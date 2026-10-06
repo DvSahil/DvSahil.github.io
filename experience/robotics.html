@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Robotics Intern, Tech Analogy: the complete interactive course</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#0a0f14;--bg2:#131c24;--card:rgba(19,28,36,.82);--tx:#e8f0f4;--mu:#93a6b3;--ac:#5cf2c0;--ac2:#ffb347;--bd:#243340;--ok:#35d49a;--onac:#06231c}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f2f6f8;--bg2:#e2eaef;--card:rgba(255,255,255,.88);--tx:#0f1c25;--mu:#4f6572;--ac:#007a5a;--ac2:#a85f00;--bd:#c4d2db;--ok:#14935f;--onac:#fff}}
+:root[data-theme="light"]{--bg:#f2f6f8;--bg2:#e2eaef;--card:rgba(255,255,255,.88);--tx:#0f1c25;--mu:#4f6572;--ac:#007a5a;--ac2:#a85f00;--bd:#c4d2db;--ok:#14935f;--onac:#fff}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(color-mix(in srgb,var(--bd) 70%,transparent) 1px,transparent 1px) 0 0/48px 48px,linear-gradient(90deg,color-mix(in srgb,var(--bd) 70%,transparent) 1px,transparent 1px) 0 0/48px 48px,var(--bg);background-attachment:fixed;color:var(--tx);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--ac)}
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;height:46px;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--bd);overflow-x:auto;white-space:nowrap}
+.nav a{display:inline-block;padding:0 12px;line-height:46px;color:var(--mu);text-decoration:none;font-size:14px}.nav a:hover,.nav a.on{color:var(--ac)}
+.layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:0 30px;max-width:1300px;margin:0 auto;padding:0 18px}
+.stg{position:sticky;top:calc(46px + env(safe-area-inset-top,0px));height:calc(100vh - 46px);align-self:start}
+#stage{position:absolute;inset:14px 0;border-radius:24px;border:1px solid var(--bd);overflow:hidden;touch-action:none;cursor:grab;background:radial-gradient(ellipse at 50% 38%,color-mix(in srgb,var(--ac) 20%,var(--bg2)),var(--bg2) 62%,var(--bg))}
+#stage canvas{display:block;width:100%;height:100%}
+#labels{position:absolute;inset:14px 0;pointer-events:none;overflow:hidden}
+.lab{position:absolute;left:0;top:0;pointer-events:auto;cursor:pointer;white-space:nowrap;font-size:12px;padding:3px 9px 3px 8px;border-radius:99px;background:rgba(8,14,26,.82);color:#e9eff9;border:1px solid var(--ac);display:none;margin:-12px 0 0 10px}
+.lab:before{content:"";position:absolute;left:-12px;top:50%;width:8px;height:8px;margin-top:-4px;border-radius:50%;background:var(--ac2);box-shadow:0 0 0 3px rgba(255,138,61,.3)}
+.lab.on{background:var(--ac);border-color:var(--ac)}
+#stag{position:absolute;left:30px;top:30px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ac2);pointer-events:none}
+.hint{position:absolute;right:30px;bottom:28px;font-size:12px;color:var(--mu);pointer-events:none}
+.nogl{padding:40px;color:var(--mu)}
+.ch{min-height:94vh;padding:64px 0;display:flex;flex-direction:column;justify-content:center}
+.ch.s{min-height:auto}
+.eyebrow{color:var(--ac2);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+h1{font-size:clamp(34px,5.4vw,60px);line-height:1.06;margin:14px 0 14px;letter-spacing:-.025em}
+h2{font-size:clamp(26px,3.6vw,38px);line-height:1.12;margin:8px 0 10px;letter-spacing:-.015em}
+h3{margin:22px 0 8px;font-size:18px}
+.l{color:var(--mu);margin:0 0 16px}
+.k{color:var(--ac);font-weight:700}
+.tag{display:inline-block;border:1px solid var(--ac);color:var(--ac);border-radius:99px;padding:4px 14px;font-size:13px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:16px;backdrop-filter:blur(6px)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:560px){.two{grid-template-columns:1fr}}
+button{font:inherit;cursor:pointer;border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:10px;padding:7px 12px}
+button:hover{border-color:var(--ac)}button.on{background:var(--ac);color:#fff;border-color:var(--ac)}
+.btns{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+input[type=range]{width:100%;accent-color:var(--ac)}
+label{font-size:14px;color:var(--mu);display:block;margin-top:8px}label b{color:var(--tx)}
+ul.t,ol.t{margin:6px 0 0;padding-left:20px}ul.t li,ol.t li{margin:4px 0}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chips span{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:5px 10px;font-size:14px}.chips b{color:var(--ac)}
+figure{margin:0}figure img{width:100%;height:auto;display:block;border-radius:12px;border:1px solid var(--bd);background:#fff;cursor:zoom-in;max-height:230px;object-fit:contain}
+figcaption{font-size:13px;color:var(--mu);margin-top:6px}
+table{border-collapse:collapse;width:100%;min-width:400px}td,th{border-bottom:1px solid var(--bd);padding:7px 8px;text-align:left;font-size:14px}tr.hl td{background:color-mix(in srgb,var(--ac) 16%,transparent);font-weight:600}
+.tw{overflow-x:auto}
+.bar{height:10px;border-radius:6px;background:var(--bd);overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--ac),var(--ac2));width:0;transition:width .25s}
+.mrow{display:grid;grid-template-columns:30px 1fr 42px;gap:8px;align-items:center;font-size:13px;color:var(--mu);margin:5px 0}
+.big{font-size:32px;font-weight:800;color:var(--ac2);line-height:1.2}
+canvas.flat{width:100%;display:block;border-radius:12px;border:1px solid var(--bd);background:var(--bg2)}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:10px}.flow .ar{color:var(--mu)}
+.step{display:flex;gap:10px;align-items:flex-start;cursor:pointer}.step b.n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--ac);color:#fff;display:grid;place-items:center;font-size:13px}
+.step.on{border-color:var(--ac)}
+.js .rv{opacity:0;transform:translateY(20px);transition:opacity .7s,transform .7s}.js .rv.in{opacity:1;transform:none}
+#lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:99;align-items:center;justify-content:center;padding:16px;cursor:zoom-out}#lb img{max-width:100%;max-height:100%;border-radius:8px;background:#fff}
+footer{padding:36px 18px 60px;color:var(--mu);font-size:14px;border-top:1px solid var(--bd);max-width:1300px;margin:0 auto}
+@media(max-width:860px){.layout{grid-template-columns:1fr}.stg{height:40vh;z-index:20;background:var(--bg)}#stage,#labels{inset:8px 0}.ch{min-height:auto;padding:36px 0}#stag{left:16px;top:16px}.hint{right:16px;bottom:14px}}
+
+pre{background:#05080f;border:1px solid var(--bd);border-radius:10px;padding:10px;overflow-x:auto;font-size:12.5px;line-height:1.5;color:#cfe3ff;margin:8px 0 0}
+table.mx{min-width:0;width:auto;margin-top:6px}table.mx td{font-family:ui-monospace,monospace;text-align:right;padding:2px 8px;border:0;font-size:13px}
+.mxw{display:inline-block;border-left:2px solid var(--mu);border-right:2px solid var(--mu);border-radius:6px;margin:4px 8px 4px 0;vertical-align:top}
+.dpad{display:grid;grid-template-columns:repeat(3,52px);gap:6px;justify-content:center;margin:10px 0}.dpad button{padding:10px 0;font-size:18px}
+.eq{font-family:ui-monospace,monospace;font-size:14px;color:var(--tx);background:var(--bg2);border-radius:8px;padding:8px 10px;margin:6px 0}
+table.tl{min-width:480px}table.tl th{color:var(--ac)}.sol{font-family:ui-monospace,monospace;font-size:13.5px;line-height:1.7;margin:8px 0}
+button.on,.step b.n,.lab.on{color:var(--onac)}#r_s4{position:relative;aspect-ratio:1/.8;border:1px solid var(--bd);border-radius:18px;overflow:hidden;cursor:grab;touch-action:pan-y;margin-top:8px;background:radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--ac) 14%,var(--bg2)),var(--bg2) 72%)}#r_s4 canvas{width:100%;height:100%;display:block}#r_s4:focus-visible{outline:3px solid var(--ac2);outline-offset:2px}
+</style></head><body>
+<nav class="nav" id="nav"><a href="#hero">Start</a><a href="#terms">Terms</a><a href="#loop">How robots work</a><a href="#basics">Basics</a><a href="#dof">DOF</a><a href="#tf">Rotations</a><a href="#fk">Kinematics</a><a href="#ik">Inverse</a><a href="#hand">By hand</a><a href="#design">Design</a><a href="#emb">Arduino</a><a href="#hw">Hardware</a><a href="#ctrl">Control</a><a href="#ros">ROS</a><a href="#auto">Automation</a></nav>
+<div class="layout">
+<div class="stg"><div id="stage"></div><div id="labels"></div><div id="stag">Robotics Internship</div><div class="hint">Drag to rotate 360° · scroll to learn</div></div>
+<main>
+
+<section class="ch" id="hero" data-cam="0.7,0.28,15,0,2.4,0" data-mode="hero" data-name="Overview"><div class="rv">
+<span class="tag">Robotics Intern · Tech Analogy (Robotron Program) · 27 Apr – 2 Jun 2023 · Delhi</span>
+<h1>From a single joint to a robot you can program.</h1>
+<p class="l">An interactive, beginner-friendly course built around my robotics internship: what a robot is made of, how its motion is calculated, how it is designed and simulated, how Arduino senses and acts, and how ROS ties it all together. Scroll, drag the 3D robot and play with every control.</p>
+<div class="chips"><span><b>1</b> ROS, robotics systems &amp; embedded integration</span><span><b>2</b> SolidWorks &amp; ANSYS design and simulation</span><span><b>3</b> Arduino, sensors &amp; actuators</span><span><b>4</b> Kinematics, control &amp; automation</span></div>
+<div class="btns"><button class="on" onclick="location.hash='basics'">Start the course</button><button onclick="location.hash='ros'">Jump to ROS</button><button onclick="window.open('https://drive.google.com/file/d/1ppJLPj-Mec1qjlYpG-DFtLXAbZkprBB5/view?usp=sharing','_blank','noopener')">View certificate</button></div>
+</div></section>
+
+<section class="ch s" id="terms" data-cam="0.7,0.28,15,0,2.4,0" data-mode="hero" data-name="Robotics terms"><div class="rv">
+<span class="eyebrow">Vocabulary</span><h2>Robotics terms, explained</h2>
+<p class="l">Short, plain definitions of the words you will meet in every chapter. Pick a topic: Body, Motion, Math, Electronics, ROS or Control.</p>
+<div class="btns" id="gcats"></div><div class="grid" id="ggrid"></div></div></section>
+
+<section class="ch s" id="loop" data-cam="0.7,0.28,15,0,2.4,0" data-mode="hero" data-name="How robots work"><div class="rv">
+<span class="eyebrow">The big picture</span><h2>How a robot works</h2>
+<p class="l">Every robot, from a factory arm to a Mars rover, repeats one loop: sense, think, act. It then senses again to check the result. This is called feedback and runs many times per second.</p>
+<div class="grid"><div class="card"><b class="k">1 · Sense</b><br>Sensors turn the world into numbers: encoders give joint angles, an IMU gives tilt, LiDAR gives distance, the DHT22 gives temperature and humidity.</div><div class="card"><b class="k">2 · Think</b><br>A controller (Arduino, ESP32 or a PC running ROS) compares what it senses with what it wants, finds the error and chooses the next command.</div><div class="card"><b class="k">3 · Act</b><br>Actuators turn commands into motion: motors turn the joints, hydraulic cylinders push heavy links, the gripper opens and closes.</div></div>
+<h3>Twelve joint types: freedom allowed and removed</h3>
+<p class="l">A free body has 6 degrees of freedom. A joint that allows f of them removes 6 − f.</p>
+<div class="card tw"><table class="tl" id="ht1"></table></div>
+<h3>Five common arm layouts</h3>
+<p class="l">Letters show joint order from the base: R is revolute (turns), P is prismatic (slides).</p>
+<div class="card tw"><table class="tl" id="ht2"></table></div>
+</div></section>
+
+<section class="ch" id="basics" data-cam="-0.6,0.3,14,0,2.6,0" data-mode="anat" data-lab="1" data-name="1 · Anatomy of a robot arm"><div class="rv">
+<span class="eyebrow">Chapter 1 · Basics</span><h2>Links, joints and an end effector</h2>
+<p class="l">Robots come in two big families: <b>manipulators</b> (arms that handle objects: industrial arms, cobots, medical robots) and <b>mobile robots</b> (moving on wheels, legs or propellers). A robot arm is a chain: rigid <b>links</b> connected by <b>joints</b>, with an <b>end effector</b> (a gripper or tool) at the tip. Tap any label on the 3D arm.</p>
+<div class="btns" id="lb2"></div><div class="card" id="linfo"></div>
+<h3>Types of links</h3>
+<div class="grid"><div class="card"><b class="k">Rigid link</b><br>No deformation while transmitting motion: the links of an industrial arm.</div><div class="card"><b class="k">Flexible link</b><br>Deforms partly: a belt drive.</div><div class="card"><b class="k">Fluid link</b><br>Motion by fluid pressure: hydraulic actuators.</div></div>
+<h3>Types of joints and their degrees of freedom</h3>
+<div class="card tw"><table><tr><th>Joint</th><th>DOF</th><th>Joint</th><th>DOF</th></tr><tr><td>Rigid</td><td>0</td><td>Planar</td><td>3</td></tr><tr class="hl"><td>Revolute (hinge)</td><td>1</td><td>Spherical (ball)</td><td>3</td></tr><tr class="hl"><td>Prismatic (slider)</td><td>1</td><td>Edge slider / cylindrical slider</td><td>4</td></tr><tr><td>Cylindrical / parallel cylinders</td><td>2</td><td>Point / spherical slider / crossed cylinders</td><td>5</td></tr></table></div>
+<p class="l" style="margin-top:10px">Actuators move the joints: electric motors rotate revolute joints; hydraulic cylinders push heavy arms such as excavators.</p>
+</div></section>
+
+<section class="ch" id="dof" data-cam="0.5,0.25,15,0,2.6,0" data-mode="dof" data-name="2 · Degrees of freedom"><div class="rv">
+<span class="eyebrow">Chapter 2 · Degrees of freedom</span><h2>How many ways can it move?</h2>
+<p class="l">A free object in space has <b>6 degrees of freedom</b>: 3 translations (x, y, z) and 3 rotations (roll, pitch, yaw). Every joint takes some freedoms away and leaves one or more. A human arm has 7: shoulder 3, elbow 1, wrist 3. Wiggle each joint of this arm:</p>
+<div class="btns" id="djb"></div>
+<h3>The Grübler–Kutzbach calculator</h3>
+<div class="card"><div class="btns" id="kmode"></div><label>Links including the fixed ground (N) <b id="vN">5</b></label><input type="range" id="kN" min="2" max="10" value="5"><label>Joints with 1 DOF, e.g. revolute (J1) <b id="vJ1">4</b></label><input type="range" id="kJ1" min="0" max="12" value="4"><label><span id="j2l">Higher pairs (J2)</span> <b id="vJ2">0</b></label><input type="range" id="kJ2" min="0" max="4" value="0">
+<div class="eq" id="keq"></div><p style="margin:8px 0 0">Degrees of freedom: <span class="big" id="kM">4</span></p><p id="kt" style="margin:4px 0 0;color:var(--mu)"></p>
+<div class="btns"><button id="p1">4-joint serial arm</button><button id="p2">Four-bar linkage</button><button id="p3">Rigid truss</button></div></div>
+</div></section>
+
+<section class="ch" id="tf" data-cam="0.5,0.25,9,0,2.2,0" data-mode="tf" data-name="3 · Rotations &amp; transforms"><div class="rv">
+<span class="eyebrow">Chapter 3 · Mathematics of motion</span><h2>Describing orientation with matrices</h2>
+<p class="l">To compute where the gripper is, we attach a coordinate frame to every part. A <b>rotation matrix</b> describes how one frame is turned relative to another; adding a translation gives a <b>4 × 4 homogeneous transform</b>. Turn the 3D body with the sliders: the matrix updates live.</p>
+<div class="card"><label>Rotation about X <b id="vr1">45°</b></label><input type="range" id="tr1" min="-180" max="180" value="45"><label>Rotation about Y <b id="vr2">30°</b></label><input type="range" id="tr2" min="-180" max="180" value="30"><label>Rotation about Z <b id="vr3">60°</b></label><input type="range" id="tr3" min="-180" max="180" value="60">
+<label>Translation x, y, z (mm) <b id="vtt">35, -10, 10</b></label><input type="range" id="tt1" min="-100" max="100" value="35"><input type="range" id="tt2" min="-100" max="100" value="-10"><input type="range" id="tt3" min="-100" max="100" value="10">
+<div class="eq">R = Rx · Ry · Rz &nbsp;&nbsp; T = [ R  t ; 0 0 0 1 ]</div>
+<div id="mats"></div><p id="pt" style="margin:6px 0 0;color:var(--mu);font-size:14px"></p><div class="btns"><button id="tex">Load example 45°, 30°, 60°</button><button id="trs">Reset</button></div></div>
+<p class="l" style="margin-top:10px">Multiplying matrices in order is how robots chain frames: turn about Z first, then Y, then X (about the fixed axes). Order matters: rotating about X then Y is not the same as Y then X.</p>
+</div></section>
+
+<section class="ch" id="fk" data-cam="0.9,0.25,15,0,2.8,0" data-mode="fk" data-name="4 · Forward kinematics"><div class="rv">
+<span class="eyebrow">Chapter 4 · Forward kinematics &amp; DH</span><h2>Joint angles in, gripper position out</h2>
+<p class="l">Forward kinematics answers: <i>if every joint is at these angles, where is the end effector?</i> The Denavit–Hartenberg (DH) method describes each link with four numbers and multiplies one 4 × 4 matrix per link. The coloured frames on the 3D arm are exactly those matrices.</p>
+<div class="card tw"><table><tr><th>Link</th><th>a (mm)</th><th>α (°)</th><th>d (mm)</th><th>θ (°)</th></tr><tr><td>1</td><td>100</td><td>90</td><td>100</td><td id="th1">30</td></tr><tr><td>2</td><td>240</td><td>0</td><td>0</td><td id="th2">30</td></tr><tr><td>3</td><td>133.6</td><td>0</td><td>0</td><td id="th3">60</td></tr><tr><td>4</td><td>52.8</td><td>0</td><td>0</td><td id="th4">30</td></tr></table></div>
+<p class="l" style="margin:8px 0 0"><b>a</b> = link length, <b>α</b> = twist between joint axes, <b>d</b> = offset along the previous axis, <b>θ</b> = joint angle (the variable).</p>
+<div class="card" style="margin-top:12px"><label>Joint 1 angle <b id="vq1">30°</b></label><input type="range" id="q1" min="-180" max="180" value="30"><label>Joint 2 angle <b id="vq2">30°</b></label><input type="range" id="q2" min="-180" max="180" value="30"><label>Joint 3 angle <b id="vq3">60°</b></label><input type="range" id="q3" min="-180" max="180" value="60"><label>Joint 4 angle <b id="vq4">30°</b></label><input type="range" id="q4" min="-180" max="180" value="30">
+<div class="eq">Aᵢ = Rz(θ)·Tz(d)·Tx(a)·Rx(α) &nbsp;&nbsp; T₀₄ = A₁·A₂·A₃·A₄</div>
+<div class="btns" id="mb"></div><div id="fmat"></div><p style="margin:8px 0 0">End effector position: <span class="big" id="ee" style="font-size:22px">…</span></p><div class="btns"><button id="home">Home pose</button><button id="exq">Example 30°, 30°, 60°, 30°</button></div></div>
+<p class="l" style="margin-top:10px">The last column of T₀₄ is the position; its first three columns tell the tool's orientation. Matrices are computed live here from the standard DH formula.</p>
+</div></section>
+
+<section class="ch" id="ik" data-cam="0,0.12,15,2.4,2.6,0" data-mode="ik" data-name="5 · Inverse kinematics"><div class="rv">
+<span class="eyebrow">Chapter 5 · Inverse kinematics</span><h2>Where do I put the joints to reach a point?</h2>
+<p class="l">The reverse problem is what programmers actually need: <i>I want the gripper here, what are the joint angles?</i> For a two-link arm there is a closed-form answer, and usually <b>two solutions</b> (elbow up and elbow down). Tap or drag in the plane below; the 3D arm follows.</p>
+<div class="card"><canvas class="flat" id="ikc" height="300" style="touch-action:none;cursor:crosshair"></canvas><div class="btns"><button id="eup" class="on">Elbow up</button><button id="edn">Elbow down</button></div><div id="iko" style="font-family:ui-monospace,monospace;font-size:14px"></div></div>
+<div class="eq">cos θ₃ = (x² + z² − L₁² − L₂²) / (2·L₁·L₂)<br>θ₂ = atan2(z, x) − atan2(L₂ sin θ₃, L₁ + L₂ cos θ₃)</div>
+<p class="l">Outside the dashed circle the point cannot be reached; very close to the base, the arm cannot fold that tightly either. Near full stretch the arm loses freedom (a singularity).</p>
+</div></section>
+
+<section class="ch" id="hand" data-cam="0.9,0.25,15,0,2.8,0" data-mode="fk" data-name="Worked by hand"><div class="rv">
+<span class="eyebrow">Calculations</span><h2>Kinematics worked by hand</h2>
+<p class="l">Kinematics studies motion without asking which force causes it. Here is a 2-link arm solved step by step. Change the numbers and watch every line recalculate. The defaults are link lengths from my DH table (240 mm and 133.6 mm).</p>
+<div class="card"><label>Link 1 length (mm) <b id="vhL1">240</b></label><input type="range" id="hL1" min="100" max="400" step="1" value="240"><label>Link 2 length (mm) <b id="vhL2">133.6</b></label><input type="range" id="hL2" min="50" max="300" step=".1" value="133.6"><label>Joint angle θ₁ (°) <b id="vha1">30</b></label><input type="range" id="ha1" min="-180" max="180" step="1" value="30"><label>Joint angle θ₂ (°) <b id="vha2">30</b></label><input type="range" id="ha2" min="-180" max="180" step="1" value="30">
+<div class="sol" id="hout"></div><div class="sol" id="hik" style="color:var(--ac)"></div></div>
+<div class="eq">x = L₁·cosθ₁ + L₂·cos(θ₁+θ₂) &nbsp; y = L₁·sinθ₁ + L₂·sin(θ₁+θ₂)<br>cosθ₂ = (x² + y² − L₁² − L₂²) / (2·L₁·L₂)</div>
+<p class="l">Flipping the sign of θ₂ gives the second "elbow" solution, which is why inverse kinematics can have two answers. If the target is farther than L₁ + L₂, there is no answer at all.</p>
+<h3>Rules that rotation matrices obey</h3>
+<div class="grid"><div class="card"><b class="k">Order matters</b><br>Rx·Ry·Rz is not the same as Rz·Ry·Rx. Turn a book 90° about two axes in two different orders and it ends up facing differently.</div><div class="card"><b class="k">Inverse = transpose</b><br>For a rotation matrix R, R⁻¹ equals Rᵀ, so undoing a rotation is cheap. Its determinant is 1 and every column has length 1.</div><div class="card"><b class="k">Chaining frames</b><br>The hand pose in the base frame is T = A₁·A₂·A₃·A₄. Each matrix moves you from one joint frame to the next: one multiplication per joint.</div></div>
+<p class="l" style="margin-top:10px">For Rx(45°)·Ry(30°)·Rz(60°) the rotation part is about [0.433 −0.750 0.500; 0.789 0.047 −0.612; 0.436 0.660 0.612]. The Rotations chapter computes it live.</p>
+</div></section>
+
+<section class="ch" id="design" data-cam="0.3,0.2,13,0,1.5,0" data-mode="design" data-name="6 · Design &amp; simulation"><div class="rv">
+<span class="eyebrow">Chapter 6 · SolidWorks &amp; ANSYS</span><h2>Will this link bend or break?</h2>
+<p class="l">Before anything is manufactured, parts are modelled in CAD (SolidWorks) and checked with finite-element analysis (ANSYS): the software splits the part into thousands of tiny elements, applies loads, and shows stress and deformation as a colour map. Here is the core idea in hand-calculation form, for a hollow arm link fixed at one end with a payload at the tip. The 3D beam shows exaggerated bending: <b style="color:#3b6bff">blue</b> = low stress, <b style="color:#ff4a3b">red</b> = high.</p>
+<div class="card"><div class="btns" id="matb"></div><label>Link length <b id="vL">300 mm</b></label><input type="range" id="bL" min="100" max="800" step="10" value="300"><label>Outer diameter <b id="vD">40 mm</b></label><input type="range" id="bD" min="20" max="80" value="40"><label>Wall thickness <b id="vt">3 mm</b></label><input type="range" id="bt" min="1" max="10" step=".5" value="3"><label>Payload at the tip <b id="vm">2 kg</b></label><input type="range" id="bm" min="0" max="10" step=".5" value="2">
+<div class="two" style="margin-top:10px"><div><span style="color:var(--mu)">Tip deflection</span><br><span class="big" id="rd">0</span></div><div><span style="color:var(--mu)">Maximum stress</span><br><span class="big" id="rs">0</span></div><div><span style="color:var(--mu)">Factor of safety</span><br><span class="big" id="rf">0</span></div><div><span style="color:var(--mu)">Link mass</span><br><span class="big" id="rm">0</span></div></div><p id="bv" style="margin:8px 0 0;font-weight:700"></p>
+<div class="eq">δ = F·L³ / (3·E·I) &nbsp; σ = F·L·(D/2) / I &nbsp; FoS = σ_yield / σ</div></div>
+<h3>From CAD model to simulation result</h3><div id="cad"></div>
+</div></section>
+
+<section class="ch" id="emb" data-cam="0.4,0.55,11,0,0.5,-0.2" data-mode="emb" data-name="7 · Arduino, sensors &amp; actuators"><div class="rv">
+<span class="eyebrow">Chapter 7 · Embedded integration</span><h2>The robot's nervous system</h2>
+<p class="l">A microcontroller (Arduino) reads <b>sensors</b> (inputs), decides, and drives <b>actuators</b> (outputs): the loop at the heart of every robot. On the 3D bench: an Arduino Uno, a hobby servo and an ultrasonic distance sensor. ESP32 boards work the same way and add Wi-Fi for connected projects.</p>
+<div class="card"><b class="k">Servo: angle becomes a pulse width</b><p style="margin:4px 0 8px;color:var(--mu);font-size:14px">A servo expects a pulse every 20 ms. Pulse length (about 1 ms to 2 ms) sets its angle.</p><label>Servo angle <b id="vsa">90°</b></label><input type="range" id="sa" min="0" max="180" value="90"><canvas class="flat" id="pwm" height="110"></canvas><p id="pwt" style="margin:6px 0 0"></p></div>
+<div class="card" style="margin-top:12px"><b class="k">Ultrasonic sensor: echo time becomes distance</b><p style="margin:4px 0 8px;color:var(--mu);font-size:14px">The sensor sends a 40 kHz ping and times the echo. Distance = (time × speed of sound) ÷ 2.</p><label>Obstacle distance <b id="vsd">80 cm</b></label><input type="range" id="sd" min="2" max="200" value="80"><p style="margin:8px 0 0">Echo time: <span class="big" id="et" style="font-size:24px">0</span></p><label style="display:flex;gap:8px;align-items:center;margin-top:10px"><input type="checkbox" id="reflex"> Reflex: retract the servo if an obstacle is closer than 30 cm</label><p id="rflx" style="margin:4px 0 0;color:var(--mu)"></p></div>
+<h3>The code behind it</h3><div class="btns" id="ctab"></div><pre id="code"></pre>
+<h3>Choosing an actuator: torque sizing</h3>
+<div class="card"><label>Payload <b id="vtp">1 kg</b></label><input type="range" id="tp" min="0" max="5" step=".1" value="1"><label>Reach from the joint <b id="vtl">30 cm</b></label><input type="range" id="tl" min="5" max="80" value="30"><label>Arm mass <b id="vtm">0.5 kg</b></label><input type="range" id="tm" min="0" max="3" step=".1" value=".5"><p style="margin:8px 0 0">Holding torque needed: <span class="big" id="tq">0</span></p><p id="tv" style="margin:4px 0 0;color:var(--mu)"></p><div class="eq">τ = m_payload·g·L + m_arm·g·L/2, then add a safety factor of about 2</div></div>
+</div></section>
+
+<section class="ch" id="hw" data-cam="0.4,0.55,11,0,0.5,-0.2" data-mode="emb" data-name="Hardware"><div class="rv">
+<span class="eyebrow">Hardware</span><h2>ESP32, DHT22 and the parts around them</h2>
+<p class="l">My electronics task used an ESP32 board with a DHT22 temperature and humidity sensor, programmed with the Arduino software.</p>
+<div class="grid"><div class="card"><b class="k">ESP32</b><br>A cheap, small microcontroller board with built-in Wi-Fi and Bluetooth, popular for smart-home gadgets and weather stations.</div><div class="card"><b class="k">DHT22</b><br>Senses temperature and humidity and sends them as a digital signal, about one new reading every 2 seconds.</div><div class="card"><b class="k">The program</b><br>Name the pin, start the sensor, wait, read both values and print them. If a read fails, print an error.</div></div>
+<div class="card" style="margin-top:12px"><b class="k">Try the sensor</b><label>Air temperature (°C) <b id="vdtt">27</b></label><input type="range" id="dtt" min="-40" max="80" step="1" value="27"><label>Humidity (%) <b id="vdhh">55</b></label><input type="range" id="dhh" min="0" max="100" step="1" value="55"><div class="btns"><button id="dcn">Sensor connected</button></div><pre id="dser">Serial monitor 115200 baud</pre><p class="l" style="margin:6px 0 0;font-size:13px">Unplug the sensor to see the error handling.</p></div>
+<pre>#include "DHT.h"
+#define DHT_PIN 4
+#define DHT_TYPE DHT22
+DHT dht(DHT_PIN, DHT_TYPE);
+
+void setup() { Serial.begin(115200); dht.begin(); }
+
+void loop() {
+  delay(2000);                       // let the reading settle
+  float t = dht.readTemperature();
+  float h = dht.readHumidity();
+  if (isnan(t) || isnan(h)) { Serial.println("Failed to read from DHT sensor!"); return; }
+  Serial.print("Temperature: "); Serial.print(t);
+  Serial.print(" C  Humidity: "); Serial.print(h); Serial.println(" %");
+}</pre>
+<h3>Specifications of the two parts</h3><div class="card tw"><table class="tl" id="ht5"></table></div>
+<h3>Actuators compared</h3><div class="card tw"><table class="tl" id="ht3"></table></div>
+<h3>Sensors a robot uses</h3><div class="card tw"><table class="tl" id="ht4"></table></div>
+<div class="grid" style="margin-top:12px"><div class="card"><b class="k">PWM</b><br>Pulse-width modulation switches power on and off very fast. A longer "on" share means a faster motor or a brighter LED, so a digital pin can control power.</div><div class="card"><b class="k">Torque and gearing</b><br>A gearbox trades speed for torque. 100:1 gives about 100 times the torque at 1/100 of the speed, which is why arm joints use geared motors.</div></div>
+</div></section>
+
+<section class="ch" id="ctrl" data-cam="0,0.2,15,1.5,3,0" data-mode="ctrl" data-name="8 · Control systems"><div class="rv">
+<span class="eyebrow">Chapter 8 · Control</span><h2>Making a joint go exactly where you say</h2>
+<p class="l">Open-loop control just sends a command and hopes. <b>Closed-loop</b> control measures the real angle with a sensor, compares it to the target, and corrects. The most common recipe is <b>PID</b>: <b>P</b> pushes in proportion to the error, <b>I</b> removes leftover error, <b>D</b> damps overshoot. Tune a joint that must swing 60°, then press Play to watch the 3D arm follow.</p>
+<div class="card"><canvas class="flat" id="pidc" height="240"></canvas><label>Kp (proportional) <b id="vkp">12</b></label><input type="range" id="kp" min="0" max="60" step=".5" value="12"><label>Ki (integral) <b id="vki">2</b></label><input type="range" id="ki" min="0" max="40" step=".5" value="2"><label>Kd (derivative) <b id="vkd">6</b></label><input type="range" id="kd" min="0" max="20" step=".5" value="6"><div class="two" style="margin-top:8px"><div>Overshoot <b id="mo">0</b></div><div>Settling time <b id="ms">0</b></div></div><div class="btns"><button id="pplay" class="on">Play on the 3D arm</button></div><p style="color:var(--mu);font-size:13px;margin:0"><span style="color:var(--ac2)">Dashed</span> = target 60°, <span style="color:var(--ac)">blue</span> = joint angle. Simplified joint model with a limited motor.</p></div>
+</div></section>
+
+<section class="ch" id="ros" data-cam="0.7,0.28,15,0,2.4,0" data-mode="hero" data-name="9 · ROS"><div class="rv">
+<span class="eyebrow">Chapter 9 · Robot Operating System</span><h2>How the robot's software talks to itself</h2>
+<p class="l">ROS is not an operating system but a framework. A robot's software is split into small programs called <b>nodes</b>. Nodes exchange data by <b>publishing</b> messages to named <b>topics</b>, and by <b>subscribing</b> to topics. Drive the 4-wheel rover below with the keys i j k l (or the buttons): you are playing the <code>teleop</code> node publishing to <code>/cmd_vel</code>.</p>
+<div class="card"><div id="r_s4" tabindex="0"><span class="hint">Click here, then use keys i j k l , or the buttons · drag to look around</span></div><div class="btns" id="r_tele"></div><h3 style="margin-top:14px">What the keyboard publishes</h3><p class="l" style="margin:0 0 6px">The <code>teleop_twist_keyboard</code> package sends a velocity command on the topic <code>/cmd_vel</code>. Every key you press changes it.</p><pre id="r_echo" style="min-height:8rem">$ rostopic echo /cmd_vel</pre></div>
+<h3>Publisher and subscriber, live</h3>
+<div class="card"><div class="flow"><button class="on">publisher_node</button><span class="ar">→ /rover_numbers (Int32) →</span><button class="on">subscriber_node</button></div><div class="btns"><button id="pbtn">Start publishing</button></div><pre id="pubt">(publisher terminal)</pre><pre id="slog">(waiting)</pre><p style="color:var(--mu);font-size:13px;margin:6px 0 0">The publisher sends 1, 2, … 100, then starts again at 1, once per second (1 Hz). The subscriber prints each number it receives.</p></div>
+<div class="btns" id="rtab"></div><pre id="rcode"></pre>
+<h3>From empty folder to a driving robot in simulation</h3><div id="rflow"></div>
+<h3>ROS commands I used and why</h3><p class="l">A ROS 1 system needs a master, started with <code>roscore</code> (roslaunch starts one for you). ROS 2 uses the same ideas with commands such as <code>ros2 topic echo</code> and needs no master.</p><div class="card tw"><table class="tl" id="ht6"></table></div>
+<div class="grid" style="margin-top:12px"><div class="card"><b class="k">URDF</b><br>An XML file describing links, joints and sensors of the robot model.</div><div class="card"><b class="k">Gazebo</b><br>A physics simulator: test code on a virtual rover before the real one.</div><div class="card"><b class="k">Packages &amp; workspace</b><br>Folders that organise code; built with catkin_make in ROS 1.</div><div class="card"><b class="k">Sensor topics</b><br>LiDAR, camera or IMU data arrives as topics you can echo or process.</div></div>
+<div class="card" style="margin-top:12px"><b class="k">Good to know</b><p style="margin:6px 0 0">In 2023, ROS 1 (Noetic) was standard; its support ended on 31 May 2025. New projects use ROS 2 (for example Jazzy Jalisco, supported to 2029), with the same ideas of nodes, topics and messages but new tools.</p></div>
+</div></section>
+
+<section class="ch" id="auto" data-cam="0.5,0.35,15,1.5,2,1.5" data-mode="auto" data-name="10 · Automation"><div class="rv">
+<span class="eyebrow">Chapter 10 · Putting it together</span><h2>An automated pick-and-place cycle</h2>
+<p class="l">Automation chains everything: inverse kinematics turns each target position into joint angles, motion control moves the joints smoothly, and the gripper (an actuator) closes on the object. Press Run and the arm picks the yellow block and places it on the other mark, over and over, just as a factory cell would.</p>
+<div class="card"><div class="btns"><button id="arun" class="on">Run</button><button id="arst">Reset</button></div><div id="aseq" style="display:grid;gap:6px"></div></div>
+<p class="l" style="margin-top:10px">Behind the scenes it is a <b>state machine</b>: each state runs until its goal is reached, then the next begins.</p>
+</div></section>
+
+<section class="ch s" id="wrap" data-cam="0.7,0.28,15,0,2.4,0" data-mode="hero" data-name="Summary"><div class="rv">
+<span class="eyebrow">What I did in the internship</span><h2>Mapped to the work</h2>
+<div class="grid"><div class="card"><b class="k">ROS, robotics systems &amp; embedded integration</b><br>Chapters 1, 7, 9: structure of robots, microcontrollers, nodes, topics and simulation.</div><div class="card"><b class="k">SolidWorks &amp; ANSYS design and simulation</b><br>Chapter 6: modelling, loads, stress and deflection checks.</div><div class="card"><b class="k">Arduino, sensors &amp; actuators</b><br>Chapter 7: servo, ultrasonic sensor, torque sizing, sensor-to-actuator loops.</div><div class="card"><b class="k">Kinematics, control &amp; automation</b><br>Chapters 2–5, 8, 10: DOF, transforms, DH, inverse kinematics, PID, pick-and-place.</div></div>
+<div class="btns"><button onclick="window.open('https://drive.google.com/file/d/1ppJLPj-Mec1qjlYpG-DFtLXAbZkprBB5/view?usp=sharing','_blank','noopener')">View certificate</button></div>
+</div></section>
+</main></div>
+<footer>Mohammad Sahil Khan · B.Tech Mechanical Engineering, Jamia Millia Islamia · Robotics Intern, Tech Analogy (Robotron Program), 27 Apr – 2 Jun 2023, Delhi. The 3D models and demos are interactive illustrations built for this page.</footer>
+<div id="lb"><img alt=""></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const $=id=>document.getElementById(id),RD=Math.PI/180,T=window.THREE;
+const S={mode:'hero',qs:[30,30,60,30],qd:[30,30,60,30],ikq:[0,40,-80,0],dj:-1,g:.7,pidY:0,pidT:0,pidPlay:false,keys:{},Rm:null,tv:[35,-10,10],beam:{dv:.3,ratio:.1},labels:false,name:''};
+// ---------- kinematics ----------
+const DH=[[100,90,100],[240,0,0],[133.6,0,0],[52.8,0,0]],I4=[[1,0,0,0],[0,1,0,0],[0,0,1,0],[0,0,0,1]];
+function Tm(a,al,d,th){const c=Math.cos(th*RD),s=Math.sin(th*RD),ca=Math.cos(al*RD),sa=Math.sin(al*RD);return[[c,-s*ca,s*sa,a*c],[s,c*ca,-c*sa,a*s],[0,sa,ca,d],[0,0,0,1]]}
+function mm(A,B){const n=A.length,C=A.map(r=>r.map(()=>0));for(let i=0;i<n;i++)for(let j=0;j<n;j++)for(let k=0;k<n;k++)C[i][j]+=A[i][k]*B[k][j];return C}
+function chain(q){let Tt=I4;const f=[Tt];for(let i=0;i<4;i++){Tt=mm(Tt,Tm(DH[i][0],DH[i][1],DH[i][2],q[i]));f.push(Tt)}return f}
+const fm=(x,d)=>(Math.abs(x)<5e-4?0:x).toFixed(d==null?3:d);
+function mh(M,d){return'<div class="mxw"><table class="mx">'+M.map(r=>'<tr>'+r.map(v=>'<td>'+fm(v,d)+'</td>').join('')+'</tr>').join('')+'</table></div>'}
+function ik3(x,y,z){const a2=240,a3=133.6,a4=52.8,r=Math.hypot(x,y)-100,zz=z-100+a4,L=a2,M2=a3;let D=(r*r+zz*zz-L*L-M2*M2)/(2*L*M2);if(Math.abs(D)>1)return null;const t3=-Math.acos(D),t2=Math.atan2(zz,r)-Math.atan2(M2*Math.sin(t3),L+M2*Math.cos(t3));return[Math.atan2(y,x)/RD,t2/RD,t3/RD,-90-(t2+t3)/RD]}
+// ---------- labels ----------
+const LAB=[['base','Base',"The fixed foundation. It holds the whole robot steady and houses the first motor. In mechanisms theory this is the fixed link (link 0)."],['l1','Link 1',"A rigid link carrying the shoulder: a vertical column and a small sideways offset."],['j1','Joint 1',"Revolute joint turning the whole arm about a vertical axis (waist rotation)."],['l2','Link 2',"The long upper arm. Link length sets the arm's reach, and the arrangement of links decides its kinematics."],['j2','Joint 2',"Revolute shoulder joint raising and lowering the upper arm."],['l3','Link 3',"The forearm."],['j3','Joint 3',"Revolute elbow joint."],['l4','Link 4',"A short wrist link carrying the tool."],['j4','Joint 4',"Revolute wrist joint that tilts the gripper."],['ee','End effector',"The tool at the tip. Here it is a two-finger gripper for grabbing and picking objects."]];
+function selL(k){const d=LAB.find(x=>x[0]===k);$('linfo').innerHTML='<b class="k">'+d[1]+'</b><p style="margin:6px 0 0">'+d[2]+'</p>';[...$('lb2').children].forEach(b=>b.classList.toggle('on',b.dataset.k===k));document.querySelectorAll('.lab').forEach(l=>l.classList.toggle('on',l.dataset.k===k))}
+LAB.forEach(d=>{const b=document.createElement('button');b.textContent=d[1];b.dataset.k=d[0];b.onclick=()=>selL(d[0]);$('lb2').appendChild(b)});selL('ee');
+// ---------- DOF ----------
+['Joint 1','Joint 2','Joint 3','Joint 4'].forEach((n,i)=>{const b=document.createElement('button');b.textContent='Move '+n;b.onclick=()=>{S.dj=S.dj===i?-1:i;[...$('djb').children].forEach((x,j)=>x.classList.toggle('on',j===S.dj))};$('djb').appendChild(b)});
+let km='p';[['p','Planar (3 DOF per body)'],['s','Spatial (6 DOF per body)']].forEach(([k,t],i)=>{const b=document.createElement('button');b.textContent=t;if(!i)b.classList.add('on');b.onclick=()=>{km=k;[...$('kmode').children].forEach(x=>x.classList.remove('on'));b.classList.add('on');kut()};$('kmode').appendChild(b)});
+function kut(){const N=+$('kN').value,a=+$('kJ1').value,b=+$('kJ2').value;$('vN').textContent=N;$('vJ1').textContent=a;$('vJ2').textContent=b;$('j2l').textContent=km==='p'?'Higher pairs (J2)':'Joints with 2 DOF, e.g. cylindrical (J2)';const M=km==='p'?3*(N-1)-2*a-b:6*(N-1)-5*a-4*b;$('keq').textContent=km==='p'?'M = 3(N−1) − 2·J1 − J2 = 3('+N+'−1) − 2·'+a+' − '+b+' = '+M:'M = 6(N−1) − 5·J1 − 4·J2 = 6('+N+'−1) − 5·'+a+' − 4·'+b+' = '+M;$('kM').textContent=M;$('kt').textContent=M>1?'A mechanism with '+M+' independent motions: it needs '+M+' actuators.':M===1?'One DOF: a single input drives the whole mechanism.':M===0?'Zero DOF: a rigid structure, nothing moves.':'Negative: over-constrained, unless special geometry makes it move.'}
+['kN','kJ1','kJ2'].forEach(i=>$(i).oninput=kut);const pre=(m,N,a,b)=>()=>{km=m;[...$('kmode').children].forEach((x,j)=>x.classList.toggle('on',(j===0)===(m==='p')));$('kN').value=N;$('kJ1').value=a;$('kJ2').value=b;kut()};$('p1').onclick=pre('p',5,4,0);$('p2').onclick=pre('p',4,4,0);$('p3').onclick=pre('p',4,5,0);kut();
+// ---------- rotations ----------
+const Rx=a=>{const c=Math.cos(a*RD),s=Math.sin(a*RD);return[[1,0,0],[0,c,-s],[0,s,c]]},Ry=a=>{const c=Math.cos(a*RD),s=Math.sin(a*RD);return[[c,0,s],[0,1,0],[-s,0,c]]},Rz=a=>{const c=Math.cos(a*RD),s=Math.sin(a*RD);return[[c,-s,0],[s,c,0],[0,0,1]]};
+function tf(){const a=+$('tr1').value,b=+$('tr2').value,c=+$('tr3').value,t=[+$('tt1').value,+$('tt2').value,+$('tt3').value];$('vr1').textContent=a+'°';$('vr2').textContent=b+'°';$('vr3').textContent=c+'°';$('vtt').textContent=t.join(', ');const R=mm(mm(Rx(a),Ry(b)),Rz(c));S.Rm=R;const H=[[...R[0],t[0]],[...R[1],t[1]],[...R[2],t[2]],[0,0,0,1]];$('mats').innerHTML='<b style="font-size:13px;color:var(--mu)">Rotation R</b><br>'+mh(R)+'<br><b style="font-size:13px;color:var(--mu)">Homogeneous transform T</b><br>'+mh(H);const p=[100,0,0],q=[0,1,2].map(i=>R[i][0]*p[0]+R[i][1]*p[1]+R[i][2]*p[2]+t[i]);$('pt').textContent='The point (100, 0, 0) in the body frame appears at ('+q.map(v=>fm(v,1)).join(', ')+') in the world frame.'}
+['tr1','tr2','tr3','tt1','tt2','tt3'].forEach(i=>$(i).oninput=tf);const setT=v=>{['tr1','tr2','tr3','tt1','tt2','tt3'].forEach((i,k)=>$(i).value=v[k]);tf()};$('tex').onclick=()=>setT([45,30,60,35,-10,10]);$('trs').onclick=()=>setT([0,0,0,0,0,0]);tf();
+// ---------- forward kinematics ----------
+let msel=4;function fk(){const q=[1,2,3,4].map(i=>+$('q'+i).value);S.qs=q;q.forEach((v,i)=>{$('vq'+(i+1)).textContent=v+'°';$('th'+(i+1)).textContent=v});const f=chain(q);const M=msel<4?Tm(DH[msel][0],DH[msel][1],DH[msel][2],q[msel]):f[4];$('fmat').innerHTML=mh(M);const p=f[4];$('ee').textContent='x '+fm(p[0][3],1)+'  y '+fm(p[1][3],1)+'  z '+fm(p[2][3],1)+' mm';[...$('mb').children].forEach((b,j)=>b.classList.toggle('on',j===msel))}
+['A₁','A₂','A₃','A₄','T₀₄ (final)'].forEach((n,i)=>{const b=document.createElement('button');b.textContent=n;b.onclick=()=>{msel=i;fk()};$('mb').appendChild(b)});
+[1,2,3,4].forEach(i=>$('q'+i).oninput=fk);const setQ=v=>{v.forEach((x,i)=>$('q'+(i+1)).value=x);fk()};$('home').onclick=()=>setQ([0,60,-100,40]);$('exq').onclick=()=>setQ([30,30,60,30]);fk();
+// ---------- inverse kinematics ----------
+const IK={tx:260,tz:120,el:-1,L1:240,L2:186.4};
+function solve(x,z,el){const L1=IK.L1,L2=IK.L2,rc=L1+L2,mn=Math.abs(L1-L2);let X=x,Z=z,ok=true;const d=Math.hypot(x,z);if(d>rc-.01){const f=(rc-.01)/d;X*=f;Z*=f;ok=false}else if(d<mn+.01&&d>0){const f=(mn+.01)/d;X*=f;Z*=f;ok=false}const D=Math.max(-1,Math.min(1,(X*X+Z*Z-L1*L1-L2*L2)/(2*L1*L2))),t3=el*Math.acos(D),t2=Math.atan2(Z,X)-Math.atan2(L2*Math.sin(t3),L1+L2*Math.cos(t3));return{t2:t2/RD,t3:t3/RD,X,Z,ok}}
+const ikc=$('ikc');let ikg={};
+function drawIK(){const[x,w,h]=fit(ikc),r=solve(IK.tx,IK.tz,IK.el);S.ikq=[0,r.t2,r.t3,0];const rc=IK.L1+IK.L2,x0=w*.3,y0=h*.62,k=Math.min((w-x0-14)/rc,(y0-12)/rc,(h-y0-12)/rc*1.0);ikg={x0,y0,k};x.clearRect(0,0,w,h);x.strokeStyle=cs('--bd');x.setLineDash([5,5]);x.beginPath();x.arc(x0,y0,rc*k,0,7);x.stroke();x.beginPath();x.arc(x0,y0,Math.abs(IK.L1-IK.L2)*k,0,7);x.stroke();x.setLineDash([]);x.beginPath();x.moveTo(0,y0);x.lineTo(w,y0);x.moveTo(x0,0);x.lineTo(x0,h);x.stroke();
+const a=r.t2*RD,b=(r.t2+r.t3)*RD,jx=x0+IK.L1*Math.cos(a)*k,jy=y0-IK.L1*Math.sin(a)*k,ex=jx+IK.L2*Math.cos(b)*k,ey=jy-IK.L2*Math.sin(b)*k;x.lineCap='round';x.lineWidth=9;x.strokeStyle=cs('--ac');x.beginPath();x.moveTo(x0,y0);x.lineTo(jx,jy);x.stroke();x.strokeStyle=cs('--ac2');x.beginPath();x.moveTo(jx,jy);x.lineTo(ex,ey);x.stroke();x.fillStyle=cs('--tx');[[x0,y0],[jx,jy]].forEach(p=>{x.beginPath();x.arc(p[0],p[1],7,0,7);x.fill()});
+const tx=x0+IK.tx*k,ty=y0-IK.tz*k;x.strokeStyle=r.ok?'#35d49a':'#ff5470';x.lineWidth=2;x.beginPath();x.arc(tx,ty,9,0,7);x.moveTo(tx-14,ty);x.lineTo(tx+14,ty);x.moveTo(tx,ty-14);x.lineTo(tx,ty+14);x.stroke();x.fillStyle=cs('--mu');x.font='11px sans-serif';x.fillText('shoulder',x0+6,y0+14);
+$('iko').innerHTML='target ('+fm(IK.tx,0)+', '+fm(IK.tz,0)+') mm<br>θ₂ = '+fm(r.t2,1)+'°&nbsp; θ₃ = '+fm(r.t3,1)+'°'+(r.ok?'':'<br><span style="color:#ff5470">Target out of reach: showing the nearest reachable pose</span>')}
+function ikp(e){const b=ikc.getBoundingClientRect();IK.tx=(e.clientX-b.left-ikg.x0)/ikg.k;IK.tz=(ikg.y0-(e.clientY-b.top))/ikg.k;drawIK()}
+let ikd=false;ikc.addEventListener('pointerdown',e=>{ikd=true;ikp(e)});ikc.addEventListener('pointermove',e=>{if(ikd)ikp(e)});addEventListener('pointerup',()=>ikd=false);
+$('eup').onclick=()=>{IK.el=-1;$('eup').classList.add('on');$('edn').classList.remove('on');drawIK()};$('edn').onclick=()=>{IK.el=1;$('edn').classList.add('on');$('eup').classList.remove('on');drawIK()};
+// ---------- design ----------
+const MAT=[['Aluminium 6061',69000,276,2700],['Structural steel',200000,250,7850],['ABS (3D-printed)',2300,40,1050]];let mi=0;
+MAT.forEach((m,i)=>{const b=document.createElement('button');b.textContent=m[0];if(!i)b.classList.add('on');b.onclick=()=>{mi=i;[...$('matb').children].forEach((x,j)=>x.classList.toggle('on',j===i));beam()};$('matb').appendChild(b)});
+function beam(){const L=+$('bL').value,D=+$('bD').value,t=Math.min(+$('bt').value,D/2-.5),m=+$('bm').value,[,E,sy,rho]=MAT[mi];$('vL').textContent=L+' mm';$('vD').textContent=D+' mm';$('vt').textContent=t+' mm';$('vm').textContent=m+' kg';const d=D-2*t,I=Math.PI*(Math.pow(D,4)-Math.pow(d,4))/64,F=m*9.81+1e-9,dl=F*L*L*L/(3*E*I),sg=F*L*(D/2)/I,fos=sy/Math.max(sg,1e-6),mass=rho*Math.PI/4*(D*D-d*d)*L*1e-9;$('rd').textContent=dl.toFixed(2)+' mm';$('rs').textContent=sg.toFixed(1)+' MPa';$('rf').textContent=m===0?'∞':fos.toFixed(1);$('rm').textContent=(mass*1000).toFixed(0)+' g';const bv=$('bv');bv.style.color=fos>2.5?'var(--ok)':fos>1.2?'var(--ac2)':'#ff5470';bv.textContent=fos>2.5?'Safe: comfortable margin, deflection '+(dl/L*100).toFixed(2)+'% of length':fos>1.2?'Marginal: add thickness or shorten the link':'Fails: stress exceeds what the material can take';S.beam={dv:Math.min(1.8,dl/L*14),ratio:sg/sy};ST&&ST.buildBeam()}
+['bL','bD','bt','bm'].forEach(i=>$(i).oninput=beam);
+// ---------- widgets ----------
+const cs=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+function fit(c){const r=devicePixelRatio||1,w=c.clientWidth,h=+(c.dataset.h||(c.dataset.h=c.getAttribute('height')));c.width=Math.max(1,w*r);c.height=h*r;const x=c.getContext('2d');x.setTransform(r,0,0,r,0,0);return[x,w,h]}
+function flow(id,items){const c=$(id);c.innerHTML='<div class="flow">'+items.map((s,i)=>'<button data-i="'+i+'">'+s[0]+'</button>').join('<span class="ar">→</span>')+'</div><div class="card"></div>';const show=i=>{[...c.querySelectorAll('button')].forEach((b,j)=>b.classList.toggle('on',j===i));c.lastChild.innerHTML='<b class="k">'+items[i][0]+'</b><p style="margin:6px 0 0">'+items[i][1]+'</p>'};c.querySelectorAll('button').forEach(b=>b.onclick=()=>show(+b.dataset.i));show(0)}
+flow('cad',[["Sketch","Draw 2D profiles with dimensions and constraints."],["3D features","Extrude, revolve and fillet sketches into solid links and brackets."],["Assembly","Join parts with mates (joint types from chapter 1) so the model moves like the real robot."],["Set up the study","In ANSYS: pick the material, fix the supports, apply loads (payload, gravity)."],["Mesh","Split the part into small elements; refine near corners where stress concentrates."],["Solve &amp; read","Check deformation, stress and factor of safety as colour maps."],["Iterate","Thicken, add ribs or change material, then re-run until it is safe and light."]]);
+// embedded
+function pwm(){const a=+$('sa').value,pw=1000+a/180*1000,c=$('pwm'),[x,w,h]=fit(c);$('vsa').textContent=a+'°';x.clearRect(0,0,w,h);x.strokeStyle=cs('--ac');x.lineWidth=2.5;const pxw=w/40,per=20*pxw,hi=pw/1000*pxw;x.beginPath();for(let k=0;k<2;k++){const o=k*per+8;x.moveTo(o,h-20);x.lineTo(o,20);x.lineTo(o+hi,20);x.lineTo(o+hi,h-20);x.lineTo(o+per,h-20)}x.stroke();x.fillStyle=cs('--mu');x.font='11px sans-serif';x.fillText('20 ms period',w*.45,h-5);$('pwt').innerHTML='Pulse width <b>'+(pw/1000).toFixed(2)+' ms</b> · duty cycle <b>'+(pw/200).toFixed(1)+'%</b>'}
+function son(){const d=+$('sd').value;$('vsd').textContent=d+' cm';$('et').textContent=Math.round(2*d/0.0343)+' µs';const rf=$('reflex').checked&&d<30;$('rflx').textContent=$('reflex').checked?(d<30?'Obstacle too close: servo retracted to 0°':'Path clear: servo follows your slider'):'';S.sa=+$('sa').value;S.sd=d;S.rflx=rf}
+['sa','sd','reflex'].forEach(i=>$(i).oninput=()=>{pwm();son()});$('reflex').onchange=son;pwm();son();
+const CODE={"Servo sweep":"#include <Servo.h>\n\nServo arm;\n\nvoid setup() {\n  arm.attach(9);          // signal wire on pin 9\n}\n\nvoid loop() {\n  for (int a = 0; a <= 180; a++) { arm.write(a); delay(15); }\n  for (int a = 180; a >= 0; a--) { arm.write(a); delay(15); }\n}","Ultrasonic distance":"const int trig = 9, echo = 10;\n\nvoid setup() {\n  Serial.begin(9600);\n  pinMode(trig, OUTPUT);\n  pinMode(echo, INPUT);\n}\n\nvoid loop() {\n  digitalWrite(trig, LOW);  delayMicroseconds(2);\n  digitalWrite(trig, HIGH); delayMicroseconds(10);   // 10 µs ping\n  digitalWrite(trig, LOW);\n  long t = pulseIn(echo, HIGH);                      // echo time in µs\n  float cm = t * 0.0343 / 2;                         // speed of sound\n  Serial.println(cm);\n  delay(100);\n}","ESP32 + DHT22":"#include <DHT.h>\n#define DHT_PIN 4\n#define DHT_TYPE DHT22\nDHT dht(DHT_PIN, DHT_TYPE);\n\nvoid setup() {\n  Serial.begin(9600);\n  dht.begin();\n}\n\nvoid loop() {\n  delay(2000);                       // let the sensor settle\n  float temperature = dht.readTemperature();\n  float humidity = dht.readHumidity();\n  if (isnan(temperature) || isnan(humidity)) {\n    Serial.println(\"Failed to read from DHT sensor!\");\n    return;\n  }\n  Serial.print(\"Temperature: \"); Serial.print(temperature);\n  Serial.print(\" C  Humidity: \"); Serial.println(humidity);\n}"};
+Object.keys(CODE).forEach((k,i)=>{const b=document.createElement('button');b.textContent=k;b.onclick=()=>{[...$('ctab').children].forEach(x=>x.classList.remove('on'));b.classList.add('on');$('code').textContent=CODE[k]};$('ctab').appendChild(b);if(!i)b.click()});
+function tq(){const p=+$('tp').value,l=+$('tl').value/100,m=+$('tm').value;$('vtp').textContent=p+' kg';$('vtl').textContent=(l*100)+' cm';$('vtm').textContent=m+' kg';const t=(p*9.81*l+m*9.81*l/2),req=t*2;$('tq').textContent=t.toFixed(2)+' N·m ('+(t/0.0981).toFixed(1)+' kg·cm)';$('tv').textContent='With a safety factor of 2, choose a motor/gearbox of at least '+req.toFixed(2)+' N·m. '+(req<=0.15?'A small hobby servo (about 1.6 kg·cm) can manage.':req<=1.0?'A metal-gear servo (about 10 kg·cm) is a fit.':'You will need a geared DC or stepper motor, or a harmonic drive.')}
+['tp','tl','tm'].forEach(i=>$(i).oninput=tq);tq();
+// PID
+function sim(kp,ki,kd){const dt=.005,y=[];let th=0,om=0,I=0,pe=60;for(let i=0;i<800;i++){const e=60-th;I+=e*dt;const dr=(e-pe)/dt;pe=e;let u=kp*e+ki*I+kd*dr;u=Math.max(-300,Math.min(300,u));om+=(u-1.2*om)*dt;th+=om*dt;y.push(th)}return y}
+let ser=[];function pid(){const kp=+$('kp').value,ki=+$('ki').value,kd=+$('kd').value;$('vkp').textContent=kp;$('vki').textContent=ki;$('vkd').textContent=kd;ser=sim(kp,ki,kd);const c=$('pidc'),[x,w,h]=fit(c),mx=Math.max(80,Math.max(...ser)*1.05),Y=v=>h-14-(v/mx)*(h-28);x.clearRect(0,0,w,h);x.strokeStyle=cs('--bd');x.beginPath();x.moveTo(0,Y(0));x.lineTo(w,Y(0));x.stroke();x.strokeStyle=cs('--ac2');x.setLineDash([6,5]);x.beginPath();x.moveTo(0,Y(60));x.lineTo(w,Y(60));x.stroke();x.setLineDash([]);x.strokeStyle=cs('--ac');x.lineWidth=2.5;x.beginPath();ser.forEach((v,i)=>{const px=i/799*w;i?x.lineTo(px,Y(v)):x.moveTo(px,Y(v))});x.stroke();x.fillStyle=cs('--mu');x.font='11px sans-serif';x.fillText('60°',4,Y(60)-4);x.fillText('4 s →',w-40,h-3);const pk=Math.max(...ser);$('mo').textContent=pk>60?((pk/60-1)*100).toFixed(0)+'%':'none';let st=-1;for(let i=799;i>=0;i--){if(Math.abs(ser[i]-60)>1.2){st=i;break}}$('ms').textContent=st>=798?'> 4 s':((st+1)*.005).toFixed(2)+' s'}
+['kp','ki','kd'].forEach(i=>$(i).oninput=pid);$('pplay').onclick=()=>{S.pidT=0;S.pidPlay=true};
+// ROS
+const RC={"publisher_node.py":"#!/usr/bin/env python\nimport rospy\nfrom std_msgs.msg import Int32\n\ndef publisher_node():\n    pub = rospy.Publisher('rover_numbers', Int32, queue_size=10)\n    rospy.init_node('publisher_node', anonymous=True)\n    rate = rospy.Rate(1)          # 1 Hz: one number per second\n    num = 1\n    while not rospy.is_shutdown():\n        pub.publish(num)\n        num = num % 100 + 1       # 1..100, then back to 1\n        rate.sleep()\n\nif __name__ == '__main__':\n    try:\n        publisher_node()\n    except rospy.ROSInterruptException:\n        pass","subscriber_node.py":"#!/usr/bin/env python\nimport rospy\nfrom std_msgs.msg import Int32\n\ndef callback(data):\n    rospy.loginfo('Received number: %s', data.data)\n\ndef subscriber_node():\n    rospy.init_node('subscriber_node', anonymous=True)\n    rospy.Subscriber('rover_numbers', Int32, callback)\n    rospy.spin()                  # keep listening\n\nif __name__ == '__main__':\n    subscriber_node()"};
+Object.keys(RC).forEach((k,i)=>{const b=document.createElement('button');b.textContent=k;b.onclick=()=>{[...$('rtab').children].forEach(x=>x.classList.remove('on'));b.classList.add('on');$('rcode').textContent=RC[k]};$('rtab').appendChild(b);if(!i)b.click()});
+flow('rflow',[["1 Workspace","Create a folder for your robot software and initialise it.<pre>mkdir -p ~/rover_workspace/src\ncd ~/rover_workspace/src\ncatkin_init_workspace\ncd ~/rover_workspace\ncatkin_make</pre>"],["2 Describe the robot","Make a package (rover_description) with a urdf folder and write rover.urdf: the chassis, four wheel joints and any sensors."],["3 Build &amp; source","Compile and make the new package visible to the terminal.<pre>cd ~/rover_workspace\ncatkin_make\nsource devel/setup.bash</pre>"],["4 Launch Gazebo","Open the physics simulator and spawn the rover.<pre>roslaunch gazebo_ros empty_world.launch</pre>"],["5 Drive it","Install and run the keyboard teleoperation node, which publishes velocity commands.<pre>sudo apt-get install ros-&lt;ROS_VERSION&gt;-teleop-twist-keyboard\nroslaunch teleop_twist_keyboard teleop_twist_keyboard.launch</pre>"],["6 Add a sensor","Install the sensor's package, launch its node, then watch the data.<pre>rostopic echo &lt;sensor_topic&gt;</pre>"],["7 Your own nodes","Create a package with rospy, write publisher_node.py and subscriber_node.py, make them executable (chmod +x), build, then run each with rosrun in its own terminal."]]);
+let pubOn=false,pn=1,pti=null;$('pbtn').onclick=()=>{pubOn=!pubOn;$('pbtn').textContent=pubOn?'Stop publishing':'Start publishing';$('pbtn').classList.toggle('on',pubOn);if(pubOn){$('slog').textContent='';pti=setInterval(()=>{const l=$('slog');const ln=l.textContent.split('\n').filter(Boolean).slice(-6);ln.push('[INFO] Received number: '+pn);pn=pn%100+1;l.textContent=ln.join('\n')},1000)}else clearInterval(pti)};
+// automation
+const HOME=[0,60,-100,40],WP=[['Home position',null,1,1.2],['Move above the block',[290,150,150],1,1.4],['Descend',[290,150,25],1,1],['Close the gripper',[290,150,25],.12,.8],['Lift',[290,150,150],.12,1],['Move above the target',[290,-150,150],.12,1.6],['Descend',[290,-150,25],.12,1],['Open the gripper',[290,-150,25],1,.8],['Return home',null,1,1.4]];
+const WQ=WP.map(w=>w[1]?ik3(...w[1]):HOME);
+WP.forEach((w,i)=>{const d=document.createElement('div');d.className='card step';d.style.padding='8px 12px';d.innerHTML='<b class="n">'+(i+1)+'</b><div>'+w[0]+'</div>';$('aseq').appendChild(d)});
+const A={on:false,t:0,i:0,q:HOME.slice(),g:1,cube:[290,150,25],held:false};
+function autoStep(dt){if(!A.on){return}A.t+=dt;const prev=A.i>0?A.i-1:0;const i=A.i,w=WP[i];let f=Math.min(1,A.t/w[3]);const e=f*f*(3-2*f);const q0=A.from||HOME,q1=WQ[i];A.q=q0.map((v,k)=>v+(q1[k]-v)*e);A.g=(A.g0==null?1:A.g0)+(w[2]-(A.g0==null?1:A.g0))*e;if(f>=1){A.from=q1.slice();A.g0=w[2];A.t=0;A.i=(i+1)%WP.length;if(A.i===0){A.cube=[290,150,25];A.held=false}if(A.i===4)A.held=true;if(A.i===8){A.held=false;A.cube=[290,-150,25]}}[...$('aseq').children].forEach((c,j)=>c.classList.toggle('on',j===i))}
+$('arun').onclick=()=>{A.on=!A.on;$('arun').textContent=A.on?'Pause':'Run'};$('arst').onclick=()=>{A.on=false;A.t=0;A.i=0;A.from=null;A.g0=null;A.q=HOME.slice();A.g=1;A.cube=[290,150,25];A.held=false;$('arun').textContent='Run';[...$('aseq').children].forEach(c=>c.classList.remove('on'))};
+// canvas loops: lidar
+// obstacles & stage
+let ST=null;
+function init3d(){
+const el=$('stage'),r=new T.WebGLRenderer({antialias:true,alpha:true});r.setPixelRatio(Math.min(devicePixelRatio,2));r.shadowMap.enabled=true;r.shadowMap.type=T.PCFSoftShadowMap;r.toneMapping=T.ACESFilmicToneMapping;r.toneMappingExposure=1.1;r.outputEncoding=T.sRGBEncoding;el.appendChild(r.domElement);
+const sc=new T.Scene(),cam=new T.PerspectiveCamera(32,1,.1,100);
+const es=new T.Scene(),gc=document.createElement('canvas');gc.width=256;gc.height=128;const gx=gc.getContext('2d'),gr=gx.createLinearGradient(0,0,0,128);gr.addColorStop(0,'#7d9bd0');gr.addColorStop(.5,'#2d3a58');gr.addColorStop(1,'#10141f');gx.fillStyle=gr;gx.fillRect(0,0,256,128);
+es.add(new T.Mesh(new T.SphereGeometry(50,32,16),new T.MeshBasicMaterial({map:new T.CanvasTexture(gc),side:T.BackSide})));
+[[0,30,0,30,2,30,4],[-30,8,10,2,14,24,2.6],[30,6,-10,2,10,20,2.2]].forEach(([x,y,z,w,h,d,i])=>{const m=new T.Mesh(new T.BoxGeometry(w,h,d),new T.MeshBasicMaterial());m.material.color.setRGB(i,i,i*1.05);m.position.set(x,y,z);es.add(m)});
+sc.environment=new T.PMREMGenerator(r).fromScene(es,.04).texture;
+sc.add(new T.HemisphereLight(0xbcd4ff,0x101522,.3));const kl=new T.DirectionalLight(0xffffff,1.1);kl.position.set(5,10,6);kl.castShadow=true;kl.shadow.mapSize.set(1024,1024);const sh=kl.shadow.camera;sh.left=-9;sh.right=9;sh.top=9;sh.bottom=-9;sh.near=1;sh.far=30;kl.shadow.bias=-.0004;sc.add(kl);const rl=new T.DirectionalLight(0x6aa8ff,.7);rl.position.set(-6,3,-5);sc.add(rl);
+const gp=new T.Mesh(new T.PlaneGeometry(40,40),new T.ShadowMaterial({opacity:.45}));gp.rotation.x=-Math.PI/2;gp.receiveShadow=true;sc.add(gp);
+const pc=document.createElement('canvas');pc.width=pc.height=128;const px=pc.getContext('2d'),pgr=px.createRadialGradient(64,64,4,64,64,64);pgr.addColorStop(0,'rgba(74,168,255,.5)');pgr.addColorStop(1,'rgba(74,168,255,0)');px.fillStyle=pgr;px.fillRect(0,0,128,128);
+const ped=new T.Mesh(new T.CircleGeometry(8,48),new T.MeshBasicMaterial({map:new T.CanvasTexture(pc),transparent:true,depthWrite:false}));ped.rotation.x=-Math.PI/2;ped.position.y=.01;sc.add(ped);
+[3.2,7].forEach((rr,i)=>{const rg=new T.Mesh(new T.RingGeometry(rr,rr+.04,72),new T.MeshBasicMaterial({color:0x4aa8ff,transparent:true,opacity:.5-i*.3,side:T.DoubleSide}));rg.rotation.x=-Math.PI/2;rg.position.y=.015;sc.add(rg)});
+const M=o=>new T.MeshStandardMaterial(Object.assign({roughness:.5,metalness:.2},o)),mk=(g,m,x,y,z)=>{const o=new T.Mesh(g,m);o.position.set(x||0,y||0,z||0);o.castShadow=o.receiveShadow=true;return o},BX=(w,h,d)=>new T.BoxGeometry(w,h,d),CY=(a,b,h,s)=>new T.CylinderGeometry(a,b,h,s||24);
+const mAl=M({color:0xcdd3dc,metalness:.85,roughness:.28}),mDk=M({color:0x1a1f29,roughness:.45,metalness:.5}),mOr=M({color:0xff7a1a,roughness:.35,metalness:.4});
+const sc3=.012,UP=new T.Vector3(0,1,0),dirm=(a,b,c)=>new T.Vector3(a,c,-b);
+const mat4=Tm=>new T.Matrix4().makeBasis(dirm(Tm[0][0],Tm[1][0],Tm[2][0]),dirm(Tm[0][1],Tm[1][1],Tm[2][1]),dirm(Tm[0][2],Tm[1][2],Tm[2][2])).setPosition(Tm[0][3]*sc3,Tm[2][3]*sc3,-Tm[1][3]*sc3);
+const pos3=Tm=>new T.Vector3(Tm[0][3]*sc3,Tm[2][3]*sc3,-Tm[1][3]*sc3);
+function seg(m,A,B){const d=B.clone().sub(A),L=Math.max(1e-4,d.length());m.position.copy(A).addScaledVector(d,.5);m.scale.set(1,L,1);m.quaternion.setFromUnitVectors(UP,d.normalize())}
+function giz(len){const g=new T.Group();[[0xff4d4d,1,0,0],[0x4dff7a,0,1,0],[0x4d8dff,0,0,1]].forEach(([c,x,y,z])=>{const b=new T.MeshBasicMaterial({color:c}),m=new T.Mesh(CY(.035,.035,len,8),b);m.position.set(x*len/2,y*len/2,z*len/2);const tip=new T.Mesh(new T.ConeGeometry(.09,.2,10),b);tip.position.set(x*len,y*len,z*len);if(x){m.rotation.z=tip.rotation.z=-Math.PI/2}if(z){m.rotation.x=tip.rotation.x=Math.PI/2}g.add(m,tip)});g.matrixAutoUpdate=false;return g}
+const root=new T.Group();sc.add(root);const VIS=[];
+// ARM
+const arm=new T.Group();root.add(arm);VIS.push([arm,['hero','anat','dof','fk','ik','ctrl','auto','wrap']]);
+arm.add(mk(CY(1.05,1.15,.3,48),mDk,0,.15,0));arm.add(mk(CY(.75,.85,.25,48),mAl,0,.42,0));arm.add(mk(CY(.5,.5,.4,32),mOr,0,.62,0));
+const col=mk(CY(.26,.26,1,24),mAl),off=mk(CY(.22,.22,1,24),mAl),L2=mk(CY(.2,.2,1,24),mAl),L3=mk(CY(.17,.17,1,24),mAl),L4=mk(CY(.14,.14,1,24),mAl);arm.add(col,off,L2,L3,L4);seg(col,new T.Vector3(0,.5,0),new T.Vector3(0,1.2,0));
+const hg=CY(.34,.34,.55,32);hg.rotateX(Math.PI/2);const H=[1,2,3].map(()=>{const m=mk(hg,mOr);m.matrixAutoUpdate=false;arm.add(m);return m});
+const gz=[0,1,2,3,4].map(()=>{const g=giz(.9);g.visible=false;arm.add(g);return g});
+const grip=new T.Group();grip.matrixAutoUpdate=false;arm.add(grip);grip.add(mk(BX(.3,.3,.8),mDk,.15,0,0));const fing=[1,-1].map(sg=>{const f=mk(BX(.55,.14,.12),mOr,.55,0,sg*.3);grip.add(f);return f});
+const cube=mk(BX(.6,.6,.6),M({color:0xffc21a,roughness:.4}),0,.3,0);const cg=new T.Group();cg.add(cube);VIS.push([cg,['auto']]);root.add(cg);
+[[290,150],[290,-150]].forEach(([x,y],i)=>{const m=new T.Mesh(new T.RingGeometry(.45,.55,32),new T.MeshBasicMaterial({color:i?0x35d49a:0xffc21a,side:T.DoubleSide,transparent:true,opacity:.8}));m.rotation.x=-Math.PI/2;m.position.set(x*sc3,.02,-y*sc3);cg.add(m)});
+// TF
+const tfG=new T.Group();tfG.position.set(0,2.4,0);root.add(tfG);VIS.push([tfG,['tf']]);const tfB=new T.Group();tfB.matrixAutoUpdate=false;tfG.add(tfB);tfB.add(mk(BX(1.4,.9,.5),mAl,.7,.45,.25));const tfb2=giz(2);tfB.add(tfb2);tfb2.matrixAutoUpdate=true;const tfw=giz(2.4);tfw.children.forEach(c=>{c.material.transparent=true;c.material.opacity=.35});tfG.add(tfw);
+// ROVER
+// EMBEDDED
+const emb=new T.Group();root.add(emb);VIS.push([emb,['emb']]);
+emb.add(mk(BX(11,.15,6.5),M({color:0x1b2233,roughness:.8}),0,-.08,0));
+const pcbM=M({color:0x0c7f86,roughness:.4,metalness:.1}),ard=new T.Group();ard.position.set(-1,.15,1);emb.add(ard);ard.add(mk(BX(3.6,.12,2.6),pcbM,0,.06,0));ard.add(mk(BX(.7,.5,.6),mAl,-1.6,.37,-.5));ard.add(mk(BX(.7,.5,.5),mDk,-1.6,.37,.6));ard.add(mk(BX(1,.14,.3),mDk,.3,.19,.2));ard.add(mk(BX(2.4,.25,.1),mDk,.5,.19,-1.15));ard.add(mk(BX(1.9,.25,.1),mDk,.7,.19,1.15));ard.add(mk(CY(.1,.1,.1,12),M({color:0xd8392b}),-.9,.17,-.5));ard.add(mk(CY(.04,.04,.03,8),M({color:0xffd34a,emissive:0xaa8800}),-.4,.14,.5));
+const lc=document.createElement('canvas');lc.width=256;lc.height=64;const lx=lc.getContext('2d');lx.fillStyle='#fff';lx.font='bold 34px sans-serif';lx.fillText('ARDUINO UNO',8,44);const lt=new T.CanvasTexture(lc);lt.encoding=T.sRGBEncoding;const lp=new T.Mesh(new T.PlaneGeometry(1.6,.4),new T.MeshBasicMaterial({map:lt,transparent:true}));lp.rotation.x=-Math.PI/2;lp.position.set(.5,.13,-.35);ard.add(lp);
+const srv=new T.Group();srv.position.set(-4,.15,-1.4);emb.add(srv);srv.add(mk(BX(1.2,.7,.55),M({color:0x1c5fd6,roughness:.5}),0,.35,0));srv.add(mk(BX(1.8,.08,.5),M({color:0x1c5fd6,roughness:.5}),0,.5,0));srv.add(mk(CY(.18,.18,.2,16),mAl,.3,.8,0));const horn=new T.Group();horn.position.set(.3,.95,0);horn.add(mk(BX(1.1,.06,.2),M({color:0xf2f2f2,roughness:.5}),.4,0,0));srv.add(horn);
+const us=new T.Group();us.position.set(3.3,.9,1.5);emb.add(us);us.add(mk(BX(2.2,1,.12),M({color:0x1a5bb0,roughness:.5}),0,0,0));[-.6,.6].forEach(x=>{const c=mk(CY(.34,.34,.4,24),mAl,x,0,.22);c.rotation.x=Math.PI/2;us.add(c);const d=mk(CY(.25,.25,.05,24),mDk,x,0,.43);d.rotation.x=Math.PI/2;us.add(d)});us.add(mk(BX(.5,.1,.1),mDk,0,-.55,0));
+const wall=mk(BX(2.4,1.8,.15),M({color:0x8a94a8,roughness:.7}),3.3,.9,-1);emb.add(wall);const waves=[0,1,2].map(i=>{const m=new T.Mesh(new T.RingGeometry(.3,.36,32),new T.MeshBasicMaterial({color:0x4aa8ff,transparent:true,opacity:.6,side:T.DoubleSide}));emb.add(m);return m});
+function wire(pts,c){const cu=new T.CatmullRomCurve3(pts.map(p=>new T.Vector3(...p)));emb.add(mk(new T.TubeGeometry(cu,24,.035,6),M({color:c,roughness:.6})))}
+[[0xff8a3d,0],[0xd8392b,.12],[0x6b3a1a,.24]].forEach(([c,o])=>{wire([[-3.6,.4,-1.2+o],[-3.4,.15,-.5],[-2.2,.3,-.8],[-1.4,.4,-.95+o*.2]],c);wire([[3,.4,1.2+o],[2.4,.2,1.4],[1.4,.4,1.2],[.8,.4,1.2-o*.2]],c)});
+// BEAM
+const bg=new T.Group();root.add(bg);VIS.push([bg,['design']]);bg.add(mk(BX(.5,3.2,2),mDk,-3.25,1.5,0));bg.add(mk(BX(.12,3.2,2.1),mOr,-3.54,1.5,0));const tipM=mk(BX(.7,.7,.7),M({color:0xd8392b,roughness:.4}),3,1,0);bg.add(tipM);let bm=null;
+function buildBeam(){if(bm){bg.remove(bm);bm.geometry.dispose()}const D=+$('bD').value,rad=.14+D/80*.25,dv=S.beam.dv,pts=[];for(let i=0;i<=24;i++){const e=i/24;pts.push(new T.Vector3(-3+6*e,1.5-dv*(3*e*e-e*e*e)/2,0))}const cu=new T.CatmullRomCurve3(pts),g=new T.TubeGeometry(cu,48,rad,16,false),n=g.attributes.position.count,col=new Float32Array(n*3),c=new T.Color();for(let i=0;i<n;i++){const ring=Math.floor(i/17),e=ring/48,v=Math.min(1,S.beam.ratio*1.3*(1-e));c.setHSL((1-v)*.66,.85,.5);col[i*3]=c.r;col[i*3+1]=c.g;col[i*3+2]=c.b}g.setAttribute('color',new T.BufferAttribute(col,3));bm=mk(g,new T.MeshStandardMaterial({vertexColors:true,roughness:.4,metalness:.3}));bg.add(bm);const end=pts[24];tipM.position.set(3,end.y-rad-.35,0);tipM.visible=+$('bm').value>0}
+// labels, camera, loop
+const labs=$('labels');LAB.forEach(d=>{const e=document.createElement('div');e.className='lab';e.dataset.k=d[0];e.textContent=d[1];e.onclick=()=>selL(d[0]);labs.appendChild(e)});
+const cur={az:.7,el:.28,d:15,tx:0,ty:2.4,tz:0},tg=Object.assign({},cur);let dAz=0,dEl=0,auto=true,w0=1,h0=1;
+function setCh(e){const c=(e.dataset.cam||'0.7,.28,15,0,2.4,0').split(',').map(Number);[tg.az,tg.el,tg.d,tg.tx,tg.ty,tg.tz]=c;S.mode=e.dataset.mode;S.labels=e.dataset.lab==='1';S.name=e.dataset.name||'';dAz=dEl=0;auto=S.mode==='hero';$('stag').innerHTML=S.name;document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.id));if(S.mode==='design')beam();if(S.mode==='ctrl'){S.pidT=0;S.pidPlay=false}}
+let drag=false,lx2=0,ly2=0;el.addEventListener('pointerdown',e=>{drag=true;lx2=e.clientX;ly2=e.clientY;auto=false;try{el.setPointerCapture(e.pointerId)}catch(_){}});el.addEventListener('pointermove',e=>{if(!drag)return;dAz-=(e.clientX-lx2)*.01;dEl=Math.max(-.9,Math.min(1,dEl+(e.clientY-ly2)*.008));lx2=e.clientX;ly2=e.clientY});addEventListener('pointerup',()=>drag=false);
+const size=()=>{w0=el.clientWidth;h0=el.clientHeight;if(!w0||!h0)return;r.setSize(w0,h0);cam.aspect=w0/h0;cam.updateProjectionMatrix()};size();new ResizeObserver(size).observe(el);
+const bb=new T.Vector3();let last=0;
+function poseFor(t){const m=S.mode;if(m==='hero'||m==='wrap')return[30*Math.sin(t*.5),55+14*Math.sin(t*.7),-85+18*Math.sin(t*.9),30+20*Math.sin(t*1.1)];if(m==='dof'){const q=[0,55,-85,30];if(S.dj>=0)q[S.dj]+=30*Math.sin(t*2.2);return q}if(m==='fk')return S.qs;if(m==='ik')return S.ikq;if(m==='ctrl')return[0,20+S.pidY,-60,40];if(m==='auto')return A.q;return[20,55,-85,30]}
+function loop(t){requestAnimationFrame(loop);t/=1000;const dt=Math.min(.05,t-last);last=t;const sr=el.getBoundingClientRect();if(sr.bottom<0||sr.top>innerHeight)return;
+const k=1-Math.exp(-dt*3);for(const q in cur)cur[q]+=(tg[q]-cur[q])*k;if(auto)dAz+=dt*.25;
+const az=cur.az+dAz,e2=Math.max(.02,cur.el+dEl),mq=w0<560?1.3:1,d=cur.d*mq;cam.position.set(cur.tx+Math.sin(az)*Math.cos(e2)*d,cur.ty+Math.sin(e2)*d,cur.tz+Math.cos(az)*Math.cos(e2)*d);cam.lookAt(cur.tx,cur.ty,cur.tz);
+for(const[g,ms]of VIS){const s=g.scale.x,tgt=ms.includes(S.mode)?1:.001;g.scale.setScalar(Math.max(.001,s+(tgt-s)*(1-Math.exp(-dt*6))));g.visible=g.scale.x>.02}
+// auto + pid
+if(S.mode==='auto')autoStep(dt);if(S.pidPlay){S.pidT+=dt;const i=Math.min(799,Math.floor(S.pidT/.005));S.pidY=ser[i]||0;if(i>=799)S.pidPlay=false}else if(S.mode!=='ctrl')S.pidY=0;
+const qT=poseFor(t),kq=(S.mode==='ctrl'||S.mode==='auto')?1:1-Math.exp(-dt*8);S.qd=S.qd.map((v,i)=>v+(qT[i]-v)*kq);
+const f=chain(S.qd),P=f.map(pos3);seg(off,new T.Vector3(0,1.2,0),P[1]);seg(L2,P[1],P[2]);seg(L3,P[2],P[3]);seg(L4,P[3],P[4]);H.forEach((h,i)=>h.matrix.copy(mat4(f[i+1])));gz.forEach((g,i)=>{g.visible=S.mode==='fk'&&(i>0);g.matrix.copy(mat4(f[i]))});gz[0].visible=S.mode==='fk';
+grip.matrix.copy(mat4(f[4]));const go=S.mode==='auto'?A.g:S.g;fing.forEach((m,i)=>m.position.z=(i?-1:1)*(.1+.28*go));
+const eeP=P[4],xa=new T.Vector3(1,0,0).transformDirection(mat4(f[4]));
+if(S.mode==='auto'){const c=A.held?eeP.clone().addScaledVector(xa,.55):new T.Vector3(A.cube[0]*sc3,.3,-A.cube[1]*sc3);if(!A.held&&A.i===0&&!A.on&&A.q[1]===HOME[1]){}cube.position.copy(c)}
+// tf
+if(S.Rm){const R=S.Rm;tfB.matrix.makeBasis(dirm(R[0][0],R[1][0],R[2][0]),dirm(R[0][1],R[1][1],R[2][1]),dirm(R[0][2],R[1][2],R[2][2]))}
+// emb
+horn.rotation.y=-((S.rflx?0:(S.sa==null?90:S.sa))*RD)+Math.PI/2*0;const dz=1.5-(S.sd||80)/200*5.5;wall.position.z=Math.min(.8,dz);waves.forEach((m,i)=>{const ph=((t*.8+i/3)%1);m.position.set(3.3,.9,1.5-.5-ph*Math.max(.2,1.5-wall.position.z-.6));m.scale.setScalar(.6+ph*2);m.material.opacity=.6*(1-ph)});
+if(S.labels){const an={base:new T.Vector3(0,.7,0),l1:new T.Vector3(0,.9,0).lerp(P[1],.4),j1:new T.Vector3(0,.65,0),l2:P[1].clone().lerp(P[2],.5),j2:P[1],l3:P[2].clone().lerp(P[3],.5),j3:P[2],l4:P[3].clone().lerp(P[4],.5),j4:P[3],ee:P[4]};for(const lb of labs.children){bb.copy(an[lb.dataset.k]).project(cam);lb.style.display=bb.z<1?'block':'none';lb.style.transform='translate('+((bb.x*.5+.5)*w0)+'px,'+((-bb.y*.5+.5)*h0)+'px)'}}else for(const lb of labs.children)lb.style.display='none';
+r.render(sc,cam)}
+ST={setCh,buildBeam};requestAnimationFrame(loop)}
+let ok=!!T;if(ok){try{init3d()}catch(e){ok=false;console.error(e)}}
+if(!ok)$('stage').innerHTML='<p class="nogl">The 3D view needs WebGL. Everything else on this page still works.</p>';
+try{document.documentElement.classList.add('js');const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.05});document.querySelectorAll('.rv').forEach(n=>io.observe(n));
+if(ST){const co=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)ST.setCh(x.target)}),{rootMargin:'-45% 0px -45% 0px'});document.querySelectorAll('section.ch').forEach(n=>co.observe(n))}
+const lb=$('lb');document.addEventListener('click',e=>{const t=e.target;if(t.matches('figure img')){lb.firstChild.src=t.src;lb.style.display='flex'}else if(lb.contains(t))lb.style.display='none'})}catch(e){document.querySelectorAll('.rv').forEach(n=>n.classList.add('in'))}
+selL('ee');drawIK();pid();beam();addEventListener('resize',()=>{drawIK();pid();pwm()});
+</script><script>
+(()=>{const q=id=>document.getElementById(id);
+const G=[
+['Body','Robot','A machine that senses its surroundings, decides what to do and acts on the physical world.'],
+['Body','Manipulator','A robot arm built to move and handle objects.'],
+['Body','Mobile robot','A robot that travels around, on wheels, legs or propellers.'],
+['Body','Link','A rigid part of the arm that does not bend. Think of the bones.'],
+['Body','Joint','Where two links meet and may move relative to each other. Also called a kinematic pair.'],
+['Body','Revolute joint','A joint that turns about an axis, like a door hinge. One degree of freedom.'],
+['Body','Prismatic joint','A joint that slides along a line, like a drawer. One degree of freedom.'],
+['Body','Kinematic chain','Links joined one after another from the base to the hand.'],
+['Body','Base','The fixed part. Every other motion is measured from it.'],
+['Body','End effector','The tool at the tip of the arm: a gripper, welder or spray nozzle.'],
+['Body','Payload','The heaviest load the arm can carry, usually quoted at full reach.'],
+['Body','Workspace','Every point in space the hand can reach.'],
+['Motion','Degrees of freedom','The number of independent ways a body can move. A free body in space has 6: three slides and three turns.'],
+['Motion','Forward kinematics','Given the joint angles, find where the hand is.'],
+['Motion','Inverse kinematics','Given where the hand should be, find the joint angles. There may be several answers, or none.'],
+['Motion','Singularity','A pose where the arm loses a direction of motion, such as when fully stretched out.'],
+['Motion','Trajectory','A path together with timing: where the arm goes and when.'],
+['Motion','Repeatability','How closely the arm returns to the same point again and again.'],
+['Motion','Teleoperation','A person drives the robot remotely, for example with a keyboard.'],
+['Motion','Odometry','Estimating how far a wheeled robot has travelled by counting wheel turns.'],
+['Math','Frame','A set of X, Y and Z axes fixed to a body, used to measure positions.'],
+['Math','Roll, pitch, yaw','Turns about the X, Y and Z axes.'],
+['Math','Rotation matrix','A 3×3 grid of numbers that turns one frame into another.'],
+['Math','Homogeneous transform','A 4×4 matrix that holds a rotation and a shift together, so poses can be chained by multiplying.'],
+['Math','DH parameters','Four numbers per joint (a, α, d, θ) that describe how one joint frame sits relative to the next.'],
+['Math','Kutzbach criterion','A formula that counts degrees of freedom from the number of links and joints.'],
+['Electronics','Actuator','The part that makes motion: an electric motor or a hydraulic cylinder.'],
+['Electronics','Sensor','A device that measures the world or the robot itself.'],
+['Electronics','Encoder','Counts shaft turns so the controller knows each joint angle.'],
+['Electronics','Microcontroller','A tiny computer on one chip that reads sensors and drives motors, such as Arduino or ESP32.'],
+['Electronics','GPIO','General-purpose pins that your program can set as input or output.'],
+['Electronics','Pull-up resistor','Holds a signal wire at a known high level when nothing else is driving it.'],
+['Electronics','PID control','A controller that corrects error using the present error, its history and its trend.'],
+['Electronics','IMU','A sensor for acceleration and turning rate.'],
+['Electronics','LiDAR','A laser scanner that measures distance to surroundings.'],
+['ROS','ROS','A software toolkit for connecting the programs of a robot.'],
+['ROS','Node','One small program with one job.'],
+['ROS','Topic','A named channel that nodes publish to or listen on.'],
+['ROS','Message','A typed packet of data sent on a topic, such as an integer.'],
+['ROS','Publisher and subscriber','The sender and the listener on a topic.'],
+['ROS','URDF','A file that describes a robot: its links, joints and shapes.'],
+['ROS','Gazebo','A simulator that gives a virtual robot physics.'],
+['ROS','Catkin workspace','The folder where ROS packages are built together.'],
+['Control','Feedback loop','Measure the result, compare it with the goal, correct, repeat.'],
+['Control','Setpoint','The value you want, such as a target joint angle.'],
+['Control','Error','Setpoint minus measured value. Controllers work to shrink it.'],
+['Control','Open and closed loop','Open loop sends commands blindly. Closed loop checks the result with a sensor.'],
+['Control','PWM','Fast on-off switching whose on-time share sets the average power.'],
+['Control','Servo motor','A motor with built-in position feedback that holds the angle you command.'],
+['Control','Stepper motor','Turns in fixed small steps, so position is known by counting steps.'],
+['Control','H-bridge','A circuit that lets a motor spin both ways from one supply.'],
+['Control','Torque','Turning force. Arm joints need high torque to lift the links.'],
+['Control','Gear ratio','How much a gearbox trades speed for torque.'],
+['Control','Backlash','Small play between gear teeth that causes position error.'],
+['Control','Latency','Delay between a sensor reading and the robot acting on it.']];
+let gc=G[0][0];const GC=[...new Set(G.map(g=>g[0]))];
+function gl(){q('gcats').innerHTML=GC.map(c=>'<button'+(c==gc?' class="on"':'')+' data-c="'+c+'">'+c+'</button>').join('');q('ggrid').innerHTML=G.filter(g=>g[0]==gc).map(g=>'<div class="card"><b class="k">'+g[1]+'</b><br>'+g[2]+'</div>').join('')}
+q('gcats').onclick=e=>{if(e.target.dataset.c){gc=e.target.dataset.c;gl()}};gl();
+function TB(id,h,r){const e=document.getElementById(id);if(!e)return;e.innerHTML='<tr>'+h.map(x=>'<th>'+x+'</th>').join('')+'</tr>'+r.map(a=>'<tr>'+a.map(x=>'<td>'+x+'</td>').join('')+'</tr>').join('')}
+TB('ht0',['Link','Behaviour','Example'],[['Rigid','No deformation while moving or carrying load','Industrial arm links'],['Flexible','Partly deforms while transmitting motion','Belt drive'],['Fluid','Motion passed by fluid pressure','Hydraulic actuators, brakes']]);
+TB('ht1',['Joint','Freedom','Removed','Note'],[['Rigid','0','6','No motion, a bolted connection'],['Prismatic','1','5','Slides along a line, like a drawer'],['Revolute','1','5','Turns about an axis, like a hinge'],['Parallel cylinders','2','4','Line contact between two cylinders'],['Cylindrical','2','4','Slides and spins on the same axis'],['Spherical','3','3','Ball and socket, like the shoulder'],['Planar','3','3','Slides on a plane and spins about its normal'],['Edge slider','4','2','An edge rests on a plane'],['Cylindrical slider','4','2','A cylinder rests on a plane'],['Point slider','5','1','A sharp point rests on a plane'],['Spherical slider','5','1','A ball rests on a plane'],['Crossed cylinders','5','1','Two cylinders cross at right angles']]);
+TB('ht2',['Layout','Joints','Reach shape','Typical use'],[['Cartesian','PPP','Box','Gantry, CNC, 3D printers'],['Cylindrical','RPP','Cylinder shell','Machine loading'],['Spherical','RRP','Part of a sphere','Early programmable arms'],['SCARA','RRP','Flat, wide disc','Fast pick-and-place, assembly'],['Articulated','RRR','Near sphere','Welding, painting, general work']]);
+TB('ht3',['Actuator','Strength','Weakness','Typical use'],[['DC motor','Simple, cheap, fast','Needs gearing and feedback','Wheels, small joints'],['Servo','Holds a commanded angle','Limited range, small torque','Hobby arms, grippers'],['Stepper','Precise steps, no encoder needed','Can skip steps under load','3D printers, small arms'],['Hydraulic','Huge force for its size','Pumps, leaks, mess','Excavators, heavy arms'],['Pneumatic','Fast, clean, light','Hard to position precisely','Grippers, factory lines']]);
+TB('ht4',['Sensor','Measures','Used for'],[['Encoder','Shaft angle or turns','Joint angle, wheel odometry'],['IMU','Acceleration and turning rate','Tilt, balance, heading'],['LiDAR','Distance by laser','Mapping, obstacle avoidance'],['Camera','Images','Recognising and locating objects'],['DHT22','Temperature and humidity','Environment monitoring'],['Limit switch','Touch at an end stop','Homing a joint']]);
+TB('ht5',['Part','Key facts'],[['ESP32','Dual-core processor up to 240 MHz, 520 KB RAM, built-in Wi-Fi and Bluetooth, 3.3 V logic'],['DHT22','Temperature −40 to 80 °C (±0.5 °C), humidity 0 to 100 % (±2 to 5 %), 3.3 to 6 V supply, one reading every 2 s at most']]);
+TB('ht6',['Command','What it does'],[['rostopic list','Lists every active topic'],['rostopic echo /rover_numbers','Prints messages as they arrive'],['rostopic hz /rover_numbers','Measures how often messages arrive (about 1 Hz here)'],['rostopic info /rover_numbers','Shows type, publishers and subscribers'],['rosmsg show std_msgs/Int32','Shows the fields of a message type'],['rosnode list','Lists running nodes'],['rqt_graph','Draws nodes and topics as a diagram'],['rosrun pkg node.py','Starts one node'],['roslaunch pkg file.launch','Starts many nodes from one file'],['catkin_make','Builds all packages in the workspace']]);
+
+function H(){const L1=+q('hL1').value,L2=+q('hL2').value,a=+q('ha1').value,b=+q('ha2').value,r=Math.PI/180,f=v=>v.toFixed(2);
+q('vhL1').textContent=L1;q('vhL2').textContent=L2;q('vha1').textContent=a;q('vha2').textContent=b;
+const x1=L1*Math.cos(a*r),x2=L2*Math.cos((a+b)*r),y1=L1*Math.sin(a*r),y2=L2*Math.sin((a+b)*r),x=x1+x2,y=y1+y2;
+q('hout').innerHTML='x = '+L1+'·cos'+a+'° + '+L2+'·cos'+(a+b)+'° = '+f(x1)+' + '+f(x2)+' = <b>'+f(x)+' mm</b><br>y = '+L1+'·sin'+a+'° + '+L2+'·sin'+(a+b)+'° = '+f(y1)+' + '+f(y2)+' = <b>'+f(y)+' mm</b><br>Distance from base = √(x²+y²) = <b>'+f(Math.hypot(x,y))+' mm</b>';
+const c2=(x*x+y*y-L1*L1-L2*L2)/(2*L1*L2);q('hik').textContent=Math.abs(c2)<=1.0000001?'Inverse check: cosθ₂ = '+c2.toFixed(3)+', so θ₂ = ±'+(Math.acos(Math.max(-1,Math.min(1,c2)))/r).toFixed(1)+'° (elbow up or down)':'Inverse check: this point is out of reach'}
+['hL1','hL2','ha1','ha2'].forEach(i=>q(i).oninput=H);H();
+let conn=true;q('dcn').onclick=()=>{conn=!conn;q('dcn').textContent=conn?'Sensor connected':'Sensor unplugged';q('dcn').classList.toggle('on',!conn)};
+let dl=[];setInterval(()=>{const l=conn?'Temperature: '+(+q('dtt').value+(Math.random()-.5)*.4).toFixed(2)+' C  Humidity: '+(+q('dhh').value+(Math.random()-.5)*.8).toFixed(2)+' %':'Failed to read from DHT sensor!';dl.push(l);dl=dl.slice(-7);q('dser').textContent='Serial monitor 115200 baud\n'+dl.join('\n')},2000);
+q('dtt').addEventListener('input',()=>q('vdtt').textContent=q('dtt').value);q('dhh').addEventListener('input',()=>q('vdhh').textContent=q('dhh').value);
+let lp=0,pl=[];setInterval(()=>{if(!pubOn){return}if(pn!==lp){lp=pn;pl.push('publishing: '+((pn+98)%100+1));pl=pl.slice(-6);q('pubt').textContent=pl.join('\n')}},200);
+})();
+</script><script>
+(()=>{const $=id=>document.getElementById('r_'+id),rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const M=(c,m=.4,r=.5)=>new THREE.MeshStandardMaterial({color:c,metalness:m,roughness:r});
+// ---------- generic scene ----------
+function mk(el,o){
+ const R=new THREE.WebGLRenderer({antialias:true,alpha:true});R.setPixelRatio(Math.min(devicePixelRatio,2));el.appendChild(R.domElement);
+ const S=new THREE.Scene(),C=new THREE.PerspectiveCamera(40,1,.1,200);
+ S.add(new THREE.HemisphereLight(0xffffff,0x445566,1.3));const d=new THREE.DirectionalLight(0xffffff,1.6);d.position.set(5,9,6);S.add(d);
+ const gr=new THREE.GridHelper(o.grid||12,o.grid||12,0x3c8c78,0x2a4a50);gr.material.transparent=true;gr.material.opacity=.5;S.add(gr);
+ let ry=o.ry??.8,rx=.5,drag=false,lx=0,ly=0,vis=true;const T=new THREE.Vector3(...(o.target||[0,1,0])),dist=o.dist||9,api={S,T,hs:[],el,C};
+ new IntersectionObserver(e=>vis=e[0].isIntersecting).observe(el);
+ el.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;ly=e.clientY;el.setPointerCapture(e.pointerId)});el.addEventListener('pointerup',()=>drag=false);
+ el.addEventListener('pointermove',e=>{if(!drag)return;ry-=(e.clientX-lx)*.01;rx=Math.max(.05,Math.min(1.4,rx+(e.clientY-ly)*.006));lx=e.clientX;ly=e.clientY});
+ function size(){R.setSize(el.clientWidth,el.clientHeight);C.aspect=el.clientWidth/el.clientHeight;C.updateProjectionMatrix()}addEventListener('resize',size);size();
+ let last=performance.now();o.init(api);
+ (function loop(n){requestAnimationFrame(loop);const dt=Math.min((n-last)/1000,.05);last=n;if(!vis)return;
+  if(o.auto&&!drag&&!rm)ry+=.003;if(o.tick)o.tick(dt,n/1000,api);if(api.follow)T.copy(api.follow);
+  C.position.set(T.x+Math.sin(ry)*Math.cos(rx)*dist,T.y+Math.sin(rx)*dist,T.z+Math.cos(ry)*Math.cos(rx)*dist);C.lookAt(T);R.render(S,C);
+  api.hs.forEach(h=>{const v=h.f().project(C);h.b.style.left=(v.x*.5+.5)*el.clientWidth+'px';h.b.style.top=(-v.y*.5+.5)*el.clientHeight+'px'})})(last);
+ return api}
+// rover
+const tw={x:0,w:0};
+mk($('s4'),{target:[0,.5,0],dist:7,grid:40,init(api){const g=new THREE.Group();api.S.add(g);api.rv=g;
+  const add=(geo,mat,p,par=g)=>{const m=new THREE.Mesh(geo,mat);m.position.set(...p);par.add(m);return m};
+  add(new THREE.BoxGeometry(1.8,.4,1.1),M(0x2e8fd0,.4,.4),[0,.55,0]);add(new THREE.BoxGeometry(.6,.25,.5),M(0x222c36),[.3,.88,0]);
+  const li=new THREE.Group();li.position.set(-.2,.95,0);g.add(li);add(new THREE.CylinderGeometry(.18,.18,.2,20),M(0x111),[0,0,0],li);add(new THREE.BoxGeometry(.2,.05,.05),M(0xff5a5a),[.12,0,0],li);api.li=li;
+  api.wh=[];[[.65,.7],[.65,-.7],[-.65,.7],[-.65,-.7]].forEach(([x,z])=>{const ge=new THREE.CylinderGeometry(.3,.3,.22,24);ge.rotateX(Math.PI/2);const w=new THREE.Mesh(ge,M(0x333a42,.2,.8));w.position.set(x,.3,z);const sp=new THREE.Mesh(new THREE.BoxGeometry(.5,.05,.24),M(0xaaa));w.add(sp);g.add(w);api.wh.push({w,z})});
+  [[6,3],[-8,-5],[3,-8],[-4,7],[10,-2],[-10,4]].forEach(([x,z])=>{const b=new THREE.Mesh(new THREE.BoxGeometry(1,1.2,1),M(0x6b5a46,0,.9));b.position.set(x,.6,z);api.S.add(b)});
+  api.th=0;api.p=new THREE.Vector3()},
+ tick(dt,t,api){api.th+=tw.w*dt;api.p.x+=Math.cos(api.th)*tw.x*dt*2;api.p.z-=Math.sin(api.th)*tw.x*dt*2;api.rv.position.copy(api.p);api.rv.rotation.y=api.th;api.follow=api.p.clone().setY(.5);
+  api.wh.forEach(q=>q.w.rotation.z-=(tw.x-(q.z>0?-1:1)*tw.w*.6)*dt*3);api.li.rotation.y+=dt*6}});
+const KEYS={i:[.5,0],',':[-.5,0],j:[0,1],l:[0,-1],k:[0,0],u:[.5,1],o:[.5,-1]};const LAB={i:'forward',',':'back',j:'turn left',l:'turn right',k:'stop',u:'fwd + left',o:'fwd + right'};
+let echoLines=[];function send(k){const v=KEYS[k];if(!v)return;tw.x=v[0];tw.w=v[1]*1;$('echo').textContent='$ rostopic echo /cmd_vel\n'+'linear:  x: '+v[0].toFixed(1)+'\nangular: z: '+(v[1]).toFixed(1)+'\n---\n('+LAB[k]+')'}
+Object.keys(KEYS).forEach(k=>{const b=document.createElement('button');b.textContent=k+'  '+LAB[k];b.onclick=()=>send(k);$('tele').appendChild(b)});
+$('s4').addEventListener('keydown',e=>{if(KEYS[e.key]){e.preventDefault();send(e.key)}});
+
+})();
+</script><a href="../index.html" style="position:fixed;left:14px;bottom:14px;z-index:2147483000;background:#0d0d0d;color:#f4f1ea;font:600 13px/1 system-ui,sans-serif;padding:10px 16px;border-radius:99px;text-decoration:none;box-shadow:0 4px 18px rgba(0,0,0,.35)">← Portfolio</a></body></html>

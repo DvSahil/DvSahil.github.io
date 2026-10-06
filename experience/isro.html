@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Space Robotics Intern | ISRO | Portfolio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap">
+<style>
+:root{--bg:#090d18;--bg2:#121a2c;--ink:#eaeef9;--mut:#9aa6c2;--acc:#ff9a3d;--acc2:#6fd3ff;--line:#243049;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f4f6fb;--bg2:#e5eaf5;--ink:#111a2e;--mut:#55627f;--acc:#b85c00;--acc2:#0a6f94;--line:#c8d1e5}}
+:root[data-theme="light"]{--bg:#f4f6fb;--bg2:#e5eaf5;--ink:#111a2e;--mut:#55627f;--acc:#b85c00;--acc2:#0a6f94;--line:#c8d1e5}
+:root[data-theme="dark"]{--bg:#090d18;--bg2:#121a2c;--ink:#eaeef9;--mut:#9aa6c2;--acc:#ff9a3d;--acc2:#6fd3ff;--line:#243049}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 'Space Grotesk',system-ui,sans-serif}
+h1,h2{font-family:'Newsreader',Georgia,serif;font-weight:600;line-height:1.1;margin:0}
+h1{font-size:clamp(2.2rem,5.5vw,4.2rem)}h2{font-size:clamp(1.7rem,3.5vw,2.6rem);margin-bottom:.6rem}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;gap:.3rem;overflow-x:auto;padding:.6rem 1rem;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav a{color:var(--mut);text-decoration:none;padding:.3rem .8rem;border-radius:99px;white-space:nowrap;font-size:.9rem}nav a:hover,nav a:focus-visible{color:var(--ink);background:var(--bg2);outline:none}
+section{padding:4.5rem 1.2rem;max-width:1100px;margin:0 auto}
+.lead{color:var(--mut);max-width:62ch}
+.herowrap{background:radial-gradient(1px 1px at 12% 22%,#fff8,transparent),radial-gradient(1px 1px at 70% 15%,#fff8,transparent),radial-gradient(1.5px 1.5px at 85% 60%,#fff9,transparent),radial-gradient(1px 1px at 30% 75%,#fff7,transparent),radial-gradient(1px 1px at 55% 40%,#fff6,transparent),radial-gradient(ellipse at 75% 30%,#1d2b52,transparent 60%)}
+.hero{display:grid;grid-template-columns:1fr 1.25fr;gap:1.5rem;align-items:center;min-height:88vh;max-width:1250px;margin:0 auto}
+@media(max-width:820px){.hero{grid-template-columns:1fr}}
+.tag{display:inline-block;border:1px solid var(--acc);color:var(--acc);padding:.15rem .8rem;border-radius:99px;font-size:.85rem;margin-bottom:1rem}
+.stage{position:relative;aspect-ratio:1/.85;background:radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--bg2) 85%,transparent),color-mix(in srgb,var(--bg) 70%,transparent));border:1px solid var(--line);border-radius:22px;overflow:hidden;touch-action:pan-y;cursor:grab}
+.stage:active{cursor:grabbing}.stage canvas{width:100%;height:100%;display:block}
+.hot{position:absolute;transform:translate(-50%,-50%);background:var(--acc);color:#2a1500;border:0;border-radius:99px;font:600 .75rem 'Space Grotesk',sans-serif;padding:.25rem .65rem;cursor:pointer;box-shadow:0 0 0 4px color-mix(in srgb,var(--acc) 25%,transparent)}
+.hot.on{background:var(--acc2);color:#00212e}
+.hint{position:absolute;left:12px;bottom:10px;font-size:.78rem;color:var(--mut);z-index:2}
+.info{margin-top:.9rem;padding:1rem 1.1rem;border-left:3px solid var(--acc2);background:var(--bg2);border-radius:0 12px 12px 0;min-height:5.5rem}.info b{display:block;font-size:1.05rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;margin-top:1.5rem}
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:1.2rem}.card h3{margin:.1rem 0 .4rem;font-size:1.1rem}.card p{margin:.3rem 0;color:var(--mut);font-size:.95rem}
+.spec{display:inline-block;margin:.15rem .25rem 0 0;padding:.1rem .6rem;border-radius:99px;background:var(--bg);border:1px solid var(--line);font-size:.8rem}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:center;margin-top:1.5rem}@media(max-width:820px){.two{grid-template-columns:1fr}}
+.btns{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1rem}
+button.b,a.b{background:var(--bg2);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:.55rem .9rem;font:500 .9rem 'Space Grotesk',sans-serif;cursor:pointer;text-decoration:none;display:inline-block}
+button.b:hover,button.b:focus-visible,a.b:hover{border-color:var(--acc);outline:none}.b.on{background:var(--acc);color:#2a1500;border-color:var(--acc)}
+label{display:block;font-size:.85rem;color:var(--mut);margin-top:.7rem}input[type=range]{width:100%;accent-color:var(--acc)}
+.out{font:600 1.6rem 'Newsreader',serif;color:var(--acc)}
+canvas.c2{width:100%;height:auto;aspect-ratio:700/380;border:1px solid var(--line);border-radius:18px;background:#1a1712;display:block}
+.bar{height:10px;border-radius:99px;background:var(--bg);overflow:hidden;margin-top:.6rem}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--acc2),var(--acc))}
+.cv li{margin:.5rem 0}.cv{padding-left:1.2rem;max-width:70ch}
+.src{font-size:.85rem;color:var(--mut)}.src a{color:var(--acc2)}
+footer{text-align:center;color:var(--mut);padding:2rem 1rem 3rem;font-size:.85rem}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style></head><body>
+<nav><a href="#top">Overview</a><a href="#why">Why robots</a><a href="#drive">Rover lab</a><a href="#auto">Self-driving</a><a href="#hard">Challenges</a><a href="#real">Real missions</a><a href="#cv">What I did</a><a href="#src">Sources</a></nav>
+
+<div class="herowrap"><section class="hero" id="top">
+<div>
+<span class="tag">Internship · 01 Jul 2024 to 09 Aug 2024 · Delhi</span>
+<h1>Space Robotics Intern at ISRO</h1>
+<p class="lead">A 40-day technical program on robots that explore other worlds. This page explains what I studied in plain language: how a rover is built, how it drives, and how it learns to make its own decisions. Drag the rover to turn it, then tap a label.</p>
+<div class="btns"><a class="b" href="https://drive.google.com/file/d/1sw19AWO8kCFsj7Ie5iaNghkOIUIgD7Ud/view?usp=sharing" target="_blank" rel="noopener">View certificate</a></div>
+<div class="info" id="info" aria-live="polite"><b>Tap a label on the rover</b>Each marker explains one part and why a planetary rover needs it.</div>
+</div>
+<div><div class="stage" id="s1"><span class="hint">Drag to rotate 360° · illustrative model, not an ISRO drawing</span></div></div>
+</section></div>
+
+<section id="why">
+<h2>Why send robots instead of people?</h2>
+<p class="lead">Space is too cold, too hot, too far and too dangerous. Robots go first. Pick a destination to see what they face.</p>
+<div class="btns" id="dest"></div>
+<div class="grid" id="destCards"></div>
+<div class="card" style="margin-top:1rem"><h3>Why delay matters</h3><p>A command takes time to reach the robot and the picture takes time to come back, so a human cannot steer in real time. Press the button to send a command.</p>
+<div class="btns"><button class="b" id="send">Send command to rover</button><span id="dly" class="out" style="align-self:center"></span></div><div class="bar"><i id="pg"></i></div><p id="dnote" style="font-size:.8rem"></p></div>
+</section>
+
+<section id="drive">
+<h2>Rover lab: drive it like Pragyan</h2>
+<p class="lead">India's Chandrayaan-3 rover, Pragyan, has six wheels, each with its own motor, and steers by spinning the left and right sides at different speeds. It has no steering wheel. Try it.</p>
+<div class="two"><div class="stage" id="s2"><span class="hint">Drag to orbit · the camera follows the rover</span></div>
+<div class="card"><label>Left wheels: <b id="vL">0</b></label><input type="range" id="sL" min="-100" max="100" value="0">
+<label>Right wheels: <b id="vR">0</b></label><input type="range" id="sR" min="-100" max="100" value="0">
+<div class="info" id="drv" style="min-height:3rem;margin-top:1rem">Both sides equal: straight line. Different: it curves. Opposite: it spins on the spot.</div>
+<div class="btns"><button class="b" data-p="60,60">Forward</button><button class="b" data-p="30,70">Curve left</button><button class="b" data-p="-50,50">Spin on the spot</button><button class="b" data-p="0,0">Stop</button></div>
+<p class="src">The real Pragyan moves at about 1 cm per second. This demo is much faster so you can see the effect.</p></div></div>
+<div class="grid"><div class="card"><h3>Rocker-bogie suspension</h3><p>Two L-shaped linkages let each wheel rise or fall without tilting the body much. Pragyan's has about 50 mm of travel.</p></div><div class="card"><h3>Six independent motors</h3><p>Each wheel is driven by its own brushless DC motor, so the rover keeps moving if one wheel struggles.</p></div></div>
+</section>
+
+<section id="auto">
+<h2>Self-driving: how a rover avoids rocks</h2>
+<p class="lead">NASA's Perseverance rover scores possible paths ahead of it and picks a safe one. This is a simplified version of that idea. Green paths are safe, red paths hit a rock.</p>
+<div class="btns"><button class="b on" id="mA">AutoNav (rover decides)</button><button class="b" id="mB">Blind drive (straight to goal)</button><button class="b" id="rs">New rocks</button></div>
+<canvas class="c2" id="cv2" width="700" height="380" style="margin-top:1rem"></canvas>
+<div class="info" id="aInfo">AutoNav: every moment the rover tests nine curved paths, throws out the unsafe ones, and takes the safe one that gets closest to the goal.</div>
+</section>
+
+<section id="hard">
+<h2>The hard parts of space robotics</h2>
+<div class="grid">
+<div class="card"><h3>Temperature</h3><p>Swings of hundreds of degrees. Parts expand, contract and can lose calibration.</p></div>
+<div class="card"><h3>Radiation</h3><p>Electronics can suffer bit flips or damage, so they need shielding and fault-tolerant design.</p></div>
+<div class="card"><h3>Dust</h3><p>Lunar dust is abrasive and clingy. It jams joints, wears surfaces and degrades cameras.</p></div>
+<div class="card"><h3>Delay</h3><p>Seconds to the Moon, minutes to Mars. Robots need autonomy to act between commands.</p></div>
+<div class="card"><h3>Power and the long night</h3><p>A lunar night lasts about 14 Earth days. Pragyan was designed for one lunar day of work.</p></div>
+<div class="card"><h3>No GPS</h3><p>Rovers navigate with cameras and by comparing images as they move (visual odometry).</p></div></div>
+</section>
+
+<section id="real">
+<h2>Real missions behind the ideas</h2>
+<div class="grid">
+<div class="card"><h3>Pragyan, Chandrayaan-3 (ISRO)</h3><p>Landed near the lunar south pole on 23 August 2023. About 26 to 27 kg, six wheels, rocker-bogie suspension, planned to travel 500 m at 1 cm per second.</p><span class="spec">India</span><span class="spec">not fully autonomous</span></div>
+<div class="card"><h3>Perseverance AutoNav (NASA)</h3><p>Builds 3D maps from its cameras, finds hazards and plans around them. Called "thinking while driving". It can reach 393 feet per hour.</p><span class="spec">Mars</span><span class="spec">autonomous</span></div>
+<div class="card"><h3>Vyommitra (ISRO)</h3><p>A half-humanoid robot made for the unmanned Gaganyaan test flights. It can recognise people, answer questions and operate switch panels and life-support functions.</p><span class="spec">India</span><span class="spec">human spaceflight</span></div></div>
+</section>
+
+<section id="cv">
+<h2>What I did in this internship</h2>
+<ul class="cv"><li>Completed a 40-day technical program focused on space robotics, autonomous systems, and space exploration technologies.</li>
+<li>Studied robotic operations in extraterrestrial environments and concepts related to autonomous robotic systems.</li>
+<li>Explored engineering challenges associated with space robotics and autonomous exploration systems.</li></ul>
+<div class="btns"><a class="b" href="https://drive.google.com/file/d/1sw19AWO8kCFsj7Ie5iaNghkOIUIgD7Ud/view?usp=sharing" target="_blank" rel="noopener">View certificate</a></div>
+</section>
+
+<section id="src"><h2>Sources</h2><p class="src">Facts on this page come from public sources. The 3D rover is an illustrative model, not an ISRO or NASA design.</p>
+<p class="src">Pragyan: <a href="https://en.wikipedia.org/wiki/Pragyan_(Chandrayaan-3)">Wikipedia</a> · <a href="https://www.autocarindia.com/auto-features/chandrayaan-3-five-key-facts-about-the-pragyan-moon-rover-429142">Autocar India</a> · <a href="https://robotsguide.com/robots/pragyan">Robots Guide</a><br>
+AutoNav: <a href="https://science.nasa.gov/photojournal/perseverance-autonav-avoids-a-boulder/">NASA Science</a> · <a href="https://www.universetoday.com/163322/nasas-perseverance-rover-is-setting-records-on-mars/">Universe Today</a> · <a href="https://www.fierceelectronics.com/electronics/pioneer-rover-uses-autonav-to-drive-itself-around-mars-at-393-feet-per-hour">Fierce Electronics</a><br>
+Environment and delay: <a href="https://arxiv.org/pdf/2608.21358">arXiv space mining robotics survey</a> · <a href="https://aerospaceroboticslab.ae.gatech.edu/?p=105">Georgia Tech Aerospace Robotics Lab</a> · <a href="https://sentinelmission.org/blog/why-space-robots-are-hard-to-control/">Sentinel Mission</a><br>
+Vyommitra: <a href="https://www.thequint.com/amp/story/news/india/part-of-gaganyaan-first-unmanned-mission-in-december-2020-isro">The Quint</a> · <a href="https://gulfnews.com/technology/isro-to-send-humanoid-vyommitra-first-into-space-1.1579699915584">Gulf News</a></p></section>
+<footer>Mohammad Sahil Khan · B.Tech Mechanical Engineering, Jamia Millia Islamia · Internship · Space Robotics Intern · ISRO · 01/07/2024 to 09/08/2024 · Delhi, India</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const PARTS=[
+["Navigation cameras",[.75,1.35,0],"Twin cameras on a mast. Their two views give depth, so the rover can build a 3D map of the ground ahead."],
+["Solar panel",[0,1.05,0],"Powers the rover in sunlight. When night falls the rover sleeps; Pragyan was designed for one lunar day (about 14 Earth days)."],
+["Electronics box",[0,.62,.55],"A warm, insulated box holding the computer, radio and batteries away from extreme cold and heat."],
+["Antenna",[-.75,.95,0],"Sends data to the lander, which relays it to Earth. A planetary rover rarely talks to Earth directly."],
+["Rocker-bogie",[.1,.46,.8],"L-shaped linkage that lets wheels rise and fall over rocks while the body stays level."],
+["Wheel and motor",[.62,.22,.82],"Each of the six wheels has its own motor. Steering is done by running the left and right sides at different speeds."]];
+function build(){
+ const g=new THREE.Group(),M=(c,m=.3,r=.6)=>new THREE.MeshStandardMaterial({color:c,metalness:m,roughness:r});
+ const add=(geo,mat,p,par=g)=>{const m=new THREE.Mesh(geo,mat);m.position.set(...p);par.add(m);return m};
+ add(new THREE.BoxGeometry(1.3,.42,.9),M(0xd9b15a,.5,.4),[0,.62,0]);
+ const pn=add(new THREE.BoxGeometry(1.35,.04,1.0),M(0x16306b,.7,.3),[0,.88,0]);pn.rotation.z=-.06;
+ add(new THREE.CylinderGeometry(.035,.035,.5,10),M(0xaab),[.55,1.1,0]);
+ add(new THREE.BoxGeometry(.12,.1,.34),M(0x222),[.55,1.38,0]);
+ add(new THREE.CylinderGeometry(.14,.02,.08,16),M(0xddd),[-.55,.98,0]);
+ [-1,1].forEach(s=>{add(new THREE.BoxGeometry(1.5,.06,.06),M(0xcfd2da,.7,.3),[0,.4,s*.62]);add(new THREE.BoxGeometry(.06,.3,.06),M(0xcfd2da,.7,.3),[.55,.3,s*.62]);add(new THREE.BoxGeometry(.06,.3,.06),M(0xcfd2da,.7,.3),[-.55,.3,s*.62])});
+ const wh=[];[-1,1].forEach(s=>[-.62,0,.62].forEach(x=>{const w=new THREE.Group();w.position.set(x,.22,s*.74);const ge=new THREE.CylinderGeometry(.22,.22,.18,24);ge.rotateX(Math.PI/2);add(ge,M(0x888b94,.6,.5),[0,0,0],w);const sp=new THREE.BoxGeometry(.4,.03,.2);add(sp,M(0x333),[0,0,0],w);g.add(w);wh.push({w,s})}));
+ return{g,wh}}
+function scene(el,o){
+ const R=new THREE.WebGLRenderer({antialias:true,alpha:true});R.setPixelRatio(Math.min(devicePixelRatio,2));el.appendChild(R.domElement);
+ const S=new THREE.Scene(),C=new THREE.PerspectiveCamera(40,1,.1,200);
+ S.add(new THREE.HemisphereLight(0xffffff,0x554433,1.2));const d=new THREE.DirectionalLight(0xfff2dd,1.8);d.position.set(5,8,4);S.add(d);
+ const ro=build();S.add(ro.g);
+ const gnd=new THREE.Mesh(new THREE.CircleGeometry(o.lab?60:4.5,48),new THREE.MeshStandardMaterial({color:0x6e665c,roughness:1}));gnd.rotation.x=-Math.PI/2;S.add(gnd);
+ const gr=new THREE.GridHelper(o.lab?120:9,o.lab?120:18,0x8a8173,0x7b7368);gr.position.y=.01;gr.material.transparent=true;gr.material.opacity=.4;S.add(gr);
+ if(o.lab){let s=7;const rn=()=>(s=(s*9301+49297)%233280)/233280;for(let i=0;i<60;i++){const r=.15+rn()*.35,m=new THREE.Mesh(new THREE.DodecahedronGeometry(r),new THREE.MeshStandardMaterial({color:0x4d4740,roughness:1}));const a=rn()*6.28,dd=4+rn()*40;m.position.set(Math.cos(a)*dd,r*.5,Math.sin(a)*dd);S.add(m)}}
+ const hs=[];if(o.hot)PARTS.forEach(p=>{const b=document.createElement('button');b.className='hot';b.textContent=p[0];b.onclick=e=>{e.stopPropagation();hs.forEach(q=>q.b.classList.remove('on'));b.classList.add('on');$('info').innerHTML='<b>'+p[0]+'</b>'+p[2]};el.appendChild(b);hs.push({b,v:new THREE.Vector3(...p[1])})});
+ let ry=.8,rx=.5,drag=false,lx=0,ly=0;const st={L:0,R:0,x:0,z:0,th:0};
+ el.addEventListener('pointerdown',e=>{drag=true;lx=e.clientX;ly=e.clientY;el.setPointerCapture(e.pointerId)});el.addEventListener('pointerup',()=>drag=false);
+ el.addEventListener('pointermove',e=>{if(!drag)return;ry-=(e.clientX-lx)*.01;rx=Math.max(.1,Math.min(1.4,rx+(e.clientY-ly)*.006));lx=e.clientX;ly=e.clientY});
+ function size(){const w=el.clientWidth,h=el.clientHeight;R.setSize(w,h);C.aspect=w/h;C.updateProjectionMatrix()}addEventListener('resize',size);size();
+ const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;let last=performance.now();
+ (function loop(n){requestAnimationFrame(loop);const dt=Math.min((n-last)/1000,.05);last=n;
+  if(o.lab){const L=st.L/100*1.4,Rr=st.R/100*1.4,v=(L+Rr)/2,w=(Rr-L)/1.5;st.th+=w*dt;st.x+=v*Math.cos(st.th)*dt;st.z-=v*Math.sin(st.th)*dt;
+   ro.wh.forEach(q=>q.w.rotation.z-=(q.s<0?L:Rr)/.22*dt)}
+  else{if(!drag&&!rm)ry+=.003;if(!rm)ro.wh.forEach(q=>q.w.rotation.z-=.4*dt)}
+  ro.g.position.set(st.x,0,st.z);ro.g.rotation.y=st.th;
+  const dist=o.lab?6.5:6.5;C.position.set(st.x+Math.sin(ry)*Math.cos(rx)*dist,Math.sin(rx)*dist,st.z+Math.cos(ry)*Math.cos(rx)*dist);C.lookAt(st.x,.5,st.z);
+  R.render(S,C);
+  hs.forEach(h=>{const v=h.v.clone().applyMatrix4(ro.g.matrixWorld).project(C);h.b.style.left=(v.x*.5+.5)*el.clientWidth+'px';h.b.style.top=(-v.y*.5+.5)*el.clientHeight+'px'})
+ })(last);return st}
+scene($('s1'),{hot:true});
+const lab=scene($('s2'),{lab:true});
+function setLR(l,r){$('sL').value=l;$('sR').value=r;lab.L=l;lab.R=r;$('vL').textContent=l;$('vR').textContent=r}
+$('sL').oninput=()=>setLR(+$('sL').value,lab.R);$('sR').oninput=()=>setLR(lab.L,+$('sR').value);
+document.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>{const[p,q]=b.dataset.p.split(',').map(Number);setLR(p,q)});
+// destinations
+const DEST={Moon:['−190 to 127 °C','about 1.3 s one way','Dust, radiation, a 14-day night',1.3,'real time'],Mars:['−143 to 35 °C','4 to 24 minutes one way','Dust storms, thin air, long delays',8,'shown 30x faster than real; the minimum is 4 min']};
+function dest(k){document.querySelectorAll('#dest .b').forEach(b=>b.classList.toggle('on',b.textContent==k));const d=DEST[k];$('destCards').innerHTML='<div class="card"><h3>Temperature</h3><p class="out">'+d[0]+'</p></div><div class="card"><h3>Signal delay</h3><p class="out">'+d[1]+'</p></div><div class="card"><h3>Main hazards</h3><p>'+d[2]+'</p></div>';cur=k;$('dly').textContent='';$('pg').style.transition='none';$('pg').style.width='0';$('dnote').textContent=''}
+let cur='Moon';Object.keys(DEST).forEach(k=>{const b=document.createElement('button');b.className='b';b.textContent=k;b.onclick=()=>dest(k);$('dest').appendChild(b)});dest('Moon');
+$('send').onclick=()=>{const d=DEST[cur],p=$('pg');p.style.transition='none';p.style.width='0';void p.offsetWidth;p.style.transition='width '+d[3]+'s linear';p.style.width='100%';$('dly').textContent='Waiting…';$('dnote').textContent='Animation time: '+d[4]+'.';setTimeout(()=>$('dly').textContent='Command arrived. Now the reply must travel back.',d[3]*1000)};
+// autonav
+const cv=$('cv2'),cx=cv.getContext('2d');let rocks,rv,mode='A',msg='';
+function reset(){rocks=[];for(let i=0;i<16;i++){const r=14+Math.random()*16,x=150+Math.random()*420,y=30+Math.random()*320;if(Math.abs(y-190)<28&&Math.abs(x-360)<60&&i<3){i--;continue}rocks.push({x,y,r})}rv={x:50,y:190,h:0,done:false,crash:false}}
+const hit=(x,y)=>rocks.some(o=>Math.hypot(o.x-x,o.y-y)<o.r+9);
+function frame(){const G={x:650,y:190};cx.clearRect(0,0,700,380);cx.fillStyle='#2a251d';cx.fillRect(0,0,700,380);
+ rocks.forEach(o=>{cx.fillStyle='#5b5246';cx.beginPath();cx.arc(o.x,o.y,o.r,0,7);cx.fill()});
+ cx.strokeStyle='#ff9a3d';cx.lineWidth=2;cx.beginPath();cx.arc(G.x,G.y,14,0,7);cx.stroke();cx.fillStyle='#ff9a3d';cx.font='12px sans-serif';cx.fillText('Goal',G.x-14,G.y-20);
+ let best=null;
+ if(mode=='A'&&!rv.done&&!rv.crash){let bd=1e9;for(let k=-4;k<=4;k++){const c=k*.0045;let x=rv.x,y=rv.y,h=rv.h,ok=true;cx.beginPath();cx.moveTo(x,y);for(let s=0;s<40;s++){x+=Math.cos(h)*4;y+=Math.sin(h)*4;h+=c*4;if(hit(x,y)){ok=false;break}cx.lineTo(x,y)}
+   cx.strokeStyle=ok?'#6fe39a':'#ff6b6b';cx.globalAlpha=ok?.55:.35;cx.lineWidth=2;cx.stroke();cx.globalAlpha=1;if(ok){const dd=Math.hypot(G.x-x,G.y-y);if(dd<bd){bd=dd;best=c}}}}
+ if(!rv.done&&!rv.crash){let c=0;if(mode=='A'){c=best==null?.02:best}else{const a=Math.atan2(G.y-rv.y,G.x-rv.x);let df=a-rv.h;df=Math.atan2(Math.sin(df),Math.cos(df));c=Math.max(-.04,Math.min(.04,df*.2))}
+  rv.h+=c*1.4;rv.x+=Math.cos(rv.h)*1.4;rv.y+=Math.sin(rv.h)*1.4;if(hit(rv.x,rv.y)){rv.crash=true}if(Math.hypot(G.x-rv.x,G.y-rv.y)<16)rv.done=true}
+ cx.save();cx.translate(rv.x,rv.y);cx.rotate(rv.h);cx.fillStyle=rv.crash?'#ff6b6b':'#d9b15a';cx.fillRect(-10,-8,20,16);cx.fillStyle='#16306b';cx.fillRect(-6,-6,10,12);cx.fillStyle='#fff';cx.fillRect(8,-5,3,3);cx.fillRect(8,2,3,3);cx.restore();
+ cx.fillStyle='#fff';cx.font='14px sans-serif';cx.fillText(rv.crash?'Collision. A rover that cannot see rocks gets stuck.':rv.done?'Goal reached.':'',16,24);requestAnimationFrame(frame)}
+function setMode(m){mode=m;$('mA').classList.toggle('on',m=='A');$('mB').classList.toggle('on',m=='B');reset();$('aInfo').textContent=m=='A'?'AutoNav: every moment the rover tests nine curved paths, throws out the unsafe ones, and takes the safe one that gets closest to the goal.':'Blind drive: the rover only aims at the goal and has no idea what is in the way. Compare this with AutoNav.'}
+$('mA').onclick=()=>setMode('A');$('mB').onclick=()=>setMode('B');$('rs').onclick=reset;reset();frame();
+</script><a href="../index.html" style="position:fixed;left:14px;bottom:14px;z-index:2147483000;background:#0d0d0d;color:#f4f1ea;font:600 13px/1 system-ui,sans-serif;padding:10px 16px;border-radius:99px;text-decoration:none;box-shadow:0 4px 18px rgba(0,0,0,.35)">← Portfolio</a></body></html>

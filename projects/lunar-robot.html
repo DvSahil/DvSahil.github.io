@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lunar Self-Balancing Robot | Project</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap">
+<style>
+:root{--bg:#06080e;--bg2:#0f1320;--ink:#e8ecf6;--mut:#8f9ab5;--acc:#8fd3ff;--acc2:#ffb86b;--bad:#ff6b7a;--ok:#6ee7a8;--line:#202840;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme="light"]{--bg:#f3f5fa;--bg2:#e4e8f3;--ink:#0f1522;--mut:#4f5a76;--acc:#0a6a9c;--acc2:#a35a00;--line:#c6cde0}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:radial-gradient(ellipse at 80% -10%,#16213d 0,transparent 50%),var(--bg);color:var(--ink);font:16px/1.6 'Space Grotesk',system-ui,sans-serif}
+h1,h2{font-family:'Newsreader',Georgia,serif;font-weight:600;line-height:1.1;margin:0}
+h1{font-size:clamp(2.2rem,5.5vw,4.2rem)}h2{font-size:clamp(1.7rem,3.5vw,2.5rem);margin-bottom:.6rem}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;gap:.3rem;overflow-x:auto;padding:.6rem 1rem;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav a{color:var(--mut);text-decoration:none;padding:.3rem .8rem;border-radius:99px;white-space:nowrap;font-size:.9rem}nav a:hover,nav a:focus-visible{color:var(--ink);background:var(--bg2);outline:none}
+section{padding:4rem 1.2rem;max-width:1100px;margin:0 auto}
+.lead{color:var(--mut);max-width:66ch}
+.hero{display:grid;grid-template-columns:1fr 1.3fr;gap:1.5rem;align-items:center;min-height:86vh;max-width:1250px;margin:0 auto;padding:3rem 1.2rem}
+@media(max-width:860px){.hero{grid-template-columns:1fr}}
+.tag{display:inline-block;border:1px solid var(--acc);color:var(--acc);padding:.15rem .8rem;border-radius:99px;font-size:.85rem;margin-bottom:1rem}
+.panel{background:#04060b;border:1px solid var(--line);border-radius:18px;overflow:hidden;position:relative}
+.panel canvas{width:100%;height:auto;display:block}.stage{aspect-ratio:1/.8;cursor:grab;touch-action:pan-y}.stage canvas{height:100%}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1rem;margin-top:1.4rem}
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:1.2rem}.card h3{margin:.1rem 0 .4rem;font-size:1.08rem}.card p{margin:.3rem 0;color:var(--mut);font-size:.93rem}
+.two{display:grid;grid-template-columns:1.3fr 1fr;gap:1.4rem;align-items:start;margin-top:1.4rem}@media(max-width:860px){.two{grid-template-columns:1fr}}
+.btns{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.9rem}
+button.b,a.b{background:var(--bg2);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:.5rem .85rem;font:500 .88rem 'Space Grotesk',sans-serif;cursor:pointer;text-decoration:none;display:inline-block}
+button.b:hover,button.b:focus-visible,a.b:hover{border-color:var(--acc);outline:none}.b.on{background:var(--acc);color:#04202e;border-color:var(--acc)}.b.pri{background:var(--acc);color:#04202e;border-color:var(--acc);font-weight:700}
+label{display:block;font-size:.85rem;color:var(--mut);margin-top:.55rem}input[type=range]{width:100%;accent-color:var(--acc)}select{background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:.3rem}
+.read{margin-top:.8rem;padding:.8rem 1rem;border-left:3px solid var(--acc2);background:var(--bg2);border-radius:0 12px 12px 0;font-size:.92rem}
+.big{font:600 1.45rem 'Newsreader',serif;color:var(--acc)}.row{display:flex;gap:1.3rem;flex-wrap:wrap;margin-top:.6rem}.row small{display:block;color:var(--mut);font-size:.74rem}
+.lvl{display:inline-block;font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;color:var(--acc2);border:1px solid var(--acc2);padding:.05rem .6rem;border-radius:99px;margin-bottom:.6rem}
+.flow{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6rem;margin-top:1rem}.fn{padding:.7rem;border:1px solid var(--line);border-radius:12px;background:var(--bg2);cursor:pointer;font-size:.85rem;text-align:center}.fn.on{border-color:var(--acc2);background:color-mix(in srgb,var(--acc2) 14%,var(--bg2))}.fn small{display:block;color:var(--mut)}
+.tree{font:.85rem ui-monospace,Menlo,Consolas,monospace}.tree button{display:block;width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--line);color:var(--ink);padding:.55rem .4rem;cursor:pointer;font:inherit}.tree button:hover,.tree button.on{background:var(--bg2);color:var(--acc)}
+code,.chip{font:.82rem ui-monospace,Menlo,Consolas,monospace;background:#04060b;border:1px solid var(--line);border-radius:6px;padding:.1rem .45rem;color:#cfe9ff}
+pre{background:#04060b;color:#cfe9ff;border:1px solid var(--line);border-radius:12px;padding:.9rem;font:.78rem/1.5 ui-monospace,Menlo,Consolas,monospace;overflow-x:auto}
+ol.plan{padding-left:1.2rem;margin:.6rem 0 0;color:var(--mut);font-size:.9rem}ol.plan li.on{color:var(--acc2);font-weight:700}
+.src,footer{color:var(--mut);font-size:.85rem}footer{text-align:center;padding:2rem 1rem 3rem}.cv li{margin:.5rem 0}.cv{padding-left:1.2rem;max-width:72ch}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head><body>
+<nav><a href="#top">Overview</a><a href="#why">Why it falls</a><a href="#lab">Balance lab</a><a href="#sense">Sensing</a><a href="#ctl">Control</a><a href="#hw">Hardware</a><a href="#arm">6-DOF arm</a><a href="#simu">Simulation</a><a href="#repo">Repository</a><a href="#cv">What I did</a></nav>
+
+<section class="hero" id="top">
+<div>
+<span class="tag">Project · 05 Sep 2023 to 15 Nov 2023</span>
+<h1>Lunar Self-Balancing Robot</h1>
+<p class="lead">A two-wheeled rover that stands on its wheels, a bit like a pencil balanced on a fingertip, and keeps itself upright by measuring its tilt and driving the wheels hundreds of times a second. Paired with a 6-DOF arm that collects planetary samples. Everything here runs live: push the robot and watch it recover.</p>
+<div class="btns"><a class="b pri" href="https://github.com/DvSahil/Lunar-Self-Balancing-Robot" target="_blank" rel="noopener">View code on GitHub</a></div>
+<div class="row"><div><small>control loop</small><span class="big">200 Hz</span></div><div><small>sensor</small><span class="big">MPU6050</span></div><div><small>controller</small><span class="big">Cascade PID</span></div></div>
+</div>
+<div><div class="panel"><canvas id="hc" width="700" height="420"></canvas></div>
+<div class="btns"><button class="b" data-hp="1">Push ←</button><button class="b" data-hp="-1">Push →</button><button class="b" id="hoff">Switch controller off</button><button class="b" id="hg">Gravity: Earth</button></div></div>
+</section>
+
+<section id="why"><span class="lvl">the problem</span>
+<h2>Why a balancing robot needs a controller at all</h2>
+<p class="lead">Treat the robot as an inverted pendulum on a cart. Lean forward a little and gravity pulls you further forward, and the more you lean, the harder it pulls. The upright position is <b>unstable</b>. The only fix is to drive the wheels under the centre of mass faster than the body falls.</p>
+<div class="grid"><div class="card"><h3>Equations of motion</h3><p>Cart-pole model: wheel position x and body tilt θ are coupled. Accelerating the wheels is the controller's only handle on tilt.</p></div>
+<div class="card"><h3>Open-loop pole ≈ ±14 rad/s</h3><p>Linearised for small angles, the model has an unstable pole near +14. That makes the time constant about 70 ms, so a 5 ms (200 Hz) loop gives roughly 14 corrections per time constant.</p></div>
+<div class="card"><h3>Lean to brake</h3><p>A robot cannot just slow down: it must first lean backward. That is why the outer loop changes the angle target, not the motors directly.</p></div></div>
+</section>
+
+<section id="lab"><span class="lvl">interactive</span>
+<h2>Balance lab: tune the controller yourself</h2>
+<p class="lead">This is the same cart-pole physics, simulated in your browser with example parameters (not measured hardware data). Try the presets, then move the sliders. Tilt-only control stays upright but <b>drifts away</b>; adding the speed loop brings it back.</p>
+<div class="two"><div><div class="panel"><canvas id="lc" width="700" height="420"></canvas></div><div class="panel" style="margin-top:.8rem"><canvas id="pc" width="700" height="190"></canvas></div><p class="src">Plot: cyan = tilt (±40°), amber = position (±2 m), last 12 seconds. Pink dashes mark the ±35° safety cut-off.</p></div>
+<div class="card"><div class="btns" style="margin-top:0"><button class="b" id="p1">Tilt-only PD</button><button class="b" id="p2">Cascade</button><button class="b" id="p3">Weak Kp</button></div>
+<label>Kp, the spring: <b id="kpv">50</b></label><input type="range" id="kp" min="0" max="120" value="50">
+<label>Kd, the damper: <b id="kdv">2.0</b></label><input type="range" id="kd" min="0" max="8" step=".1" value="2">
+<label><input type="checkbox" id="ou" checked> Outer speed loop</label>
+<label>vp (resist motion): <b id="vpv">0.20</b></label><input type="range" id="vp" min="0" max="45" value="20">
+<label>vi (return to start): <b id="viv">0.10</b></label><input type="range" id="vi" min="0" max="30" value="10">
+<label>Gravity <select id="gg"><option value="9.81">Earth 9.81</option><option value="3.71">Mars 3.71</option><option value="1.62">Moon 1.62</option></select></label>
+<div class="btns"><button class="b" data-lp="1">Push ←</button><button class="b" data-lp="-1">Push →</button><button class="b" id="lr">Reset</button></div>
+<div class="row"><div><small>tilt</small><span class="big" id="rt">0°</span></div><div><small>from start</small><span class="big" id="rx">0 m</span></div><div><small>unstable pole</small><span class="big" id="rp">0</span></div></div>
+<div class="read" id="rd"></div></div></div>
+<div class="grid"><div class="card"><h3>Kp: the spring</h3><p>Pushes harder the farther it leans. Too low: falls over. Too high: shakes.</p></div><div class="card"><h3>Kd: the damper</h3><p>Resists fast motion, taken from the gyro rather than a noisy derivative. Too low: oscillates. Too high: buzzes.</p></div><div class="card"><h3>Why the Moon is easier to balance</h3><p>Lower gravity lowers the unstable pole, so the body falls more slowly and the controller has more time. (Traction on loose regolith is the real challenge.)</p></div></div>
+</section>
+
+<section id="sense"><span class="lvl">sensing</span>
+<h2>Knowing the tilt: the complementary filter</h2>
+<p class="lead">The MPU6050 has two sensors that are each half-right. The accelerometer measures angle from gravity: correct on average but noisy. The gyro measures turning rate: smooth, but its tiny bias adds up to a drifting angle. A complementary filter trusts the gyro in the short term and the accelerometer in the long term. The robot uses α = 0.99.</p>
+<div class="two"><div class="panel"><canvas id="fc" width="700" height="360"></canvas></div>
+<div class="card"><label>Filter weight α: <b id="av">0.990</b></label><input type="range" id="fa" min="0" max="1000" value="990">
+<label>Accelerometer noise: <b id="nv">6</b>°</label><input type="range" id="fn" min="0" max="20" value="6">
+<label>Gyro bias: <b id="bv">1.5</b> °/s</label><input type="range" id="fb" min="0" max="5" step=".1" value="1.5">
+<p style="margin:.7rem 0 0;font-size:.85rem;color:var(--mut)">Average error vs the true angle</p><div class="row"><div><small style="color:#ff8fb0">accelerometer</small><span class="big" id="e1">0</span></div><div><small style="color:var(--acc2)">gyro only</small><span class="big" id="e2">0</span></div><div><small style="color:var(--acc)">fused</small><span class="big" id="e3">0</span></div></div>
+<div class="read">angle = α · (angle + gyro · dt) + (1 − α) · accel_angle. White: the true tilt. Slide α to 1 and the gyro drift takes over; slide to 0 and the noise returns.</div></div></div>
+</section>
+
+<section id="ctl"><span class="lvl">control</span>
+<h2>The control architecture: two nested loops</h2>
+<p class="lead">Tap any block to see what it does. The fast inner loop keeps the robot upright. The slow outer loop stops it wandering. The outer loop must be much slower than the inner one, otherwise the two fight each other and oscillate.</p>
+<div class="flow" id="fl"></div><div class="read" id="fi"></div>
+<h3 style="margin-top:2rem">Safety built into the firmware</h3>
+<div class="grid"><div class="card"><h3>Starts disabled</h3><p>Motors are off at power-up and only arm when the robot is held upright.</p></div><div class="card"><h3>Cut-off beyond ±35°</h3><p>Past that angle recovery is impossible, so the motors stop instead of thrashing.</p></div><div class="card"><h3>Command time-outs</h3><p>Remote test commands expire on their own, and typing <code>x</code> stops everything instantly.</p></div><div class="card"><h3>Anti-windup and dead-band</h3><p>The integrator is clamped and the motor dead-band is compensated so small commands still move the wheels.</p></div></div>
+</section>
+
+<section id="hw"><span class="lvl">hardware</span>
+<h2>Hardware and bring-up</h2>
+<div class="grid"><div class="card"><h3>Chassis and wheels</h3><p>Two driven wheels on a tall body so the centre of mass sits well above the axle.</p></div><div class="card"><h3>DC motors with encoders</h3><p>Encoders measure wheel speed and position for the outer loop.</p></div><div class="card"><h3>MPU6050 IMU</h3><p>Accelerometer plus gyro over I²C. Gyro calibrated at start-up.</p></div><div class="card"><h3>TB6612FNG driver</h3><p>Turns the controller's PWM signal into motor current.</p></div><div class="card"><h3>2S LiPo battery</h3><p>Voltage sag as it drains changes the robot's behaviour, so gains may need re-tuning.</p></div><div class="card"><h3>Arduino Uno / Nano</h3><p>Runs the 200 Hz loop. Gains can be tuned live over serial and saved to EEPROM.</p></div></div>
+<h3 style="margin-top:2rem">Bring-up: one thing at a time</h3>
+<div class="flow" id="bu"></div><div class="read" id="bi"></div>
+<h3 style="margin-top:2rem">Debugging guide: pick a symptom</h3>
+<label>What do you see? <select id="sy"></select></label><div class="read" id="so"></div>
+<p class="src" style="margin-top:1rem">Live tuning commands: <code>kp 20</code> <code>kd 0.8</code> <code>trim 1.2</code> <code>outer 1</code> <code>save</code> <code>x</code> (stop).</p>
+</section>
+
+<section id="arm"><span class="lvl">manipulation</span>
+<h2>The 6-DOF arm for planetary sample collection</h2>
+<p class="lead">Six joints let a gripper reach any position and angle: base yaw, shoulder, elbow, wrist pitch, wrist yaw and wrist roll. <b>Click inside the blue ring on the lunar ground</b> (the arm's reach) to drop a sample, then press Collect. The arm solves inverse kinematics for each waypoint, then blends between them in joint space, the way a planned motion works. This is an illustrative model of the arm architecture.</p>
+<div class="two"><div class="panel stage" id="as"><span class="src" style="position:absolute;left:12px;bottom:8px;z-index:2">Drag to orbit · click inside the blue ring to place a sample</span></div>
+<div class="card"><div class="btns" style="margin-top:0"><button class="b pri" id="ac">Collect sample</button><button class="b" id="ah">Home</button></div>
+<ol class="plan" id="ap"><li>Hover above the sample</li><li>Descend</li><li>Close gripper</li><li>Lift</li><li>Swing to the bin</li><li>Release</li><li>Return home</li></ol>
+<div class="read" id="am">Click inside the blue ring on the ground to place a sample, then press Collect.</div>
+<div id="aj"></div><div class="row"><div><small>samples collected</small><span class="big" id="an">0</span></div><div><small>tool tip x, y, z (m)</small><span class="big" id="at" style="font-size:1.05rem">0, 0, 0</span></div></div></div></div>
+<div class="grid"><div class="card"><h3>Forward kinematics</h3><p>Joint angles in, tool position out. Try the sliders and read the tip position.</p></div><div class="card"><h3>Inverse kinematics</h3><p>Tool position in, joint angles out. Needed to say "go there". Here solved with the elbow-up solution and a wrist angle that keeps the tool pointing down.</p></div><div class="card"><h3>Motion planning</h3><p>Choose safe waypoints (hover, descend, lift, swing) so the arm never drags through the sample or the ground.</p></div></div>
+</section>
+
+<section id="simu"><span class="lvl">simulation</span>
+<h2>Validating in simulation first</h2>
+<p class="lead">I used CoppeliaSim, a robot simulator, to test kinematics, motion planning and autonomous control before trusting real hardware. Simulating is cheap, safe and repeatable: a bug costs seconds, not a broken gearbox.</p>
+<div class="grid"><div class="card"><h3>1 · Build the scene</h3><p>Robot model with joints and links, a ground plane, the sample and sensors.</p></div><div class="card"><h3>2 · Kinematics</h3><p>Inverse kinematics maps a target position to joint angles for the arm.</p></div><div class="card"><h3>3 · Plan the motion</h3><p>Waypoints and trajectories that avoid collisions and respect joint limits.</p></div><div class="card"><h3>4 · Control from code</h3><p>A script reads sensors and commands joints, so the same logic can later move to embedded hardware.</p></div><div class="card"><h3>5 · Compare</h3><p>The repository also simulates the balancing robot in Python with three controllers (tilt-only PD, cascade PID and LQR) under a 6 N push.</p></div></div>
+</section>
+
+<section id="repo"><span class="lvl">open source</span>
+<h2>Explore the repository</h2>
+<p class="lead">Every stage of the project is documented in the public GitHub repository. Tap a folder.</p>
+<div class="two"><div class="card tree" id="tr"></div><div class="card" id="ti"></div></div>
+<div class="btns"><a class="b pri" href="https://github.com/DvSahil/Lunar-Self-Balancing-Robot" target="_blank" rel="noopener">Open on GitHub</a></div>
+</section>
+
+<section id="cv"><span class="lvl">summary</span>
+<h2>What I did in this project</h2>
+<ul class="cv"><li>Developed a self-balancing rover using IMU feedback and PID control for stability and autonomous motion.</li>
+<li>Designed and simulated a 6-DOF robotic arm for planetary sample collection and manipulation.</li>
+<li>Applied robot kinematics, motion planning, and autonomous control using CoppeliaSim.</li>
+<li>Integrated embedded systems, sensing, control, and simulation for robotic-system validation.</li></ul>
+<div class="btns"><a class="b pri" href="https://github.com/DvSahil/Lunar-Self-Balancing-Robot" target="_blank" rel="noopener">Source code</a></div>
+<p class="src" style="margin-top:1.4rem">The simulations on this page use example parameters and run in your browser; they illustrate the method and are not measured hardware data.</p>
+</section>
+<footer>Lunar Self-Balancing Robot · 05/09/2023 to 15/11/2023</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const $=id=>document.getElementById(id),rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function rng(s){return()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+// ================= cart-pole sim =================
+const PM={M:.3,m:.7,l:.08,h:.16,b:.2,Fmax:12},PI_=PM.m*PM.h*PM.h/12;
+const pole=g=>Math.sqrt(PM.m*g*PM.l*(PM.M+PM.m)/((PM.M+PM.m)*(PI_+PM.m*PM.l*PM.l)-(PM.m*PM.l)**2));
+function Sim(cv,o){const cx=cv.getContext('2d'),W=700,H=420,S=700,s={x:0,v:0,th:.05,w:0,t:0,F:0,wa:0,on:true,fell:false,done:0,push:0,hist:[],acc:0,kp:50,kd:2,outer:true,vp:.2,vi:.1,g:9.81};
+ const r=rng(4),stars=[...Array(60)].map(()=>[r()*W,r()*220,r()*1.6+.4]),cr=[...Array(14)].map((_,i)=>[i*.9-2,.1+r()*.16]);
+ s.reset=()=>{Object.assign(s,{x:0,v:0,th:.05,w:0,t:0,F:0,wa:0,fell:false,done:0,push:0,hist:[]})};
+ s.step=dt=>{const th=s.th,tt=s.outer?-(s.vp*s.v+s.vi*s.x):0;let F=0;if(s.on&&!s.fell){F=s.kp*(th-tt)+s.kd*s.w;F=Math.max(-PM.Fmax,Math.min(PM.Fmax,F))}
+  if(Math.abs(th)>35*Math.PI/180)s.fell=true;if(s.fell)F=0;s.F=F;const Fd=s.push>0?6*s.pdir:0;if(s.push>0)s.push-=dt;
+  const c=Math.cos(th),sn=Math.sin(th),{M,m,l,b}=PM,a11=M+m,a12=m*l*c,a22=PI_+m*l*l,r1=F+Fd-b*s.v+m*l*sn*s.w*s.w,r2=m*s.g*l*sn,det=a11*a22-a12*a12;
+  const xa=(r1*a22-a12*r2)/det,ta=(a11*r2-a12*r1)/det;s.v+=xa*dt;s.x+=s.v*dt;s.w+=ta*dt;s.th+=s.w*dt;s.wa+=s.v*dt/.04;s.t+=dt;
+  if(Math.abs(s.th)>1.45){s.th=Math.sign(s.th)*1.45;s.w=0;s.v*=.9}s.k=(s.k||0)+1;if(s.k%4==0){s.hist.push([s.th,s.x]);if(s.hist.length>600)s.hist.shift()}};
+ s.kick=d=>{s.push=.1;s.pdir=d};
+ s.draw=()=>{cx.fillStyle='#04060b';cx.fillRect(0,0,W,H);stars.forEach(p=>{cx.fillStyle='rgba(255,255,255,.7)';cx.fillRect(((p[0]-s.x*20*p[2]*.1)%W+W)%W,p[1],p[2],p[2])});
+  cx.fillStyle='#4aa3ff';cx.beginPath();cx.arc(600,70,26,0,7);cx.fill();cx.fillStyle='#1a5fb0';cx.beginPath();cx.arc(592,66,14,0,7);cx.fill();
+  const G=330;cx.fillStyle='#8a8a92';cx.fillRect(0,G,W,H-G);cx.fillStyle='#6d6d75';cr.forEach(c=>{const X=W/2+(c[0]*3-s.x)*S*.5;cx.beginPath();cx.ellipse(((X%1200)+1200)%1200-200,G+40,40*c[1]*4,9,0,0,7);cx.fill()});
+  cx.strokeStyle='#5a5a62';for(let i=-30;i<30;i++){const X=W/2+(i*.25-s.x%.25-0)*S+Math.floor(s.x/.25)*0;}
+  const ox=W/2-s.x*S;cx.strokeStyle='#5a5a62';cx.lineWidth=2;for(let i=-40;i<=40;i++){const X=ox+i*.25*S;if(X>0&&X<W){cx.beginPath();cx.moveTo(X,G);cx.lineTo(X,G+(i%4?8:16));cx.stroke()}}
+  cx.fillStyle='#ffb86b';const fx=ox;if(fx>-20&&fx<W+20){cx.fillRect(fx-1,G-46,3,46);cx.beginPath();cx.moveTo(fx+1,G-46);cx.lineTo(fx+24,G-38);cx.lineTo(fx+1,G-30);cx.fill();cx.font='11px sans-serif';cx.fillText('start',fx+4,G-52)}
+  const ax=W/2,ay=G-28;cx.save();cx.translate(ax,ay);cx.rotate(s.th);cx.fillStyle=s.fell?'#7a3a44':'#2b3a58';cx.strokeStyle='#8fd3ff';cx.lineWidth=2;cx.fillRect(-20,-PM.h*S-0,40,PM.h*S+10);cx.strokeRect(-20,-PM.h*S,40,PM.h*S+10);cx.fillStyle='#ffb86b';cx.fillRect(-12,-PM.h*S+10,24,30);cx.fillStyle='#6ee7a8';cx.fillRect(-4,-PM.h*S-10,8,10);cx.restore();
+  cx.save();cx.translate(ax,ay);cx.rotate(s.wa);cx.fillStyle='#d6dae6';cx.beginPath();cx.arc(0,0,28,0,7);cx.fill();cx.fillStyle='#333';cx.fillRect(-26,-3,52,6);cx.fillRect(-3,-26,6,52);cx.restore();
+  cx.fillStyle='#e8ecf6';cx.font='13px sans-serif';cx.fillText('tilt '+(s.th*57.3).toFixed(1)+'°   push force '+s.F.toFixed(1)+' N   '+(s.fell?'MOTORS CUT: fell over':!s.on?'controller OFF':'balancing'),14,H-12);
+  if(s.fell&&o.auto){s.done+=1}};
+ return s}
+function loopSim(s,fn){let last=performance.now();(function f(n){requestAnimationFrame(f);let dt=Math.min((n-last)/1000,.04);last=n;if(rm)dt=Math.min(dt,.01);s.acc+=dt;while(s.acc>=.005){s.step(.005);s.acc-=.005}if(fn)fn();s.draw()})(last)}
+// hero
+const hs=Sim($('hc'),{auto:true});let hg=false;
+loopSim(hs,()=>{if(hs.fell&&hs.done>150){hs.reset();hs.on=true;$('hoff').textContent='Switch controller off'}});
+document.querySelectorAll('[data-hp]').forEach(b=>b.onclick=()=>{if(hs.fell){hs.reset()}hs.kick(+b.dataset.hp)});
+$('hoff').onclick=()=>{hs.on=!hs.on;if(hs.on&&hs.fell)hs.reset();$('hoff').textContent=hs.on?'Switch controller off':'Switch controller on'};
+$('hg').onclick=()=>{hg=!hg;hs.g=hg?1.62:9.81;$('hg').textContent='Gravity: '+(hg?'Moon':'Earth')};
+setInterval(()=>{if(!hs.fell&&hs.on&&!rm&&Math.random()<.3)hs.kick(Math.random()<.5?1:-1)},4000);
+// lab
+const ls=Sim($('lc'),{});const pc=$('pc').getContext('2d');
+function lpush(){['kp','kd','vp','vi'].forEach(i=>0);ls.kp=+$('kp').value;ls.kd=+$('kd').value;ls.vp=$('vp').value/100;ls.vi=$('vi').value/100;ls.outer=$('ou').checked;ls.g=+$('gg').value;
+ $('kpv').textContent=ls.kp;$('kdv').textContent=ls.kd.toFixed(1);$('vpv').textContent=ls.vp.toFixed(2);$('viv').textContent=ls.vi.toFixed(2);$('rp').textContent='+'+pole(ls.g).toFixed(1)+' rad/s'}
+['kp','kd','vp','vi','ou','gg'].forEach(i=>$(i).oninput=lpush);lpush();
+const preset=(kp,kd,ou)=>{$('kp').value=kp;$('kd').value=kd;$('ou').checked=ou;lpush();ls.reset()};$('p1').onclick=()=>preset(50,2,false);$('p2').onclick=()=>preset(50,2,true);$('p3').onclick=()=>preset(22,1,false);
+document.querySelectorAll('[data-lp]').forEach(b=>b.onclick=()=>{if(ls.fell)ls.reset();ls.kick(+b.dataset.lp)});$('lr').onclick=()=>ls.reset();
+loopSim(ls,()=>{$('rt').textContent=(ls.th*57.3).toFixed(1)+'°';$('rx').textContent=ls.x.toFixed(2)+' m';
+ $('rd').textContent=ls.fell?'It fell past 35° and the safety cut-off stopped the motors. Raise Kp or Kd, then Reset.':!ls.outer&&Math.abs(ls.x)>.6?'Upright but drifting: tilt-only control has no idea where the robot is. Turn on the outer speed loop.':ls.outer&&Math.abs(ls.x)<.1&&ls.t>6?'Balanced and returned to its start position.':'Give it a push and watch the recovery.';
+ pc.fillStyle='#04060b';pc.fillRect(0,0,700,190);pc.strokeStyle='#202840';pc.beginPath();pc.moveTo(0,95);pc.lineTo(700,95);pc.stroke();pc.strokeStyle='rgba(255,107,122,.6)';pc.setLineDash([5,5]);[35,-35].forEach(a=>{const y=95-a/40*85;pc.beginPath();pc.moveTo(0,y);pc.lineTo(700,y);pc.stroke()});pc.setLineDash([]);
+ [['#8fd3ff',0,57.3/40],['#ffb86b',1,1/2]].forEach(([c,k,sc])=>{pc.strokeStyle=c;pc.lineWidth=2;pc.beginPath();ls.hist.forEach((h,i)=>{const y=Math.max(4,Math.min(186,95-h[k]*sc*85));i?pc.lineTo(i*700/600,y):pc.moveTo(0,y)});pc.stroke()})});
+// ================= complementary filter =================
+function filt(){const al=$('fa').value/1000,nz=+$('fn').value,bs=+$('fb').value;$('av').textContent=al.toFixed(3);$('nv').textContent=nz;$('bv').textContent=bs;
+ const N=1600,dt=.005,r=rng(8),gs=()=>Math.sqrt(-2*Math.log(r()+1e-9))*Math.cos(6.283*r());let gyro=0,fu=0,e1=0,e2=0,e3=0;const T=[],A=[],G=[],F=[];
+ for(let k=0;k<N;k++){const t=k*dt,th=8*Math.sin(6.283*.4*t)+(t>4&&t<4.6?10:0),thd=8*6.283*.4*Math.cos(6.283*.4*t),ac=th+gs()*nz,gr=thd+bs+gs()*.3;gyro+=gr*dt;fu=al*(fu+gr*dt)+(1-al)*ac;T.push(th);A.push(ac);G.push(gyro);F.push(fu);e1+=Math.abs(ac-th);e2+=Math.abs(gyro-th);e3+=Math.abs(fu-th)}
+ $('e1').textContent=(e1/N).toFixed(1)+'°';$('e2').textContent=(e2/N).toFixed(1)+'°';$('e3').textContent=(e3/N).toFixed(1)+'°';
+ const c=$('fc').getContext('2d');c.fillStyle='#04060b';c.fillRect(0,0,700,360);c.strokeStyle='#202840';c.beginPath();c.moveTo(0,180);c.lineTo(700,180);c.stroke();
+ [[A,'rgba(255,143,176,.55)',1],[G,'#ffb86b',1.5],[T,'#fff',2],[F,'#8fd3ff',2.5]].forEach(([d,col,w])=>{c.strokeStyle=col;c.lineWidth=w;c.beginPath();d.forEach((v,i)=>{const y=Math.max(4,Math.min(356,180-v*6));i?c.lineTo(i*700/N,y):c.moveTo(0,y)});c.stroke()})}
+['fa','fn','fb'].forEach(i=>$(i).oninput=filt);filt();
+// ================= architecture =================
+const FL=[['Speed target','from the remote or 0 to hold still','The commanded speed. With the outer loop on and target 0, the robot holds position.'],['Speed PI · 50 Hz','outer loop','Compares wheel speed from the encoders with the target and outputs a small angle offset. Slow on purpose.'],['Angle target','trim + offset','Sum of the speed-loop offset and a manual balance trim (usually between −3° and +3°) that compensates for the real centre of mass.'],['Tilt estimate','MPU6050 + filter','Complementary filter fuses accelerometer and gyro (α = 0.99) into one clean tilt angle.'],['PID · 200 Hz','inner loop','u = Kp·error + Ki·∫error + Kd·tilt rate. The D term uses the gyro directly, so it is smooth. Output is clamped and dead-band compensated.'],['TB6612FNG','motor driver','Converts the PWM command into current for both motors. Motors cut out beyond ±35° tilt.'],['Wheels + encoders','feedback','Wheel speed returns to the outer loop. Driving under the falling body is what actually corrects the tilt.']];
+FL.forEach((f,i)=>{const d=document.createElement('div');d.className='fn'+(i?'':' on');d.innerHTML=f[0]+'<small>'+f[1]+'</small>';d.onclick=()=>{document.querySelectorAll('#fl .fn').forEach(x=>x.classList.remove('on'));d.classList.add('on');$('fi').textContent=f[2]};$('fl').appendChild(d)});$('fi').textContent=FL[0][2];
+const BU=[['mode imu','check the sensor','Verify angle signs, gyro calibration and the filter output before anything moves.'],['mode enc','check encoders','Verify direction and counts per revolution by turning each wheel by hand.'],['mode motor','check motors','Verify direction and measure the dead-band: the smallest command that makes the wheels turn (robot on a stand).'],['mode balance','balance','Hold the robot upright to arm it, then tune Kp, Kd, trim, Ki, and finally enable the outer loop. Save gains to EEPROM.']];
+BU.forEach((f,i)=>{const d=document.createElement('div');d.className='fn'+(i?'':' on');d.innerHTML='<code>'+f[0]+'</code><small>'+f[1]+'</small>';d.onclick=()=>{document.querySelectorAll('#bu .fn').forEach(x=>x.classList.remove('on'));d.classList.add('on');$('bi').textContent=f[2]};$('bu').appendChild(d)});$('bi').textContent=BU[0][2];
+const SY=[['Wheels drive away from the direction of the fall','A sign is wrong.','Flip the IMU sign or the motor invert setting.'],['Falls over immediately, no reaction','Kp too low, battery low, or disarmed.','Raise Kp, charge the battery, check that it is armed.'],['Slow wobble that keeps growing','Too little damping.','Raise Kd or lower Kp.'],['Fast buzzing or shaking','Kd too high, loose mechanics or dead-band too big.','Lower Kd, tighten screws, re-measure the dead-band.'],['Stands but creeps in one direction','Trim is off.','Adjust trim in steps of about 0.2°.'],['Stands but wanders around the floor','No position feedback.','Enable the outer speed loop.'],['Good for a minute, then gets worse','Battery voltage is dropping.','Recharge, or retune at a lower voltage.'],['Random twitches','IMU noise or I²C errors.','Check wiring, raise the filter α, add capacitors on the motor supply.']];
+SY.forEach((s,i)=>{const o=document.createElement('option');o.value=i;o.textContent=s[0];$('sy').appendChild(o)});const sy=()=>{const s=SY[$('sy').value];$('so').innerHTML='<b>Likely cause:</b> '+s[1]+'<br><b>Fix:</b> '+s[2]};$('sy').oninput=sy;sy();
+// ================= repo =================
+const RP=[['data/','Tuning log, experiment log and raw runs of logged data.','tree/main/data'],['docs/','Theory, hardware notes, IMU filtering, PID tuning guide, bring-up procedure and references.','tree/main/docs'],['firmware/','Arduino sketch with config, IMU, motor and encoder code.','tree/main/firmware'],['hardware/','Bill of materials and wiring tables.','tree/main/hardware'],['simulation/','Python cart-pole model comparing tilt-only PD, cascade PID and LQR.','tree/main/simulation'],['tools/','log_serial.py records runs; plot_log.py plots them and prints summary numbers.','tree/main/tools']];
+RP.forEach((f,i)=>{const b=document.createElement('button');b.textContent=f[0];b.className=i?'':'on';b.onclick=()=>{document.querySelectorAll('#tr button').forEach(x=>x.classList.remove('on'));b.classList.add('on');ri(f)};$('tr').appendChild(b)});
+function ri(f){$('ti').innerHTML='<h3>'+f[0]+'</h3><p>'+f[1]+'</p><a class="b" href="https://github.com/DvSahil/Lunar-Self-Balancing-Robot/'+f[2]+'" target="_blank" rel="noopener">Open folder</a>'}ri(RP[0]);
+// ================= 3D arm =================
+(function(){const el=$('as'),R=new THREE.WebGLRenderer({antialias:true,alpha:true});R.setPixelRatio(Math.min(devicePixelRatio,2));el.appendChild(R.domElement);
+ const S=new THREE.Scene(),C=new THREE.PerspectiveCamera(40,1,.1,100),mat=(c,m=.4,r=.6)=>new THREE.MeshStandardMaterial({color:c,metalness:m,roughness:r});
+ S.add(new THREE.AmbientLight(0x8899bb,.5));const sun=new THREE.DirectionalLight(0xfff0dd,2.2);sun.position.set(-6,5,4);S.add(sun);
+ const gnd=new THREE.Mesh(new THREE.CircleGeometry(7,64),mat(0x7e7e86,0,1));gnd.rotation.x=-Math.PI/2;S.add(gnd);
+ const reach=new THREE.Mesh(new THREE.RingGeometry(.7,2.6,96),new THREE.MeshBasicMaterial({color:0x2f9bff,transparent:true,opacity:.28,side:2}));reach.rotation.x=-Math.PI/2;reach.position.y=.02;S.add(reach);
+ const r=rng(5);for(let i=0;i<9;i++){const c=new THREE.Mesh(new THREE.RingGeometry(.3+r()*.5,.5+r()*.6,32),new THREE.MeshBasicMaterial({color:0x5f5f67,side:2}));c.rotation.x=-Math.PI/2;c.position.set((r()-.5)*11,.01,(r()-.5)*11);S.add(c)}
+ const sg=new THREE.BufferGeometry(),sp=[];for(let i=0;i<500;i++){const a=r()*6.28,b=r()*1.4,d=40;sp.push(Math.cos(a)*Math.cos(b)*d,Math.sin(b)*d+2,Math.sin(a)*Math.cos(b)*d)}sg.setAttribute('position',new THREE.Float32BufferAttribute(sp,3));S.add(new THREE.Points(sg,new THREE.PointsMaterial({color:0xffffff,size:.15})));
+ const L1=1.5,L2=1.3,L3=.5,H0=.5,add=(g,m,p,par)=>{const x=new THREE.Mesh(g,m);x.position.set(...p);par.add(x);return x};
+ const root=new THREE.Group();S.add(root);add(new THREE.CylinderGeometry(.55,.65,.3,32),mat(0x2a3140),[0,.15,0],root);
+ const j0=new THREE.Group();j0.position.y=.3;root.add(j0);add(new THREE.CylinderGeometry(.2,.2,H0-.3,20),mat(0xcfd5e4),[0,(H0-.3)/2,0],j0);
+ const j1=new THREE.Group();j1.position.y=H0-.3;j0.add(j1);add(new THREE.SphereGeometry(.2,20,16),mat(0xffb86b),[0,0,0],j1);add(new THREE.BoxGeometry(L1,.2,.2),mat(0xdfe5f2),[L1/2,0,0],j1);
+ const j2=new THREE.Group();j2.position.x=L1;j1.add(j2);add(new THREE.SphereGeometry(.17,20,16),mat(0xffb86b),[0,0,0],j2);add(new THREE.BoxGeometry(L2,.16,.16),mat(0xdfe5f2),[L2/2,0,0],j2);
+ const j3=new THREE.Group();j3.position.x=L2;j2.add(j3);add(new THREE.SphereGeometry(.14,20,16),mat(0xffb86b),[0,0,0],j3);add(new THREE.BoxGeometry(.2,.12,.12),mat(0x8fd3ff),[.1,0,0],j3);
+ const j4=new THREE.Group();j4.position.x=.2;j3.add(j4);const j5=new THREE.Group();j4.add(j5);add(new THREE.BoxGeometry(.12,.3,.14),mat(0x2a3140),[.06,0,0],j5);
+ const fA=add(new THREE.BoxGeometry(.3,.04,.08),mat(0x8fd3ff),[.25,.1,0],j5),fB=add(new THREE.BoxGeometry(.3,.04,.08),mat(0x8fd3ff),[.25,-.1,0],j5);const tip=new THREE.Object3D();tip.position.x=L3-.2;j5.add(tip);
+ const bin=new THREE.Mesh(new THREE.CylinderGeometry(.4,.32,.3,24,1,true),new THREE.MeshStandardMaterial({color:0xffb86b,side:2,metalness:.3,roughness:.6}));bin.position.set(-1.7,.15,.4);S.add(bin);
+ const Q=[0,.6,-1.5,0,0,0];Q[3]=-Math.PI/2-Q[1]-Q[2];let grip=.1,rock=null,holding=false,n=0,plan=null;const J=[j0,j1,j2,j3,j4,j5];
+ const apply=()=>{j0.rotation.y=Q[0];j1.rotation.z=Q[1];j2.rotation.z=Q[2];j3.rotation.z=Q[3];j4.rotation.y=Q[4];j5.rotation.x=Q[5];fA.position.y=grip;fB.position.y=-grip;
+  [0,1,2,3,4,5].forEach(i=>{if($('s'+i)&&!plan)$('s'+i).value=Q[i]*57.2958})};
+ const NM=['Base yaw','Shoulder','Elbow','Wrist pitch','Wrist yaw','Wrist roll'];NM.forEach((nm,i)=>{const d=document.createElement('div');d.innerHTML='<label>'+nm+': <b id="sv'+i+'">0</b>°</label><input type="range" id="s'+i+'" min="-180" max="180" value="0">';$('aj').appendChild(d);d.querySelector('input').oninput=e=>{if(plan)return;Q[i]=e.target.value/57.2958;$('sv'+i).textContent=e.target.value;apply()}});
+ function ik(t,roll){const r=Math.hypot(t.x,t.z),zz=t.y+L3-H0,d2=r*r+zz*zz,c=(d2-L1*L1-L2*L2)/(2*L1*L2);if(c>1||c<-1||r<.6||r>2.6)return null;const q2=-Math.acos(c),q1=Math.atan2(zz,r)-Math.atan2(L2*Math.sin(q2),L1+L2*Math.cos(q2));return[Math.atan2(-t.z,t.x),q1,q2,-Math.PI/2-q1-q2,0,roll]}
+ const HOME=[0,.6,-1.5,-Math.PI/2-.6+1.5,0,0];
+ function run(steps){plan={steps,i:0,t:0,from:Q.slice(),fg:grip};document.querySelectorAll('#ap li').forEach(l=>l.classList.remove('on'))}
+ $('ah').onclick=()=>{if(!plan)run([{q:HOME,g:.1,d:1,lab:-1}])};
+ $('ac').onclick=()=>{if(plan)return;if(!rock){$('am').textContent='Click inside the blue ring on the ground to place a sample first.';return}const p=rock.position,rl=rock.rotation.y;
+  const hov=ik({x:p.x,y:.8,z:p.z},rl),dn=ik({x:p.x,y:.14,z:p.z},rl);if(!hov||!dn){$('am').textContent='Out of reach. Click between 0.7 m and 2.6 m from the base.';return}
+  const bh=ik({x:-1.7,y:.8,z:.4},0);$('am').textContent='Planning: inverse kinematics solved for every waypoint. Executing…';
+  run([{q:hov,g:.12,d:1.3,lab:0},{q:dn,g:.12,d:1,lab:1},{q:dn,g:.035,d:.6,lab:2,grab:1},{q:hov,g:.035,d:1,lab:3},{q:bh,g:.035,d:1.5,lab:4},{q:bh,g:.12,d:.6,lab:5,drop:1},{q:HOME,g:.1,d:1.3,lab:6}])};
+ const ray=new THREE.Raycaster();let sx=0,sy=0,ry=.9,rx=.45,drag=false,lx=0,ly=0,vis=true;new IntersectionObserver(e=>vis=e[0].isIntersecting).observe(el);
+ el.addEventListener('pointerdown',e=>{drag=true;lx=sx=e.clientX;ly=sy=e.clientY;el.setPointerCapture(e.pointerId)});
+ el.addEventListener('pointermove',e=>{if(!drag)return;ry-=(e.clientX-lx)*.01;rx=Math.max(.1,Math.min(1.4,rx+(e.clientY-ly)*.006));lx=e.clientX;ly=e.clientY});
+ el.addEventListener('pointerup',e=>{drag=false;if(Math.hypot(e.clientX-sx,e.clientY-sy)>5||plan||holding)return;const b=el.getBoundingClientRect();ray.setFromCamera({x:(e.clientX-b.left)/b.width*2-1,y:-(e.clientY-b.top)/b.height*2+1},C);const h=ray.intersectObject(gnd)[0];if(!h)return;
+  let px=h.point.x,pz=h.point.z;const rr=Math.hypot(px,pz),cl=Math.max(.8,Math.min(2.5,rr)),moved=Math.abs(cl-rr)>.01;if(rr>.001){px*=cl/rr;pz*=cl/rr}else{px=cl;pz=0}
+  if(!rock){rock=new THREE.Mesh(new THREE.DodecahedronGeometry(.17),new THREE.MeshStandardMaterial({color:0xff9a3d,emissive:0xff5a00,emissiveIntensity:.35,roughness:.8}));S.add(rock)}rock.position.set(px,.14,pz);rock.rotation.y=Math.random()*3-1.5;
+  $('am').textContent=moved?'That spot was outside the blue reach ring, so the sample was placed at the nearest reachable point. Press Collect sample.':'Sample placed. Press Collect sample.'});
+ const size=()=>{R.setSize(el.clientWidth,el.clientHeight);C.aspect=el.clientWidth/el.clientHeight;C.updateProjectionMatrix()};addEventListener('resize',size);size();apply();
+ let last=performance.now();(function f(nn){requestAnimationFrame(f);const dt=Math.min((nn-last)/1000,.05);last=nn;if(!vis)return;
+  if(plan){const st=plan.steps[plan.i];plan.t+=dt/(rm?.3:st.d);const k=Math.min(1,plan.t),e=k*k*(3-2*k);for(let i=0;i<6;i++)Q[i]=plan.from[i]+(st.q[i]-plan.from[i])*e;grip=plan.fg+(st.g-plan.fg)*e;
+   document.querySelectorAll('#ap li').forEach((l,i)=>l.classList.toggle('on',i==st.lab));
+   if(k>=1){if(st.grab&&rock){tip.attach(rock);holding=true}if(st.drop&&rock){S.attach(rock);rock.position.set(-1.7,.12,.4);holding=false}if(plan.i==plan.steps.length-1){if(st.lab==6){n++;$('an').textContent=n;$('am').textContent='Sample delivered to the bin. Click the ground for another.';rock=null}plan=null}else{plan.i++;plan.t=0;plan.from=Q.slice();plan.fg=grip}}apply()}
+  else if(!drag&&!rm&&false){}
+  const w=new THREE.Vector3();tip.getWorldPosition(w);$('at').textContent=w.x.toFixed(2)+', '+w.y.toFixed(2)+', '+w.z.toFixed(2);
+  if(!plan)[0,1,2,3,4,5].forEach(i=>{$('sv'+i).textContent=Math.round(Q[i]*57.2958)});
+  C.position.set(Math.sin(ry)*Math.cos(rx)*8,Math.sin(rx)*8+.6,Math.cos(ry)*Math.cos(rx)*8);C.lookAt(0,.9,0);R.render(S,C)})(last)})();
+</script><a href="../index.html" style="position:fixed;left:14px;bottom:14px;z-index:2147483000;background:#0d0d0d;color:#f4f1ea;font:600 13px/1 system-ui,sans-serif;padding:10px 16px;border-radius:99px;text-decoration:none;box-shadow:0 4px 18px rgba(0,0,0,.35)">← Portfolio</a></body></html>

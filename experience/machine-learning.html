@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Machine Learning Intern | EduStation | Portfolio</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Newsreader:opsz,wght@6..72,400;6..72,600&display=swap">
+<style>
+:root{--bg:#0d0f1a;--bg2:#171a2b;--ink:#eceefa;--mut:#9aa0c2;--acc:#c4a1ff;--acc2:#ffd166;--line:#2a2f4a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f5f4fb;--bg2:#e8e6f6;--ink:#161830;--mut:#575c80;--acc:#6b3fd0;--acc2:#9a6a00;--line:#cdc9e6}}
+:root[data-theme="light"]{--bg:#f5f4fb;--bg2:#e8e6f6;--ink:#161830;--mut:#575c80;--acc:#6b3fd0;--acc2:#9a6a00;--line:#cdc9e6}
+:root[data-theme="dark"]{--bg:#0d0f1a;--bg2:#171a2b;--ink:#eceefa;--mut:#9aa0c2;--acc:#c4a1ff;--acc2:#ffd166;--line:#2a2f4a}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 'Space Grotesk',system-ui,sans-serif}
+h1,h2{font-family:'Newsreader',Georgia,serif;font-weight:600;line-height:1.1;margin:0}
+h1{font-size:clamp(2.2rem,5.5vw,4.2rem)}h2{font-size:clamp(1.7rem,3.5vw,2.5rem);margin-bottom:.6rem}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;display:flex;gap:.3rem;overflow-x:auto;padding:.6rem 1rem;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav a{color:var(--mut);text-decoration:none;padding:.3rem .8rem;border-radius:99px;white-space:nowrap;font-size:.9rem}nav a:hover,nav a:focus-visible{color:var(--ink);background:var(--bg2);outline:none}
+section{padding:4rem 1.2rem;max-width:1100px;margin:0 auto}
+.lead{color:var(--mut);max-width:66ch}
+.lvl{display:inline-block;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;padding:.1rem .6rem;border-radius:99px;margin-bottom:.6rem;border:1px solid}
+.l1{color:#5be3a0;border-color:#5be3a0}.l2{color:var(--acc2);border-color:var(--acc2)}.l3{color:#ff7ba8;border-color:#ff7ba8}
+.hero{display:grid;grid-template-columns:1fr 1.15fr;gap:1.5rem;align-items:center;min-height:86vh;max-width:1250px;margin:0 auto;padding:3rem 1.2rem}
+@media(max-width:820px){.hero{grid-template-columns:1fr}}
+.tag{display:inline-block;border:1px solid var(--acc);color:var(--acc);padding:.15rem .8rem;border-radius:99px;font-size:.85rem;margin-bottom:1rem}
+.panel{background:#0a0c16;border:1px solid var(--line);border-radius:18px;overflow:hidden;position:relative}
+.panel canvas{width:100%;height:auto;display:block;cursor:crosshair}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1.4rem}
+.card{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:1.2rem}.card h3{margin:.1rem 0 .4rem;font-size:1.1rem}.card p{margin:.3rem 0;color:var(--mut);font-size:.95rem}
+.two{display:grid;grid-template-columns:1.25fr 1fr;gap:1.4rem;align-items:start;margin-top:1.4rem}@media(max-width:860px){.two{grid-template-columns:1fr}}
+.btns{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.9rem}
+button.b,a.b{background:var(--bg2);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:.5rem .85rem;font:500 .88rem 'Space Grotesk',sans-serif;cursor:pointer;text-decoration:none;display:inline-block}
+button.b:hover,button.b:focus-visible,a.b:hover{border-color:var(--acc);outline:none}.b.on{background:var(--acc);color:#1a0c33;border-color:var(--acc)}
+label{display:block;font-size:.85rem;color:var(--mut);margin-top:.6rem}input[type=range]{width:100%;accent-color:var(--acc)}select{background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:.3rem}
+.read{margin-top:.8rem;padding:.8rem 1rem;border-left:3px solid var(--acc2);background:var(--bg2);border-radius:0 12px 12px 0;font-size:.92rem}
+.big{font:600 1.6rem 'Newsreader',serif;color:var(--acc)}.row{display:flex;gap:1.4rem;flex-wrap:wrap;margin-top:.6rem}.row div{min-width:6rem}.row small{display:block;color:var(--mut);font-size:.75rem}
+table{border-collapse:collapse;font-size:.85rem;width:100%}th,td{border:1px solid var(--line);padding:.3rem .5rem;text-align:right}th{background:var(--bg);color:var(--mut)}td:first-child,th:first-child{text-align:left}
+.tw{overflow-x:auto}.cm{display:grid;grid-template-columns:auto 1fr 1fr;gap:4px;font-size:.85rem;margin-top:.6rem;text-align:center}.cm div{padding:.5rem;border-radius:8px;background:var(--bg)}.cm .h{background:none;color:var(--mut)}
+pre{background:#080a12;color:#d9d3ff;border:1px solid var(--line);border-radius:12px;padding:.9rem;font:.78rem/1.5 ui-monospace,Menlo,Consolas,monospace;overflow-x:auto;margin:1rem 0 0}
+.steps{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:1rem}.st{flex:1;min-width:110px;padding:.7rem;border:1px solid var(--line);border-radius:12px;background:var(--bg2);cursor:pointer;text-align:center;font-size:.9rem}.st.on{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 18%,var(--bg2))}
+.src,footer{color:var(--mut);font-size:.85rem}footer{text-align:center;padding:2rem 1rem 3rem}
+.cv li{margin:.5rem 0}.cv{padding-left:1.2rem;max-width:70ch}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head><body>
+<nav><a href="#top">Overview</a><a href="#flow">Big picture</a><a href="#reg">Regression</a><a href="#cls">Classification</a><a href="#prep">Preprocessing</a><a href="#feat">Features</a><a href="#over">Overfitting</a><a href="#eval">Evaluation</a><a href="#nn">Neural nets</a><a href="#km">Clustering</a><a href="#code">Code</a><a href="#cv">What I did</a></nav>
+
+<section class="hero" id="top">
+<div>
+<span class="tag">Internship · 01 Mar 2023 to 01 May 2023 · New Delhi</span>
+<h1>Machine Learning Intern at EduStation</h1>
+<p class="lead">Two months of teaching computers to learn from data: predicting numbers (regression) and sorting things into groups (classification), including cleaning data, designing features and judging results. This page teaches machine learning from zero to advanced. Everything is live: every chart is a real model training in your browser.</p>
+<div class="btns"><a class="b" href="https://drive.google.com/file/d/1zaJQdDR-lOmwkZJu6Q__Nsp7rY_C6nLC/view?usp=sharing" target="_blank" rel="noopener">View certificate</a></div>
+<p class="src" style="margin-top:1rem"><span class="lvl l1">beginner</span> <span class="lvl l2">intermediate</span> <span class="lvl l3">advanced</span> Each section is tagged so to follow the climb.</p>
+</div>
+<div class="panel"><canvas id="hero" width="640" height="460" style="cursor:default"></canvas></div>
+</section>
+
+<section id="flow"><span class="lvl l1">beginner</span>
+<h2>What is machine learning?</h2>
+<p class="lead">Normal programs follow rules a person wrote. Machine learning flips this: you show the computer many examples and it works out the rules itself. Show it thousands of house sales and it learns how size relates to price.</p>
+<div class="grid"><div class="card"><h3>Supervised learning</h3><p>Examples come with the right answer. The model learns to predict it. Two kinds: <b>regression</b> predicts a number (price, temperature); <b>classification</b> predicts a category (spam or not). My internship work.</p></div>
+<div class="card"><h3>Unsupervised learning</h3><p>No answers given. The model finds structure on its own, like grouping customers with similar habits (clustering).</p></div>
+<div class="card"><h3>Reinforcement learning</h3><p>An agent learns by trial and reward, like a game-playing program or a robot learning to walk.</p></div></div>
+<h2 style="font-size:1.5rem;margin-top:2.2rem">The workflow of every ML project</h2>
+<div class="steps" id="steps"></div><div class="read" id="stepInfo"></div>
+</section>
+
+<section id="reg"><span class="lvl l1">beginner</span>
+<h2>Regression: predicting a number</h2>
+<p class="lead">The simplest model is a straight line: score = slope × hours + intercept. "Learning" means finding the slope and intercept that make the line sit closest to the points. Closeness is measured by the <b>mean squared error</b> (average of squared gaps). Click the chart to add your own points, then watch the model train by <b>gradient descent</b>: nudge the line downhill on the error, step by step.</p>
+<div class="two"><div class="panel"><canvas id="rc" width="660" height="420"></canvas></div>
+<div class="card"><label>Noise in the data: <b id="rnv">8</b></label><input type="range" id="rn" min="0" max="25" value="8">
+<label>Learning rate (step size): <b id="rlv">0.010</b></label><input type="range" id="rl" min="1" max="30" value="10">
+<div class="btns"><button class="b" id="rg">Train (gradient descent)</button><button class="b" id="rr">Reset line</button><button class="b" id="ro">Add outlier</button><button class="b" id="rd">New data</button></div>
+<div class="row"><div><small>slope</small><span class="big" id="rs">0</span></div><div><small>intercept</small><span class="big" id="rb">0</span></div><div><small>error (MSE)</small><span class="big" id="rm">0</span></div><div><small>R² score</small><span class="big" id="rq">0</span></div></div>
+<div class="read" id="rt"></div></div></div>
+<p class="src">Dashed line = the exact best answer (least squares). Try a very high learning rate: the steps overshoot and the error explodes. Add an outlier: one odd point drags the whole line.</p>
+</section>
+
+<section id="cls"><span class="lvl l2">intermediate</span>
+<h2>Classification: sorting into groups</h2>
+<p class="lead">Now the answer is a category. The model draws a boundary between pink and blue points. Data is split: 70% to <b>train</b> on, 30% held back to <b>test</b> (white-ringed dots) so we can check the model on examples it has never seen. Pick a model and compare.</p>
+<div class="two"><div class="panel"><canvas id="cc" width="660" height="480"></canvas></div>
+<div class="card"><label>Model <select id="cm"><option value="log">Logistic regression (a straight line)</option><option value="knn">k-Nearest neighbours (vote of nearby points)</option><option value="tree">Decision tree (a flowchart of questions)</option><option value="rf">Random forest (many trees voting)</option></select></label>
+<label>Shape of data <select id="cd"><option value="moons">Two moons</option><option value="circles">Circles in circles</option><option value="blobs">Two blobs</option></select></label>
+<label>Noise: <b id="cnv">0.25</b></label><input type="range" id="cn" min="5" max="60" value="25">
+<label><span id="clab">Complexity</span>: <b id="ckv">5</b></label><input type="range" id="ck" min="1" max="25" value="5">
+<div class="row"><div><small>training accuracy</small><span class="big" id="ca">0</span></div><div><small>test accuracy</small><span class="big" id="ct">0</span></div></div><div class="read" id="cx"></div></div></div>
+<div class="grid"><div class="card"><h3>Logistic regression</h3><p>Fits a straight boundary. Fast and easy to explain, but cannot bend around curved groups.</p></div><div class="card"><h3>k-Nearest neighbours</h3><p>Look at the k closest examples and take a vote. k=1 memorises noise; a large k blurs detail.</p></div><div class="card"><h3>Decision tree</h3><p>Asks yes/no questions on one feature at a time. Deep trees memorise the training set.</p></div><div class="card"><h3>Random forest <span class="lvl l3" style="margin:0">advanced</span></h3><p>Trains many trees on random resamples and averages them. Averaging cancels out individual errors, so it is usually far more stable.</p></div></div>
+</section>
+
+<section id="prep"><span class="lvl l1">beginner</span>
+<h2>Data preprocessing: cleaning before learning</h2>
+<p class="lead">Real data is messy. Models need numbers, no blanks, and similar scales. Click each step and watch the table change.</p>
+<div class="btns"><button class="b" id="pf">1 · Fill missing values (mean)</button><button class="b" id="pe">2 · Encode city as numbers (one-hot)</button><button class="b" id="ps">3 · Scale numbers (z-score)</button><button class="b" id="pz">Reset</button></div>
+<div class="tw" style="margin-top:1rem"><table id="tb"></table></div><div class="read" id="pt"></div>
+</section>
+
+<section id="feat"><span class="lvl l2">intermediate</span>
+<h2>Feature engineering: giving the model better clues</h2>
+<p class="lead">A feature is one measurement the model sees. Sometimes the raw features hide the pattern, and a clever new feature reveals it. Here the blue points sit in a ring around the pink ones: no straight line can split them. Add one new feature, the squared distance from the centre (x² + y²), and the problem becomes easy.</p>
+<div class="two"><div class="panel"><canvas id="fc" width="660" height="480"></canvas></div>
+<div class="card"><div class="btns" style="margin-top:0"><button class="b on" id="f0">Raw features: x, y</button><button class="b" id="f1">Add feature x² + y²</button></div>
+<div class="row"><div><small>accuracy</small><span class="big" id="fa">0</span></div></div><div class="read" id="ft"></div>
+<p class="src">The same model (logistic regression) is used in both cases. Only the features changed.</p></div></div>
+</section>
+
+<section id="over"><span class="lvl l2">intermediate</span>
+<h2>Overfitting: when learning too much goes wrong</h2>
+<p class="lead">Fit a curve through 12 noisy points. A simple curve misses the pattern (<b>underfit</b>). A very flexible one threads every point perfectly, including the noise, and then fails on new data (<b>overfit</b>). The goal is the sweet spot. Raise the polynomial degree and compare training error with test error.</p>
+<div class="two"><div class="panel"><canvas id="oc" width="660" height="420"></canvas></div>
+<div class="card"><label>Model flexibility (polynomial degree): <b id="ov">3</b></label><input type="range" id="od" min="1" max="11" value="3">
+<div class="row"><div><small>training error</small><span class="big" id="oa">0</span></div><div><small>test error</small><span class="big" id="ob">0</span></div></div><div class="read" id="ot"></div>
+<p class="src">Dots: training data. Faded dots: unseen test data. Dashed line: the true pattern. This trade-off is called bias versus variance.</p></div></div>
+</section>
+
+<section id="eval"><span class="lvl l2">intermediate</span>
+<h2>Model evaluation: is it actually good?</h2>
+<p class="lead">A model outputs a score from 0 to 1. Where you place the <b>threshold</b> decides who is labelled positive, and every choice trades one kind of mistake for another. Slide it.</p>
+<div class="two"><div class="card"><label>Share of positive cases <select id="ei"><option value="0.5">Balanced (50%)</option><option value="0.05">Rare event (5%)</option></select></label>
+<label>Decision threshold: <b id="etv">0.50</b></label><input type="range" id="et" min="5" max="95" value="50">
+<div class="cm" id="em"></div>
+<div class="row"><div><small>accuracy</small><span class="big" id="e1">0</span></div><div><small>precision</small><span class="big" id="e2">0</span></div><div><small>recall</small><span class="big" id="e3">0</span></div><div><small>F1</small><span class="big" id="e4">0</span></div></div><div class="read" id="ex"></div></div>
+<div class="panel"><canvas id="ec" width="420" height="420" style="cursor:default"></canvas></div></div>
+<div class="grid"><div class="card"><h3>Precision</h3><p>Of everything I flagged positive, how much really was? Matters when false alarms are costly.</p></div><div class="card"><h3>Recall</h3><p>Of all real positives, how many did I catch? Matters when missing one is costly (disease screening).</p></div><div class="card"><h3>ROC curve and AUC</h3><p>Plots catch-rate against false-alarm rate across all thresholds. Area under it (AUC) summarises quality: 0.5 is a coin flip, 1.0 is perfect.</p></div><div class="card"><h3>Regression metrics</h3><p>For numbers: MAE (average gap), MSE or RMSE (penalises big misses), R² (share of variation explained).</p></div></div>
+</section>
+
+<section id="nn"><span class="lvl l3">advanced</span>
+<h2>Neural networks: learning curved boundaries</h2>
+<p class="lead">A neural network stacks many tiny units. Each one mixes its inputs and squashes the result; together they can bend a boundary into almost any shape. Here is a real network (2 inputs, one hidden layer, 1 output) learning in your browser by backpropagation. Press Train and watch the boundary form.</p>
+<div class="two"><div class="panel"><canvas id="nc" width="660" height="480"></canvas></div>
+<div class="card"><label>Dataset <select id="nd"><option value="moons">Two moons</option><option value="circles">Circles in circles</option></select></label>
+<label>Hidden units: <b id="nhv">6</b></label><input type="range" id="nh" min="1" max="16" value="6">
+<label>Learning rate: <b id="nlv">0.30</b></label><input type="range" id="nl" min="1" max="100" value="30">
+<div class="btns"><button class="b" id="ng">Train</button><button class="b" id="nr">Reset network</button></div>
+<div class="row"><div><small>steps</small><span class="big" id="n1">0</span></div><div><small>loss</small><span class="big" id="n2">0</span></div><div><small>accuracy</small><span class="big" id="n3">0</span></div></div><div class="read">With 1 hidden unit the network can only draw a straight line. Add units and it can wrap around the circle. Too few units underfit; the right number fits.</div></div></div>
+</section>
+
+<section id="km"><span class="lvl l2">intermediate</span>
+<h2>Clustering: finding groups without answers</h2>
+<p class="lead">k-means has no labels. It places k centres, assigns every point to its nearest centre, moves each centre to the middle of its points, and repeats until nothing changes. Press Step to see each move.</p>
+<div class="two"><div class="panel"><canvas id="kc" width="660" height="420"></canvas></div>
+<div class="card"><label>Number of clusters k: <b id="kv">3</b></label><input type="range" id="kk" min="1" max="6" value="3">
+<div class="btns"><button class="b" id="ks">Step</button><button class="b" id="kr">Run</button><button class="b" id="kn">Re-start</button></div>
+<div class="row"><div><small>iteration</small><span class="big" id="k1">0</span></div><div><small>total spread</small><span class="big" id="k2">0</span></div></div><div class="read">The data really has 3 groups. With k=1 or 2 groups are merged; with 6 real groups get split. Choosing k is a judgment call.</div></div></div>
+</section>
+
+<section id="code"><span class="lvl l2">intermediate</span>
+<h2>The same ideas as real Python code</h2>
+<p class="lead">Everything above, written the way it is done in practice with pandas and scikit-learn: clean, encode, scale, train, evaluate in one reproducible pipeline.</p>
+<pre>import pandas as pd
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.compose import ColumnTransformer
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.pipeline import Pipeline
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import classification_report
+
+df = pd.read_csv("data.csv")
+X, y = df.drop(columns="target"), df["target"]
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42, stratify=y)
+
+prep = ColumnTransformer([
+    ("num", Pipeline([("fill", SimpleImputer(strategy="mean")),
+                      ("scale", StandardScaler())]), ["age", "salary"]),
+    ("cat", OneHotEncoder(handle_unknown="ignore"), ["city"]),
+])
+model = Pipeline([("prep", prep),
+                  ("clf", RandomForestClassifier(n_estimators=200, random_state=42))])
+
+print(cross_val_score(model, X_train, y_train, cv=5).mean())   # honest estimate
+model.fit(X_train, y_train)
+print(classification_report(y_test, model.predict(X_test)))</pre>
+<p class="src">For regression swap in LinearRegression or RandomForestRegressor and judge with mean_squared_error and r2_score.</p>
+</section>
+
+<section id="cv"><span class="lvl l1">my work</span>
+<h2>What I did in this internship</h2>
+<ul class="cv"><li>Developed Python-based machine-learning models for regression and classification, including data preprocessing, feature engineering, and model evaluation.</li></ul>
+<div class="btns"><a class="b" href="https://drive.google.com/file/d/1zaJQdDR-lOmwkZJu6Q__Nsp7rY_C6nLC/view?usp=sharing" target="_blank" rel="noopener">View certificate</a></div>
+<p class="src" style="margin-top:1.4rem">All data on this page is generated in your browser for teaching; the models are real implementations written for this page.</p>
+</section>
+<footer>Machine Learning Intern (Remote) · EduStation · 01/03/2023 to 01/05/2023 · New Delhi, India</footer>
+
+<script>
+const $=id=>document.getElementById(id),C0=[76,201,240],C1=[255,107,154],rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function rng(s){return()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const gauss=r=>Math.sqrt(-2*Math.log(r()+1e-9))*Math.cos(6.283185*r());
+function gen(kind,n,noise,seed){const r=rng(seed),P=[];for(let i=0;i<n;i++){const c=i%2;let x,y;
+ if(kind=='moons'){const t=r()*Math.PI;x=c?1-Math.cos(t):Math.cos(t);y=c?.5-Math.sin(t):Math.sin(t);x=(x-.5)*1.5;y=(y-.25)*1.5}
+ else if(kind=='circles'){const t=r()*6.283,R=c?.6:1.3;x=Math.cos(t)*R;y=Math.sin(t)*R}
+ else{x=(c?1:-1)*.9;y=(c?.3:-.3);x+=gauss(r)*noise*1.6;y+=gauss(r)*noise*1.6;P.push({x,y,c,test:i%10>=7});continue}
+ x+=gauss(r)*noise;y+=gauss(r)*noise;P.push({x,y,c,test:i%10>=7})}return P}
+const XR=[-2.2,2.2],YR=[-1.6,1.6];
+function regions(cx,W,H,pred,cell=9){for(let i=0;i<W;i+=cell)for(let j=0;j<H;j+=cell){const x=XR[0]+(i+cell/2)/W*4.4,y=YR[1]-(j+cell/2)/H*3.2,p=Math.max(0,Math.min(1,pred(x,y)));cx.fillStyle=`rgba(${Math.round(C0[0]+(C1[0]-C0[0])*p)},${Math.round(C0[1]+(C1[1]-C0[1])*p)},${Math.round(C0[2]+(C1[2]-C0[2])*p)},.3)`;cx.fillRect(i,j,cell,cell)}}
+function pts(cx,P,W,H,tr=true){P.forEach(p=>{const X=(p.x-XR[0])/4.4*W,Y=(YR[1]-p.y)/3.2*H,c=p.c?C1:C0;cx.fillStyle=`rgb(${c})`;cx.beginPath();cx.arc(X,Y,p.test&&tr?5:4,0,7);cx.fill();if(p.test&&tr){cx.strokeStyle='#fff';cx.lineWidth=1.6;cx.stroke()}})}
+// models
+function fitLog(tr,fm){const F=tr.map(p=>fm(p.x,p.y)),d=F[0].length,mu=Array(d).fill(0),sd=Array(d).fill(0),n=F.length;F.forEach(f=>f.forEach((v,j)=>mu[j]+=v/n));F.forEach(f=>f.forEach((v,j)=>sd[j]+=(v-mu[j])**2/n));sd.forEach((v,j)=>sd[j]=Math.sqrt(v)||1);
+ const Z=F.map(f=>f.map((v,j)=>(v-mu[j])/sd[j]));let w=Array(d).fill(0),b=0;
+ for(let it=0;it<500;it++){const gw=Array(d).fill(0);let gb=0;Z.forEach((z,i)=>{const e=1/(1+Math.exp(-(b+z.reduce((s,v,j)=>s+v*w[j],0))))-tr[i].c;z.forEach((v,j)=>gw[j]+=e*v);gb+=e});w=w.map((v,j)=>v-.8*gw[j]/n);b-=.8*gb/n}
+ return(x,y)=>1/(1+Math.exp(-(b+fm(x,y).reduce((s,v,j)=>s+(v-mu[j])/sd[j]*w[j],0))))}
+const fitKnn=(tr,k)=>(x,y)=>{const d=tr.map(p=>[(p.x-x)**2+(p.y-y)**2,p.c]).sort((a,b)=>a[0]-b[0]).slice(0,k);return d.reduce((s,v)=>s+v[1],0)/d.length};
+function build(X,maxD,rn,sub,d=0){const n=X.length,p=X.reduce((s,q)=>s+q.c,0)/n;if(d>=maxD||p==0||p==1||n<2)return{p};let best=null;const fs=sub?(rn()<.5?['x','y']:['y','x']):['x','y'];
+ for(const f of fs){const s=[...X].sort((a,b)=>a[f]-b[f]);let lc=0;for(let i=0;i<n-1;i++){lc+=s[i].c;if(s[i][f]==s[i+1][f])continue;const nl=i+1,nr=n-nl,pl=lc/nl,pr=(p*n-lc)/nr,g=nl*2*pl*(1-pl)+nr*2*pr*(1-pr);if(!best||g<best.g)best={g,f,t:(s[i][f]+s[i+1][f])/2}}if(sub&&best)break}
+ if(!best)return{p};const L=X.filter(q=>q[best.f]<=best.t),R=X.filter(q=>q[best.f]>best.t);if(!L.length||!R.length)return{p};return{f:best.f,t:best.t,l:build(L,maxD,rn,sub,d+1),r:build(R,maxD,rn,sub,d+1)}}
+const walk=(t,x,y)=>{while(t.f)t=(t.f=='x'?x:y)<=t.t?t.l:t.r;return t.p};
+const fitTree=(tr,d)=>{const t=build(tr,d,Math.random,false);return(x,y)=>walk(t,x,y)};
+function fitForest(tr,d){const r=rng(5),ts=[...Array(25)].map(()=>build(tr.map(()=>tr[Math.floor(r()*tr.length)]),d,r,true));return(x,y)=>ts.reduce((s,t)=>s+walk(t,x,y),0)/ts.length}
+const acc=(f,S)=>S.length?S.filter(p=>(f(p.x,p.y)>.5)==!!p.c).length/S.length:0;
+const pc=v=>Math.round(v*100)+'%';
+// ---- hero ----
+(()=>{const cv=$('hero'),cx=cv.getContext('2d'),r=rng(3),P=[...Array(90)].map(()=>({x:r()*640,y:r()*460,a:r()*6.28,s:.3+r()*.5}));let t=0;
+ (function f(){t+=.004;cx.fillStyle='#0a0c16';cx.fillRect(0,0,640,460);const an=t*.6,nx=Math.cos(an),ny=Math.sin(an);
+  P.forEach(p=>{if(!rm){p.x+=Math.cos(p.a)*p.s*.4;p.y+=Math.sin(p.a)*p.s*.4;if(p.x<0||p.x>640)p.a=3.14-p.a;if(p.y<0||p.y>460)p.a=-p.a}
+   const side=(p.x-320)*nx+(p.y-230)*ny>0;cx.fillStyle=side?'rgb(255,107,154)':'rgb(76,201,240)';cx.beginPath();cx.arc(p.x,p.y,4.5,0,7);cx.fill()});
+  cx.strokeStyle='#ffd166';cx.lineWidth=2.5;cx.beginPath();cx.moveTo(320-ny*500,230+nx*500);cx.lineTo(320+ny*500,230-nx*500);cx.stroke();
+  cx.fillStyle='#9aa0c2';cx.font='13px sans-serif';cx.fillText('A model finding a boundary between two groups',16,440);requestAnimationFrame(f)})()})();
+// ---- workflow ----
+const ST=[['1 · Collect','Gather examples with the right answers: rows of measurements plus the target to predict.'],['2 · Clean','Fix missing values, remove errors, turn categories into numbers, scale features. (Preprocessing)'],['3 · Features','Choose or invent the measurements that expose the pattern. (Feature engineering)'],['4 · Train','Pick a model and let it adjust itself on the training set to reduce its error.'],['5 · Evaluate','Test on data the model has never seen with the right metric. (Model evaluation)'],['6 · Improve','Tune settings, try other models, fix overfitting, and repeat. Then deploy.']];
+ST.forEach((s,i)=>{const d=document.createElement('div');d.className='st'+(i?'':' on');d.textContent=s[0];d.onclick=()=>{document.querySelectorAll('.st').forEach(x=>x.classList.remove('on'));d.classList.add('on');$('stepInfo').textContent=s[1]};$('steps').appendChild(d)});$('stepInfo').textContent=ST[0][1];
+// ---- regression ----
+let RP=[],lineM=0,lineB=0,train=false;const RW=660,RH=420,rc=$('rc'),rx=rc.getContext('2d');
+const rX=x=>x/10*RW,rY=y=>RH-y/100*RH;
+function rdata(){const r=rng(Math.floor(Math.random()*1e6)),n=+$('rn').value;RP=[...Array(22)].map(()=>{const x=.5+r()*9;return{x,y:Math.max(0,Math.min(100,8*x+15+gauss(r)*n))}});lineM=0;lineB=0}
+function ols(){const n=RP.length,mx=RP.reduce((s,p)=>s+p.x,0)/n,my=RP.reduce((s,p)=>s+p.y,0)/n;let a=0,b=0;RP.forEach(p=>{a+=(p.x-mx)*(p.y-my);b+=(p.x-mx)**2});const m=a/b;return[m,my-m*mx]}
+function rdraw(){rx.fillStyle='#0a0c16';rx.fillRect(0,0,RW,RH);rx.strokeStyle='#222844';for(let i=0;i<=10;i++){rx.beginPath();rx.moveTo(rX(i),0);rx.lineTo(rX(i),RH);rx.stroke()}
+ const [om,ob]=ols();rx.setLineDash([6,5]);rx.strokeStyle='#8a90b8';rx.beginPath();rx.moveTo(0,rY(ob));rx.lineTo(RW,rY(om*10+ob));rx.stroke();rx.setLineDash([]);
+ rx.strokeStyle='#ffd166';rx.lineWidth=3;rx.beginPath();rx.moveTo(0,rY(lineB));rx.lineTo(RW,rY(lineM*10+lineB));rx.stroke();rx.lineWidth=1;
+ RP.forEach(p=>{rx.fillStyle='#4cc9f0';rx.beginPath();rx.arc(rX(p.x),rY(p.y),5,0,7);rx.fill()});rx.fillStyle='#9aa0c2';rx.font='12px sans-serif';rx.fillText('hours studied →',RW-100,RH-8);rx.fillText('exam score ↑',8,16);
+ const n=RP.length,mse=RP.reduce((s,p)=>s+(p.y-(lineM*p.x+lineB))**2,0)/n,my=RP.reduce((s,p)=>s+p.y,0)/n,vt=RP.reduce((s,p)=>s+(p.y-my)**2,0)/n,r2=1-mse/vt;
+ $('rs').textContent=isFinite(lineM)?lineM.toFixed(2):'∞';$('rb').textContent=isFinite(lineB)?lineB.toFixed(1):'∞';$('rm').textContent=mse>1e6||!isFinite(mse)?'huge':mse.toFixed(0);$('rq').textContent=isFinite(r2)?r2.toFixed(2):'-';
+ $('rt').textContent=!isFinite(mse)||mse>1e5?'The learning rate is too high: each step overshoots and the error blows up. Reduce it.':train?'Training: each step moves the line downhill on the error.':'Click Train to start. Learning rate '+$('rl').value/1000+' controls the step size.'}
+function rstep(){const n=RP.length;let gm=0,gb=0;RP.forEach(p=>{const e=lineM*p.x+lineB-p.y;gm+=2*e*p.x/n;gb+=2*e/n});const lr=$('rl').value/1000;lineM-=lr*gm;lineB-=lr*gb*5}
+rc.addEventListener('click',e=>{const b=rc.getBoundingClientRect();RP.push({x:(e.clientX-b.left)/b.width*10,y:100-(e.clientY-b.top)/b.height*100})});
+$('rg').onclick=()=>{train=!train;$('rg').classList.toggle('on',train)};$('rr').onclick=()=>{lineM=0;lineB=0};$('rd').onclick=rdata;$('ro').onclick=()=>RP.push({x:9,y:5});
+$('rn').oninput=()=>{$('rnv').textContent=$('rn').value;rdata()};$('rl').oninput=()=>$('rlv').textContent=($('rl').value/1000).toFixed(3);
+rdata();(function f(){if(train)for(let i=0;i<4;i++)rstep();rdraw();requestAnimationFrame(f)})();
+// ---- classification ----
+function cdraw(){const kind=$('cd').value,noise=$('cn').value/100,m=$('cm').value,k=+$('ck').value;$('cnv').textContent=noise.toFixed(2);$('ckv').textContent=k;
+ $('clab').textContent=m=='knn'?'k (neighbours)':m=='log'?'Complexity (not used)':'Tree depth';$('ck').max=m=='knn'?25:12;$('ck').disabled=m=='log';
+ const P=gen(kind,200,noise,11),tr=P.filter(p=>!p.test),te=P.filter(p=>p.test);
+ const f=m=='log'?fitLog(tr,(x,y)=>[x,y]):m=='knn'?fitKnn(tr,k):m=='tree'?fitTree(tr,k):fitForest(tr,k);
+ const cx=$('cc').getContext('2d');cx.fillStyle='#0a0c16';cx.fillRect(0,0,660,480);regions(cx,660,480,f);pts(cx,P,660,480);
+ const a=acc(f,tr),b=acc(f,te);$('ca').textContent=pc(a);$('ct').textContent=pc(b);
+ $('cx').textContent=a-b>.1?'Big gap between training and test accuracy: the model has memorised the training points (overfitting).':m=='log'&&kind!='blobs'?'A straight line cannot separate this shape. Try k-NN, a tree or a forest.':b>.9?'Strong result that holds up on unseen test points.':'Reasonable. Try another model or adjust the complexity.'}
+['cm','cd','cn','ck'].forEach(i=>$(i).oninput=cdraw);cdraw();
+// ---- preprocessing ----
+const RAW=[['Asha',25,40000,'Delhi',1],['Ravi',null,52000,'Mumbai',0],['Meena',35,null,'Pune',1],['Karan',45,98000,'Delhi',0],['Sana',29,61000,'Mumbai',1],['Dev',52,120000,'Pune',0]];
+let pS={f:0,e:0,s:0};
+function ptable(){let R=RAW.map(r=>r.slice());const cols=['Name','Age','Salary','City','Bought'];
+ if(pS.f){[1,2].forEach(j=>{const v=R.map(r=>r[j]).filter(x=>x!=null),m=v.reduce((a,b)=>a+b,0)/v.length;R.forEach(r=>{if(r[j]==null)r[j]=Math.round(m)})})}
+ if(pS.s&&pS.f){[1,2].forEach(j=>{const v=R.map(r=>r[j]),m=v.reduce((a,b)=>a+b,0)/v.length,sd=Math.sqrt(v.reduce((a,b)=>a+(b-m)**2,0)/v.length);R.forEach(r=>r[j]=((r[j]-m)/sd).toFixed(2))})}
+ let H=cols.slice();if(pS.e){const cs=['Delhi','Mumbai','Pune'];H=['Name','Age','Salary','Delhi','Mumbai','Pune','Bought'];R=R.map(r=>[r[0],r[1],r[2],...cs.map(c=>+(r[3]==c)),r[4]])}
+ $('tb').innerHTML='<tr>'+H.map(h=>'<th>'+h+'</th>').join('')+'</tr>'+R.map(r=>'<tr>'+r.map(v=>'<td'+(v==null?' style="color:#ff7ba8"':'')+'>'+(v==null?'missing':v)+'</td>').join('')+'</tr>').join('');
+ $('pt').textContent=!pS.f&&!pS.e&&!pS.s?'Raw data: two blanks, a text column, and salary numbers thousands of times bigger than age. Most models cannot use this as it is.':[pS.f?'Blanks replaced by the column average, so no rows are thrown away.':'',pS.e?'City words became 0/1 columns so a model can use them without thinking Pune > Delhi.':'',pS.s?(pS.f?'Age and salary now share a scale (mean 0, spread 1), so salary no longer dominates just because its numbers are big.':''):(pS.f?'Scaling needs complete numbers, so do step 1 first, then step 3.':'')].filter(Boolean).join(' ')}
+$('pf').onclick=()=>{pS.f=1;ptable()};$('pe').onclick=()=>{pS.e=1;ptable()};$('ps').onclick=()=>{pS.s=1;ptable()};$('pz').onclick=()=>{pS={f:0,e:0,s:0};ptable()};ptable();
+// ---- features ----
+let fUse=0;function fdraw(){const P=gen('circles',240,.1,21),tr=P.filter(p=>!p.test),te=P.filter(p=>p.test);const f=fitLog(tr,fUse?(x,y)=>[x,y,x*x+y*y]:(x,y)=>[x,y]);
+ const cx=$('fc').getContext('2d');cx.fillStyle='#0a0c16';cx.fillRect(0,0,660,480);regions(cx,660,480,f);pts(cx,P,660,480);const a=acc(f,te);$('fa').textContent=pc(a);
+ $('ft').textContent=fUse?'With the new feature the model can draw a circle. Accuracy jumps. The data never changed, only how we described it.':'No straight line separates a ring from its centre, so the model does no better than guessing.';$('f0').classList.toggle('on',!fUse);$('f1').classList.toggle('on',!!fUse)}
+$('f0').onclick=()=>{fUse=0;fdraw()};$('f1').onclick=()=>{fUse=1;fdraw()};fdraw();
+// ---- overfitting ----
+function polyfit(xs,ys,deg){const n=deg+1,A=Array.from({length:n},()=>Array(n+1).fill(0));xs.forEach((x,k)=>{for(let i=0;i<n;i++){for(let j=0;j<n;j++)A[i][j]+=x**(i+j);A[i][n]+=ys[k]*x**i}});for(let i=0;i<n;i++)A[i][i]+=1e-9;
+ for(let i=0;i<n;i++){let m=i;for(let r=i+1;r<n;r++)if(Math.abs(A[r][i])>Math.abs(A[m][i]))m=r;[A[i],A[m]]=[A[m],A[i]];for(let r=0;r<n;r++)if(r!=i){const f=A[r][i]/A[i][i];for(let c=i;c<=n;c++)A[r][c]-=f*A[i][c]}}return A.map((r,i)=>r[n]/r[i])}
+const tf=x=>Math.sin(2.5*x),or=rng(9),OT=[...Array(12)].map(()=>{const x=or()*2-1;return[x,tf(x)+gauss(or)*.22]}),OV=[...Array(40)].map(()=>{const x=or()*2-1;return[x,tf(x)+gauss(or)*.22]});
+const ev=(w,x)=>w.reduce((s,c,i)=>s+c*x**i,0),mse=(w,D)=>D.reduce((s,[x,y])=>s+(y-ev(w,x))**2,0)/D.length;
+const OB=(()=>{let b=1,bv=1e9;for(let d=1;d<=11;d++){const e=mse(polyfit(OT.map(p=>p[0]),OT.map(p=>p[1]),d),OV);if(e<bv){bv=e;b=d}}return b})();
+function odraw(){const d=+$('od').value;$('ov').textContent=d;const w=polyfit(OT.map(p=>p[0]),OT.map(p=>p[1]),d),cx=$('oc').getContext('2d'),X=x=>(x+1)/2*660,Y=y=>210-y/1.8*190;
+ cx.fillStyle='#0a0c16';cx.fillRect(0,0,660,420);cx.strokeStyle='#8a90b8';cx.setLineDash([6,5]);cx.beginPath();for(let i=0;i<=100;i++){const x=i/50-1;i?cx.lineTo(X(x),Y(tf(x))):cx.moveTo(X(x),Y(tf(x)))}cx.stroke();cx.setLineDash([]);
+ OV.forEach(p=>{cx.fillStyle='rgba(255,107,154,.35)';cx.beginPath();cx.arc(X(p[0]),Y(p[1]),3.5,0,7);cx.fill()});
+ cx.strokeStyle='#ffd166';cx.lineWidth=3;cx.beginPath();let st=0;for(let i=0;i<=200;i++){const x=i/100-1,y=Math.max(-2.5,Math.min(2.5,ev(w,x)));st?cx.lineTo(X(x),Y(y)):cx.moveTo(X(x),Y(y));st=1}cx.stroke();cx.lineWidth=1;
+ OT.forEach(p=>{cx.fillStyle='#4cc9f0';cx.beginPath();cx.arc(X(p[0]),Y(p[1]),5.5,0,7);cx.fill()});
+ const a=mse(w,OT),b=mse(w,OV);$('oa').textContent=a.toFixed(3);$('ob').textContent=b>50?'huge':b.toFixed(3);
+ $('ot').textContent=d<OB-1?'Underfit: too simple to follow the curve. Both errors are high.':d>OB+1?'Overfit: training error is tiny but test error grew. It memorised the noise.':'Good fit: low error on both training and unseen data.'}
+$('od').oninput=odraw;odraw();
+// ---- evaluation ----
+const er=rng(17);const ES=[...Array(400)].map(()=>[gauss(er),gauss(er),er()]);
+function edraw(){const pf=+$('ei').value,th=$('et').value/100;$('etv').textContent=th.toFixed(2);const npos=Math.round(400*pf);
+ const S=ES.map((s,i)=>{const pos=i<npos;return{pos,v:Math.max(0,Math.min(1,(pos?.66:.38)+s[pos?0:1]*.17))}});let tp=0,fp=0,fn=0,tn=0;S.forEach(s=>{const p=s.v>=th;if(s.pos&&p)tp++;else if(!s.pos&&p)fp++;else if(s.pos)fn++;else tn++});
+ const prec=tp+fp?tp/(tp+fp):0,rec=tp+fn?tp/(tp+fn):0,f1=prec+rec?2*prec*rec/(prec+rec):0;
+ $('em').innerHTML='<div class="h"></div><div class="h">Predicted positive</div><div class="h">Predicted negative</div><div class="h">Actually positive</div><div style="background:rgba(91,227,160,.25)">'+tp+'<br><small>caught</small></div><div style="background:rgba(255,123,168,.25)">'+fn+'<br><small>missed</small></div><div class="h">Actually negative</div><div style="background:rgba(255,123,168,.25)">'+fp+'<br><small>false alarm</small></div><div style="background:rgba(91,227,160,.25)">'+tn+'<br><small>correct</small></div>';
+ $('e1').textContent=pc((tp+tn)/400);$('e2').textContent=pc(prec);$('e3').textContent=pc(rec);$('e4').textContent=f1.toFixed(2);
+ $('ex').textContent=pf<.5?'Only 5% are positive: a model that always says "negative" scores 95% accuracy while catching nothing. That is why accuracy alone is misleading. Watch recall and precision.':th<.35?'Low threshold: catches almost everything (high recall) but raises many false alarms.':th>.65?'High threshold: very few false alarms but real cases are missed.':'A balanced threshold trades the two mistakes evenly.';
+ const cx=$('ec').getContext('2d');cx.fillStyle='#0a0c16';cx.fillRect(0,0,420,420);cx.strokeStyle='#2a2f4a';cx.strokeRect(30,10,380,380);cx.setLineDash([4,4]);cx.beginPath();cx.moveTo(30,390);cx.lineTo(410,10);cx.stroke();cx.setLineDash([]);
+ const roc=[];for(let t=100;t>=0;t--){let a=0,b=0;S.forEach(s=>{if(s.v>=t/100){s.pos?a++:b++}});roc.push([b/(400-npos),a/npos])}let auc=0;roc.forEach((p,i)=>{if(i)auc+=(p[0]-roc[i-1][0])*(p[1]+roc[i-1][1])/2});
+ cx.strokeStyle='#ffd166';cx.lineWidth=3;cx.beginPath();roc.forEach((p,i)=>{const x=30+p[0]*380,y=390-p[1]*380;i?cx.lineTo(x,y):cx.moveTo(x,y)});cx.stroke();
+ cx.fillStyle='#c4a1ff';cx.beginPath();cx.arc(30+fp/(400-npos)*380,390-rec*380,7,0,7);cx.fill();cx.fillStyle='#9aa0c2';cx.font='12px sans-serif';cx.fillText('false alarm rate →',150,408);cx.fillText('catch rate',2,14);cx.fillStyle='#ffd166';cx.font='bold 15px sans-serif';cx.fillText('AUC = '+auc.toFixed(2),250,330)}
+$('et').oninput=edraw;$('ei').oninput=edraw;edraw();
+// ---- neural net ----
+let NN=null,nTrain=false,NP=[];const nc=$('nc').getContext('2d');
+function ninit(){const H=+$('nh').value,r=rng(31);$('nhv').textContent=H;NP=gen($('nd').value,200,.12,5);NN={H,W1:[...Array(H)].map(()=>[gauss(r)*.8,gauss(r)*.8]),b1:Array(H).fill(0),W2:[...Array(H)].map(()=>gauss(r)*.8),b2:0,steps:0,loss:0}}
+const nf=(x,y)=>{const{H,W1,b1,W2,b2}=NN;let z=b2;for(let j=0;j<H;j++)z+=W2[j]*Math.tanh(W1[j][0]*x+W1[j][1]*y+b1[j]);return 1/(1+Math.exp(-z))};
+function nstep(){const{H,W1,b1,W2}=NN,lr=$('nl').value/100,g1=W1.map(()=>[0,0]),gb1=Array(H).fill(0),g2=Array(H).fill(0);let gb2=0,L=0;
+ NP.forEach(p=>{const h=W1.map((w,j)=>Math.tanh(w[0]*p.x+w[1]*p.y+b1[j]));let z=NN.b2;h.forEach((v,j)=>z+=W2[j]*v);const o=1/(1+Math.exp(-z)),e=o-p.c;L-=p.c?Math.log(o+1e-9):Math.log(1-o+1e-9);gb2+=e;for(let j=0;j<H;j++){g2[j]+=e*h[j];const dh=e*W2[j]*(1-h[j]*h[j]);g1[j][0]+=dh*p.x;g1[j][1]+=dh*p.y;gb1[j]+=dh}});
+ const n=NP.length;for(let j=0;j<H;j++){W1[j][0]-=lr*g1[j][0]/n;W1[j][1]-=lr*g1[j][1]/n;b1[j]-=lr*gb1[j]/n;W2[j]-=lr*g2[j]/n}NN.b2-=lr*gb2/n;NN.steps++;NN.loss=L/n}
+function ndraw(){nc.fillStyle='#0a0c16';nc.fillRect(0,0,660,480);regions(nc,660,480,nf,10);pts(nc,NP,660,480,false);$('n1').textContent=NN.steps;$('n2').textContent=NN.loss.toFixed(3);$('n3').textContent=pc(acc(nf,NP))}
+$('ng').onclick=()=>{nTrain=!nTrain;$('ng').classList.toggle('on',nTrain);$('ng').textContent=nTrain?'Pause':'Train'};$('nr').onclick=ninit;$('nd').oninput=ninit;$('nh').oninput=ninit;$('nl').oninput=()=>$('nlv').textContent=($('nl').value/100).toFixed(2);
+ninit();(function f(){if(nTrain)for(let i=0;i<8;i++)nstep();ndraw();requestAnimationFrame(f)})();
+// ---- k-means ----
+let KP,KC,Ki=0,run=false;const kcx=$('kc').getContext('2d'),KCOL=['#4cc9f0','#ff6b9a','#ffd166','#5be3a0','#c4a1ff','#ff9f5a'];
+function kinit(){const r=rng(Math.floor(Math.random()*1e5)),cs=[[150,130],[480,120],[320,320]];KP=[...Array(150)].map((_,i)=>{const c=cs[i%3];return{x:c[0]+gauss(r)*45,y:c[1]+gauss(r)*45,k:-1}});const k=+$('kk').value;$('kv').textContent=k;KC=[...Array(k)].map(()=>{const p=KP[Math.floor(r()*KP.length)];return[p.x,p.y]});Ki=0;run=false}
+function kstep(){KP.forEach(p=>{let b=0,bd=1e9;KC.forEach((c,i)=>{const d=(p.x-c[0])**2+(p.y-c[1])**2;if(d<bd){bd=d;b=i}});p.k=b});KC.forEach((c,i)=>{const m=KP.filter(p=>p.k==i);if(m.length){c[0]=m.reduce((s,p)=>s+p.x,0)/m.length;c[1]=m.reduce((s,p)=>s+p.y,0)/m.length}});Ki++}
+function kdraw(){kcx.fillStyle='#0a0c16';kcx.fillRect(0,0,660,420);let sp=0;KP.forEach(p=>{kcx.fillStyle=p.k<0?'#8a90b8':KCOL[p.k];kcx.beginPath();kcx.arc(p.x,p.y,4.5,0,7);kcx.fill();if(p.k>=0)sp+=(p.x-KC[p.k][0])**2+(p.y-KC[p.k][1])**2});
+ KC.forEach((c,i)=>{kcx.strokeStyle='#fff';kcx.lineWidth=3;kcx.fillStyle=KCOL[i];kcx.beginPath();kcx.arc(c[0],c[1],10,0,7);kcx.fill();kcx.stroke()});$('k1').textContent=Ki;$('k2').textContent=Ki?Math.round(sp/1000)+'k':'-'}
+$('ks').onclick=kstep;$('kn').onclick=kinit;$('kk').oninput=kinit;$('kr').onclick=()=>{run=!run;$('kr').classList.toggle('on',run)};kinit();
+let kt=0;(function f(){if(run&&++kt%25==0)kstep();kdraw();requestAnimationFrame(f)})();
+</script><a href="../index.html" style="position:fixed;left:14px;bottom:14px;z-index:2147483000;background:#0d0d0d;color:#f4f1ea;font:600 13px/1 system-ui,sans-serif;padding:10px 16px;border-radius:99px;text-decoration:none;box-shadow:0 4px 18px rgba(0,0,0,.35)">← Portfolio</a></body></html>
